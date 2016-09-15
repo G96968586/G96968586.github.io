@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>JavaScript  客户端检测技术学习分享 | 箫鉴哥博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近学习了 JavaScript  客户端检测 的知识点，写这篇文章是为了方便自己以后有需要时查阅，同时也把自己的学习成果分享给大家。
+客户端检测方案分三种，分别是：
+
+能力检测
+怪癖检测
+用户代理检测
+
+能力检测是指在编写代码之前先检测特定浏览器的能力。比如，脚本在调用某个函数之前，可能要先检测该函数是否存在。
+怪癖检测实际上是浏览器实现中存在的 bug，例如，早起的 WebKit 中存在一个怪">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript  客户端检测技术学习分享">
+<meta property="og:url" content="http://G96968586.github.io/2016/09/15/JavaScript-客户端检测技术学习分享/index.html">
+<meta property="og:site_name" content="箫鉴哥博客">
+<meta property="og:description" content="最近学习了 JavaScript  客户端检测 的知识点，写这篇文章是为了方便自己以后有需要时查阅，同时也把自己的学习成果分享给大家。
+客户端检测方案分三种，分别是：
+
+能力检测
+怪癖检测
+用户代理检测
+
+能力检测是指在编写代码之前先检测特定浏览器的能力。比如，脚本在调用某个函数之前，可能要先检测该函数是否存在。
+怪癖检测实际上是浏览器实现中存在的 bug，例如，早起的 WebKit 中存在一个怪">
+<meta property="og:updated_time" content="2016-09-15T15:27:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript  客户端检测技术学习分享">
+<meta name="twitter:description" content="最近学习了 JavaScript  客户端检测 的知识点，写这篇文章是为了方便自己以后有需要时查阅，同时也把自己的学习成果分享给大家。
+客户端检测方案分三种，分别是：
+
+能力检测
+怪癖检测
+用户代理检测
+
+能力检测是指在编写代码之前先检测特定浏览器的能力。比如，脚本在调用某个函数之前，可能要先检测该函数是否存在。
+怪癖检测实际上是浏览器实现中存在的 bug，例如，早起的 WebKit 中存在一个怪">
+  
+    <link rel="alternative" href="/atom.xml" title="箫鉴哥博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">箫鉴哥</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/p/1005051813501992/home?from=page_100505&mod=TAB#place" title="weibo">weibo</a>
+					        
+								<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">简简单单，热爱生活和编程的技术鲜肉，理想是成为大神！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">箫鉴哥</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="nullhttps://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">箫鉴哥</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/p/1005051813501992/home?from=page_100505&mod=TAB#place" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-JavaScript-客户端检测技术学习分享" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/15/JavaScript-客户端检测技术学习分享/" class="article-date">
+  	<time datetime="2016-09-15T15:26:39.000Z" itemprop="datePublished">2016-09-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript  客户端检测技术学习分享
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近学习了 JavaScript  客户端检测 的知识点，写这篇文章是为了方便自己以后有需要时查阅，同时也把自己的学习成果分享给大家。</p>
+<p>客户端检测方案分三种，分别是：</p>
+<ul>
+<li>能力检测</li>
+<li>怪癖检测</li>
+<li>用户代理检测</li>
+</ul>
+<p>能力检测是指在编写代码之前先检测特定浏览器的能力。比如，脚本在调用某个函数之前，可能要先检测该函数是否存在。</p>
+<p>怪癖检测实际上是浏览器实现中存在的 bug，例如，早起的 WebKit 中存在一个怪癖，即它会在 for-in 村换中返回被隐蔽的属性。</p>
+<p>用户代理检测是通过检测用户代理字符串来识别浏览器。因为在用户代理字符串中，包含着大量与浏览器有关的信息，包括浏览器、平台、操作系统及浏览器版本。</p>
+<p>这里我要说的是第三种方案，用户代理检测。</p>
+<p>下面是一份完整的用户代理字符串检测脚本，包括检测呈现引擎、平台、Windows 操作系统、移动设备和游戏系统。我会在脚本难以理解的地方写上注释，方便理解。资料整理自 <a href="">《JavaScript 高级程序设计》</a>。</p>
+<pre><code>var client = function() {
+  // 呈现引擎
+  /**
+  * 每个呈现引擎都对应着一个属性，默认值为0，如果检测到哪一个呈现引擎，就将该引擎的版本号以浮点数值
+  * 形式写入相应的属性。呈现引擎的完整版本号则以字符串形式写入 ver 属性.
+  */
+  var engine = {
+    ie: 0,
+    gecko: 0,
+    webkit: 0,
+    khtml: 0,
+    opera: 0,
+
+    // 完整的版本号
+    var: null
+};
+
+  // 浏览器
+  /**
+  * 与 engine 变量一样，除了当前使用的浏览器，其他属性的值都保持为0。当前浏览器的这个属性保存的是
+  * 浮点数值形式版本号。 ver 同上。
+  */
+  var browser = {
+  // 主要的浏览器
+    ie: 0,
+    firefox: 0,
+    safari: 0,
+    konq: 0,
+    opera: 0,
+    chrome: 0,
+
+    // 具体的版本号
+    ver: null
+};
+
+  // 平台、设备和操作系统
+  /**
+  * 与呈现引擎不同，在不能访问操作系统或版本的情况下，平台信息通常是很有限的。对这三个平台，浏览器
+  * 一般只报告 Windows 版本。所以新变量 system 的每个属性最初值都保存着布尔值 false。
+  * 在确定平台时，检测 navigator.platform 要比检测用户代理字符串更简单，后者在不同浏览器中会给出
+  * 不同的平台信息。navigator.platform 属性可能的值包括：
+  * &quot;Win32&quot;、&quot;Win64&quot;、&quot;MacPPC&quot;、&quot;MacIntel&quot;、&quot;X11&quot; 和 &quot;Linux i686&quot;
+  * 这些值在不同浏览器都是一致的。
+  */
+  var system = {
+    win: false,/*Windows*/
+    mac: false,/*Mac*/
+    x11: false,/*Unix*/
+
+    // 移动设备
+    iphone: false,
+    ipod: false,
+    ipad: false,
+    ios: false,
+    android: false,
+    nokiaN: false,
+    winMobile: false,
+
+    // 游戏系统
+    wii: false,/*任天堂*/
+    playstation: false /*playstation 3,简称 PS3*/
+};
+
+  // 检测呈现引擎和浏览器
+  var ua = navigator.userAgent;
+  /**
+  * 要识别 opera，必须得检测 window.opera 对象。Opera 5及更高版本中都有这个对象。在 Opera 7.6       
+  * 及更高版本中，调用 Version() 方法可以返回一个表示浏览器版本的字符串，而这也是确定 Opera 版本
+  * 号的最佳方式。至于要检测更早版本的 Opera，可以直接检查用户代理字符串，因为早期版本不支持隐藏身
+  * 份。但是在 07年底 Opera 的最高版本已经是 9.5 了，所以现在太可能有人还在使用 7.6 之前的版本。
+  */
+  if (window.opera) {
+    engine.ver = browser.ver = window.opera.version();
+    engine.opera = browser.opera = parseFloat(engine.ver);
+}
+  /**
+  * WebKit 的用户代理字符串中的 &quot;AppleWebKit&quot;是独一无二的，所以检测这个字符串最合适。
+  * eg:
+  * &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko)       
+  * Chrome/48.0.2564.116 Safari/537.36&quot;
+  */
+  else if (/AppleWebKit\/(\S+)/.test(ua)) {
+    engine.ver = RegExp[&quot;$1&quot;];
+    engine.webkit = parseFloat(engine.ver);
+
+    // 此时确定是 Chrome 还是 Safari
+    if (/Chrome\/(\S+)/.test(ua)) {
+        browser.ver = RegExp[&quot;$1&quot;];
+        browser.chrome = parseFloat(browser.ver);
+    } else if (/Version\/(\S+)/.test(ua)) {
+        browser.ver = RegExp[&quot;$1&quot;];
+        browser.safari = parseFloat(browser.ver);
+    } else {
+        // 近似确定版本号
+        var safariVersion = 1;
+        if (engine.webkit &lt; 100) {
+            safariVersion = 1;
+        } else if (engine.webkit &lt; 312) {
+            safariVersion = 1.2;
+        } else if (engine.webkit &lt; 412) {
+            safariVersion = 1.3;
+        } else if (engine.webkit &lt; 523) {
+            safariVersion = 2;
+        } else if (engine.webkit &lt; 525) {
+            safariVersion = 3;
+        } else {
+            safariVersion = 3.1;
+        }
+
+        browser.safari = browser.ver = safariVersion;
+    }
+}
+  /**
+  * 先检测 KHTML,因为 KHTML 的 UA 中也包含了 &quot;Gecko&quot;,因此在排除 KHTML 之前，我们无法准确检测基于
+  * Gecko 的浏览器。
+  * KHTML 与 WebKit 的版本号在 UA 中的格式差不多，因此用了类似的正则表达式。但由于在 Konqueror
+  * 3.1 及更高的版本中不包含 KHTML 的版本，所以要使用 Konqueror 的版本来代替，所以有了后面的正则
+  * 表达式。
+  */
+  else if (/KHTML\/(\S+)/.test(ua) || /Kongqueror\/([^;]+)/.test(ua)) {
+        engine.ver = browser.ver = RegExp[&quot;$1&quot;];
+        engine.khtml = browser.konq = parseFloat(engine.ver);
+}
+  /**
+  * Gecko 的版本号不会出现在字符串 &quot;Gecko&quot; 的后面，而是会出现在字符串 &quot;rv:&quot; 的后面。
+  */
+  else if (/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)) {
+        engine.ver = RegExp[&quot;$1&quot;];
+        engine.gecko = parseFloat(engine.ver);
+    // 确定是不是 Firefox
+    if (/Firefox\/(\S+)/.test(ua)) {
+        browser.ver = RegExp[&quot;$1&quot;];
+        browser.firefox = parseFloat(browser.ver);
+    }
+}
+  // IE 的版本号位于字符串 &quot;MSIE&quot; 的后面，一个分号的前面
+  else if (/MSIE ([^;]+)/.test(ua)) {
+        engine.ver = browser.ver = RegExp[&quot;$1&quot;];
+        engine.ie = browser.ie = parseFloat(engine.ver);
+}
+
+  // 检测浏览器
+  // browser.ie = engine.ie;
+  // browser.opera = engine.opera;
+
+  // 检测平台
+  var p = navigator.platform;
+  system.win = p.indexOf(&quot;Win&quot;) == 0;
+  system.mac = p.indexOf(&quot;Mac&quot;) == 0;
+  system.x11 = (p == &quot;X11&quot;) || (p.indexOf(&quot;Linux&quot;) == 0);
+
+  // 检测 Windows 操作系统
+  // 第一个捕获组匹配 95、98、9x、NT、ME 或 XP，第二个捕获组只针对 Windows ME 及所有 Windows
+  // NT 的变体。
+  /**
+  * 要理解下面的正则表达式，首先要知道不同浏览器在表示不同的 Windows 操作系统时给出的不同字符串。
+  * windows版本    IE4+          Gecko          Opera&lt;7          0pera7+      WebKit
+  *    95      &quot; Windows 95&quot;    &quot;Win95&quot;      &quot;Windows 95&quot;     &quot;Windows 95      n/a
+  *    98       &quot;Windows 98&quot;    &quot;Win98&quot;      &quot;Windows 98&quot;     &quot;Windows 98&quot;     n/a
+  *  NT 4.0     &quot;Windows NT&quot;   &quot;WinNT4.O&quot;    &quot;Windows NT 4.O&quot; &quot;Windows NT 4.0&quot; n/a
+  *   2000   &quot;Windows NT 5.0&quot; &quot;Windows NT 5.O&quot;&quot;Windows 2000&quot;  &quot;Windows NT 5.O&quot; n/a
+  *    ME       &quot;Win 9x 4.90&quot; &quot;Win 9x 4.90&quot;   &quot;Windows ME&quot;    &quot;Win 9x 4.90&quot;    n/a
+  *    XP  &quot;Windows NT 5.1&quot; &quot;Windows NT 5.1&quot;&quot;Windows XP&quot;   &quot;Windows NT 5.1&quot;&quot;Windows NT 5.1&quot;
+  *  Vista &quot;Windows NT 6.0&quot; &quot;Windows NT 6.0&quot;    n/a        &quot;Windows NT 6.0&quot;&quot;Windows NT 6.0&quot;
+  *    7   &quot;Windows NT 6.1&quot; &quot;Windows NT 6.1&quot;    n/a        &quot;Windows NT 6.1&quot;&quot;Windows NT 6.1&quot;
+*/
+  if (system.win) {
+    if (/Win(?:dows )?([^do]{2})\s?(\d+\.\d+)?/.test(ua)) {
+        if (RegExp[&quot;$1&quot;] == &quot;NT&quot;) {
+            switch(RegExp[&quot;$2&quot;]) {
+              case &quot;5.0&quot;:
+                system.win = &quot;2000&quot;;
+                break;
+              case &quot;5.1&quot;:
+                system.win = &quot;XP&quot;;
+                break;
+              case &quot;6.0&quot;:
+                system.win = &quot;Vista&quot;;
+                break;
+              case &quot;6.1&quot;:
+                system.win = 7;
+                break;
+              default:
+                system.win = &quot;NT&quot;;
+                break;
+            }
+        } else if (RegExp[&quot;$1&quot;] == &quot;9x&quot;) {
+            system.win = &quot;ME&quot;;
+        } else {
+            system.win = RegExp[&quot;$1&quot;];
+        }
+    }
+}
+
+  // 移动设备
+  system.iphone = ua.indexOf(&quot;iPhone&quot;) &gt; -1;
+  system.ipad = ua.indexOf(&quot;iPad&quot;) &gt; -1;
+  system.ipod = ua.indexOf(&quot;iPod&quot;) &gt; -1;
+  system.nokiaN = ua.indexOf(&quot;nokiaN&quot;) &gt; -1;
+
+  // windows mobile，简称 Windows CE，用于 Pocket PC 和 Smartphone 中。
+  /**
+  * 在 Windows Mobile 5.0 及以前版本，上面两种设备的 UA 很相似，比如：
+  * Mozilla/4.0 (compatible; MSIE 4.01; Windows CE; PPC; 240x320)
+  * Mozilla/4.0 (compatible; MSIE 4.01; Windows CE; Smartphone; 176x220)
+  * 因为在 Windows Mobile 5.0 以后版本的浏览器中，移除了上面的记号 &quot;PPC&quot; 和 &quot;Smartphone&quot;，
+  * 所以不建议测试字符串中的 &quot;PPC&quot; 和 &quot;Smartphone&quot;。一般情况下，只是到某个设备使用的是 Windows
+  * Mobile 就足够了。
+  * Windows Phone 7 的 UA 稍有改进，基本格式如下：
+  * Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0)
+  * Asus; Galaxy6
+  * 其中，Windows 操作符的标识符与以往完全不同，在这个用户代理中， client.system.win == &quot;Ph&quot;
+  */
+  if (system.win == &quot;CE&quot;) {
+    system.winMobile = system.win;
+  } else if (system.win == &quot;Ph&quot;) {
+    if(/Windows Phone OS (\d+\.\d+)/.test(ua)) {
+        system.win = &quot;Phone&quot;;
+        system.winMobile = parseFloat(RegExp[&quot;$1&quot;]);
+    }
+  }
+
+  // 检测 iOS 版本
+  /**
+  * iOS 3 之前，UA 只包含 &quot;CPU like Max OS&quot;,后来 iPhone 中又改成 &quot;CPU iPhone OS 3_0 like Mac
+  * OS X&quot;, iPad 中又改成 &quot;CPU OS 3_2 like Mac OS X&quot;。
+  */
+  if (system.mac &amp;&amp; ua.indexOf(&quot;Mobile&quot;) &gt; -1) {
+    if (/CPU (?:iPhone )?OS (\d+_\d+)/.test(ua)) {
+        system.ios = parseFloat(RegExp.$1.replace(&quot;_&quot;,&quot;.&quot;));
+    } else {
+        system.ios = 2;// 因为没有办法确定到底是什么版本，所以设置为更早的版本比较稳妥。
+    }
+  }
+
+  // 检测 Android 版本,只需简单的获取字符串 &quot;Android&quot; 紧随其后的版本号
+  if (/Android (\d+\.\d+)/.test(ua)) {
+    system.android = parseFloat(RegExp.$1);
+  }
+
+  // 游戏系统
+  system.wii = ua.indexOf(&quot;Wii&quot;) &gt; -1;
+  system.playstation = /playstation/i.test(ua);
+
+  // 返回这些对象
+  return {
+    engine: engine,
+    browser: browser,
+    system: system
+  };
+}();
+</code></pre><p>以上的脚本是出自 2012年3月份的，但放在今天还是适用的，知识更新速度还不至于夸张到几年前的东西放到今天大多都不能使用。然而对于后面出现的一些新的浏览器特性，就只能靠大家一起努力去完善这份脚本了。</p>
+<p>有了上面的脚本，我们就可以这样方便的使用了。</p>
+<p>比如：</p>
+<pre><code>// 区分浏览器
+if (client.engine.webkit) {
+  if (client.browser.chrome) {
+    // 执行针对 chrome 的代码
+  } else if (client.browser.safari) {
+    // 执行针对 safari 的代码
+    }
+} else if (client.engine.gecko) {
+    if (client.browser.firefox) {
+        // 执行针对 firefox 的代码
+    } else {
+        // 执行针对其他 gecko 的浏览器代码
+    }
+  }
+
+// 区分系统
+if (client.system.win) {
+  if (client.system.win == &quot;XP&quot;) {
+    // 说明是 XP
+  } else if (client.system.win == &quot;Vista&quot;) {
+    // 说明是 Vista
+  }
+}
+
+// 移动端
+if (client.system.webkit) {
+  if (client.system.ios) {
+
+  } else if (client.system.android) {
+
+  }
+}
+</code></pre><p>等等。</p>
+<p>这里虽然没有对能力检测和怪癖检测进行详细总结，但并不代表它们不重要。在决定使用哪种客户端检测方法时，一般应优先考虑使用能力检测。怪癖检测是确定应该如何处理代码的第二选择。用户代理检测则是客户端检测的最后一种方案，因为该方法对 UA 有很强的依赖性。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/15/聊聊-Android-的-Service-组件/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">聊聊 Android 的 Service 组件</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JavaScript-客户端检测技术学习分享" data-title="JavaScript  客户端检测技术学习分享" data-url="http://G96968586.github.io/2016/09/15/JavaScript-客户端检测技术学习分享/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 箫鉴哥
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: /
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
