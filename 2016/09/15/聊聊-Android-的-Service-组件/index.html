@@ -4,14 +4,38 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>箫鉴哥博客</title>
+  <title>聊聊 Android 的 Service 组件 | 箫鉴哥博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="箫鉴哥博客">
-<meta property="og:url" content="http://G96968586.github.io/index.html">
+  <meta name="description" content="Android 开发的同学都知道，Android 有四大组件，分别是 Activity、Service、BroadcastReceiver 和 ContentProvider。在这里，我想跟大家聊一聊 Service 组件，我们从头开始，包括什么是 Service？Service 有什么作用？怎么使用它？需要关注哪些性能问题？什么情况下使用它最合适？好，废话少说，马上进入主题。
+直译过来，Serv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊 Android 的 Service 组件">
+<meta property="og:url" content="http://G96968586.github.io/2016/09/15/聊聊-Android-的-Service-组件/index.html">
 <meta property="og:site_name" content="箫鉴哥博客">
+<meta property="og:description" content="Android 开发的同学都知道，Android 有四大组件，分别是 Activity、Service、BroadcastReceiver 和 ContentProvider。在这里，我想跟大家聊一聊 Service 组件，我们从头开始，包括什么是 Service？Service 有什么作用？怎么使用它？需要关注哪些性能问题？什么情况下使用它最合适？好，废话少说，马上进入主题。
+直译过来，Serv">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1onGRLXXXXXcvXVXXXXXXXXXX-389-507.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1GIa9LXXXXXXSXpXXXXXXXXXX-970-236.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1FRSPLXXXXXXYaXXXXXXXXXXX-980-324.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1zG93LXXXXXaxXFXXXXXXXXXX-2266-190.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1CUbjLXXXXXXeXXXXXXXXXXXX-1230-130.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1S9yYLXXXXXayapXXXXXXXXXX-847-417.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1Qqe1LXXXXXckaXXXXXXXXXXX-434-214.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1LnPcLXXXXXaWXFXXXXXXXXXX-434-267.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1sXnpLXXXXXalXFXXXXXXXXXX-996-314.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1lvPfLXXXXXbXXVXXXXXXXXXX-1350-54.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1qFTqLXXXXXXZXFXXXXXXXXXX-1762-166.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB120DxLXXXXXbTXpXXXXXXXXXX-1696-60.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1QwznLXXXXXXRaXXXXXXXXXXX-998-378.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1_nDALXXXXXXYXFXXXXXXXXXX-1594-110.png">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1ZoYLLXXXXXcZXpXXXXXXXXXX-497-746.gif">
+<meta property="og:image" content="https://gw.alicdn.com/tps/TB1J9.XLXXXXXcYaXXXXXXXXXXX-497-746.gif">
+<meta property="og:updated_time" content="2016-09-15T15:18:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="箫鉴哥博客">
+<meta name="twitter:title" content="聊聊 Android 的 Service 组件">
+<meta name="twitter:description" content="Android 开发的同学都知道，Android 有四大组件，分别是 Activity、Service、BroadcastReceiver 和 ContentProvider。在这里，我想跟大家聊一聊 Service 组件，我们从头开始，包括什么是 Service？Service 有什么作用？怎么使用它？需要关注哪些性能问题？什么情况下使用它最合适？好，废话少说，马上进入主题。
+直译过来，Serv">
+<meta name="twitter:image" content="https://gw.alicdn.com/tps/TB1onGRLXXXXXcvXVXXXXXXXXXX-389-507.png">
   
     <link rel="alternative" href="/atom.xml" title="箫鉴哥博客" type="application/atom+xml">
   
@@ -193,9 +217,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-聊聊-Android-的-Service-组件" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-聊聊-Android-的-Service-组件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/09/15/聊聊-Android-的-Service-组件/" class="article-date">
@@ -211,12 +233,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/15/聊聊-Android-的-Service-组件/">聊聊 Android 的 Service 组件</a>
+    <h1 class="article-title" itemprop="name">
+      聊聊 Android 的 Service 组件
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Android/">Android</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -372,483 +405,68 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Android/">Android</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/15/Android-音频技术开发总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android 音频技术开发总结</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-
-
-
-  
-    <article id="post-Android-音频技术开发总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/15/Android-音频技术开发总结/" class="article-date">
-  	<time datetime="2016-09-14T17:11:06.000Z" itemprop="datePublished">2016-09-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/15/Android-音频技术开发总结/">Android 音频技术开发总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>摘要： 在文章开头，我们先来了解几个概念，这样有利于对后面内容的理解。 1、概念理解 采样率：即采样频率，百科的解释是，每秒从连续信号中提取并组成离散信号的采样个数，单位 赫兹（Hz）。通俗的讲采样频率是指计算机每秒钟采集多少个声音样本，是描述声音文件的音质、音调，衡量声卡、声音文件的质量标准。好吧，感觉…</p>
-</blockquote>
-<p>在文章开头，我们先来了解几个概念，这样有利于对后面内容的理解。</p>
-<h4 id="1、概念理解"><a href="#1、概念理解" class="headerlink" title="1、概念理解"></a>1、概念理解</h4><p><strong>采样率</strong>：即采样频率，百科的解释是，每秒从<a href="http://baike.baidu.com/view/1910376.htm" target="_blank" rel="external">连续信号</a>中提取并组成离散信号的采样个数，单位 <a href="http://baike.baidu.com/subview/19996/7461726.htm" target="_blank" rel="external">赫兹</a>（Hz）。通俗的讲采样频率是指计算机每秒钟采集多少个声音样本，是描述声音文件的音质、音调，衡量声卡、声音文件的质量标准。好吧，感觉这样还是不太理解，那我们来看看下面的解释：</p>
-<p>如图，</p>
-<p><img src="http://s4.51cto.com/wyfs02/M02/7C/F6/wKioL1bdXQviw_TBAAAVYm_x3gk862.gif" alt=""></p>
-<p>采样就是把模拟信号数字化的过程，不仅仅是音频需要采样，所有的模拟信号都需要通过采样转换为可以用 0101 来表示的数字信号，上图蓝色代表模拟音频信号，而红色的点代表采样得到的量化数值。红色点之间的间隔越小，表示采样频率越高，同时音频质量也就越高。</p>
-<p><strong>通道数</strong>：一般表示声音录制时的音源数量或回放时相应的扬声器数量。单声道（Mono）和双声道（Stereo）比较常见。</p>
-<p><strong>量化精度（位宽）</strong>：上图中的每一个红色点，都有一个数值来表示其大小，这个数值的数据类型有：4bit、8bit、16bit、32bit等，位数越多，表示得就越精细，声音质量也就越好。</p>
-<p><strong>音频帧（frame）</strong>：音频数据是流式的，本身并没有明确的一帧帧的概念，在实际的应用中，为了音频算法处理/传输的方便，一般约定俗成取 2.5 ms ~ 60 ms为单位的数据量为一帧音频。 这个时间被称之为“采样时间”，其长度没有特别的标准。我们可以计算一下一帧音频帧的大小：</p>
-<p>假设某通道的音频信号是采样率为 8 kHz，位宽为16 bit，20 ms 一帧，双通道，则一帧音频数据的大小为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int size = 8000 x 16bit x 0.02s  x 2 = 5120 bit = 640 byte</div></pre></td></tr></table></figure>
-<p><strong>音频编码</strong>：模拟的音频信号转换为数字信号需要经过采样和量化，量化的过程被称之为编码。根据不同的量化策略，产生了许多不同的编码方式。</p>
-<h4 id="2、音频采集"><a href="#2、音频采集" class="headerlink" title="2、音频采集"></a>2、音频采集</h4><p>在 Android 开发中，官方 SDK 提供了两套音频录制的 API，一个是 MediaRecorder ，另一个是 AudioRecord。前者会对录入的音频数据进行编码压缩(如 AMR，3GP等)，  而后者是更加偏向底层的 API，录入的是一帧帧 的 PCM 音频数据，是无损没有经过压缩的。如果你对音频格式没有特殊的要求，只是简单的想做一个录音功能，那推荐你使用 MediaRecorder 。MediaRecorder 支持的输出方式有：amr_nb，amr_wb, default, mpeg_4, raw_amr, three_gpp。如果需要对音频数据进行额外的算法处理，则建议使用更加灵活的 AudioRecord API。比如，我想要录制一个 MP3 格式的音频文件， Android SDK 本身是不支持直接录制 MP3 格式的文件，我们就可以通过 AudioRecord 来采集音频数据，并通过第三方库来进行编码。下面我将会介绍怎么在 Android 上使用 AudioRecord 录制 MP3 和 WAV 格式的音频文件。</p>
-<h5 id="2-1-MP3-音频录制"><a href="#2-1-MP3-音频录制" class="headerlink" title="2.1 MP3 音频录制"></a>2.1 MP3 音频录制</h5><p>LAME 是目前最出色的 MP3 编码引擎。我们要在 Android 平台上使用它，需要下载 <a href="http://lame.sourceforge.net/links.php" target="_blank" rel="external">lame</a> 源码并将其编译成 so 库，然后通过 jni 来调用。这里有一个开源项目 <a href="https://github.com/GavinCT/AndroidMP3Recorder" target="_blank" rel="external">AndroidMP3Recorder</a> 帮我们省去了这一步骤，而且这个库封装了底层的 MP3 编码，我们直接拿过来使用就可以了。作者具体的实现思路，可以参考这里 <a href="http://www.cnblogs.com/ct2011/p/4080193.html" target="_blank" rel="external">实现思路讲解</a>。</p>
-<p>我简要说下怎么引入这个库和使用，以及本人踩过的坑。</p>
-<p>在 Android studio 上集成这个库:</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> dependencies &#123;</div><div class="line">    compile &apos;com.czt.mp3recorder:library:1.0.2&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>另外，因为上面的集成会自动引入多种 so 库，如果只需要其中的几种，可以在gradle中添加下面的配置（比如）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">productFlavors &#123;</div><div class="line">  arm &#123;</div><div class="line">    ndk &#123;</div><div class="line">      abiFilters &quot;armeabi-v7a&quot;, &quot;armeabi&quot;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  x86 &#123;</div><div class="line">    ndk &#123;</div><div class="line">      abiFilter &quot;x86&quot;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样在编译时就只会在 arm 中接入 armeabi-v7a armeabi 包，在 x86 上接入 x86 的包，而不会接入其他的包。最后还需要在 gradle.properties 中添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android.useDeprecatedNdk = true</div></pre></td></tr></table></figure>
-<p>这样就可以正常使用了。如果不过滤不需要的 so 库，在编译时就会报这个错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java.lang.UnsatisfiedLinkError</div></pre></td></tr></table></figure>
-<p>举个例子，使用无线保镖 SDK 时，我们会接入 armeabi-v7a 和 x86 这两个包的 so 文件，但由于我们使用了 AndroidMP3Recorder 这个库，它会产生额外的诸如 armeabi、armeabi-v8a、mips等多个文件夹，这些文件夹里面都有 liblame.so 文件，但没有无线保镖的 so 文件，这样就会引发java.lang.UnsatisfiedLinkError 错误，导致编译不通过。</p>
-<p>OK，剩下的就是开始使用这个库了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 创建 MP3Recorder 实例， 传入录音文件的保存路径和文件名</div><div class="line">MP3Recorder mRecorder = new MP3Recorder(new File(Environment.getExternalStorageDirectory(), &quot;demo.mp3&quot;));</div><div class="line"></div><div class="line">// 开始录音</div><div class="line">mRecorder.start();</div><div class="line"></div><div class="line">// 停止录音</div><div class="line">mRecorder.stop();</div></pre></td></tr></table></figure>
-<p>是不是很简单，转码的事情通通不用操心，全帮你做了。</p>
-<p>踩到的坑：</p>
-<p>后面我发现在小米4、锤子 T2 等手机上打开接入了这个库的 app 直接闪退了。经过分析发现，在小米 4、锤子 T2 等手机上运行我们的 app ，系统会先去找 arm64-v8a 这个目录下的 so 文件，如果不存在还好，偏偏我的 app 存在 arm64-v8a 目录，此时因为找不到目录下无线保镖的 so 文件（前面说过，接入了无线保镖只会引入  armeabi-v7a 和 x86 这两个包的 so 文件），就直接报 java.lang.UnsatisfiedLinkError：couldn’t find “libsecuritysdk.so” 的错了。</p>
-<p>这时候我就纳闷了，前面配置时我的确只保留了 armeabi-v7a 和 x86 这两个目录下的 so 文件，去掉了不需要的 so ，但为什么还会出现其他的 so 目录呢？后面发现，在打包 apk 时，这些 so 库还是会一并被打包进 apk ！而在测试时，刚好使用的 MX3 手机加载 so 文件正常，所以没发现这个问题。这时候你也许会问，为什么小米4、锤子 T2 等手机会先去找 arm64-v8a 这个目录呢？因为它们是 64 位设备呀，而 armeabi-v7a 和 x86 针对的都是 32 位的文件。综上所述，问题可以描述为怎么在 64 位的设备上运行 32 位的二进制文件，这里指 so 文件。</p>
-<p>在 stackoverflow 上找到了解决的答案：</p>
-<p>When you install an APK on Android, the system will look for native libraries directories (armeabi, armeabi-v7a, arm64-v8a, x86, x86_64, mips64, mips) inside the lib folder of the APK, in the order determined by Build.SUPPORTED_ABIS.</p>
-<p>If your app happen to have an arm64-v8a directory with missing libs, the missing libs will not be installed from another directory, the libs aren’t mixed. That means you have to provide the full set of your libraries for each architecture.</p>
-<p>So, to solve your issue, you can remove your 64-bit libs from your build, or set abiFilters to package only 32-bit architectures:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ....</div><div class="line">    defaultConfig &#123;</div><div class="line">        ....</div><div class="line">        ndk &#123;</div><div class="line">            abiFilters &quot;x86&quot;, &quot;armeabi-v7a&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果照上面的配置，那打包时就只会把 “x86”, “armeabi-v7a” 这两个目录及其下的 so 文件打包进 apk 。我们的问题也解决了，因为系统也只能找这两个目录下的 so 文件了。</p>
-<h5 id="2-2-WAV-音频录制"><a href="#2-2-WAV-音频录制" class="headerlink" title="2.2 WAV 音频录制"></a>2.2 WAV 音频录制</h5><p>因为 wav 是无损格式的音频文件，所以我们使用的还是 AudioRecord 这个 API。但在此之前，我们需要先了解一下怎么存储 wav 格式的文件。</p>
-<p>wav 是微软公司开发的一种声音文件格式，整个文件分两部分，第一部分是”文件头”，包括：采样率、通道数、位宽等参数信息，第二部分是”数据块”：指一帧一帧的二进制音频数据。</p>
-<p>见下图 wav 格式的文件头：</p>
-<p><img src="http://www.liuhaihua.cn/wp-content/uploads/2016/03/b2qAVfa.png" alt=""></p>
-<p>它主要分为三个部分：</p>
-<p>第一部分，The “RIFF” chunk descriptor，通过 “ChunkID” 来表示这是一个 “RIFF” 格式的文件，通过 “Format” 填入 “WAVE” 来标识这是一个 wav 文件。而 “ChunkSize” 则记录了整个 wav 文件的字节数。</p>
-<p>第二部分，The “fmt” sub-chunk，从图中可以看出记录了 wav 音频文件的详细音频参数信息，例如：通道数、采样率、位宽、编码方式、数据块对齐信息等等。</p>
-<p>第三部分，The “data” sub-chunk，这部分是真正保存 wav 数据的地方，由“Subchunk2Size”这个字段来记录后面存储的二进制原始音频数据的长度。</p>
-<p>OK，我们来看下 Java 代码是怎么实现往一个文件写入 wav “文件头”的。结合上图，你理解起来就不会很困难了。</p>
-<p>关键代码来自 <a href="https://github.com/mobro/android/blob/master/src/com/testo/audio/ExtAudioRecorder.java" target="_blank" rel="external">ExtAudioRecorder</a>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">RandomAccessFile randomAccessWriter = null;</div><div class="line">...</div><div class="line"></div><div class="line">randomAccessWriter = new RandomAccessFile(filePath, &quot;rw&quot;);</div><div class="line"></div><div class="line">randomAccessWriter.setLength(0); // Set file length to 0, to prevent unexpected behavior in case the file already existed</div><div class="line">randomAccessWriter.writeBytes(&quot;RIFF&quot;);</div><div class="line">randomAccessWriter.writeInt(0); // Final file size not known yet, write 0</div><div class="line">randomAccessWriter.writeBytes(&quot;WAVE&quot;);</div><div class="line">randomAccessWriter.writeBytes(&quot;fmt &quot;);</div><div class="line">randomAccessWriter.writeInt(Integer.reverseBytes(16)); // Sub-chunk size, 16 for PCM</div><div class="line">randomAccessWriter.writeShort(Short.reverseBytes((short) 1)); // AudioFormat, 1 for PCM</div><div class="line">randomAccessWriter.writeShort(Short.reverseBytes(nChannels));// Number of channels, 1 for mono, 2 for stereo</div><div class="line">randomAccessWriter.writeInt(Integer.reverseBytes(sRate)); // Sample rate</div><div class="line">randomAccessWriter.writeInt(Integer.reverseBytes(sRate*bSamples*nChannels/8)); // Byte rate, SampleRate*NumberOfChannels*BitsPerSample/8</div><div class="line">randomAccessWriter.writeShort(Short.reverseBytes((short)(nChannels*bSamples/8))); // Block align, NumberOfChannels*BitsPerSample/8</div><div class="line">randomAccessWriter.writeShort(Short.reverseBytes(bSamples)); // Bits per sample</div><div class="line">randomAccessWriter.writeBytes(&quot;data&quot;);</div><div class="line">randomAccessWriter.writeInt(0); // Data chunk size not known yet, write 0</div></pre></td></tr></table></figure>
-<p>filePath 是音频文件绝对路径，注意此时的录音还未开始，这里的思路是在准备阶段，先创建一个带有 wave 头部信息的文件，然后在录音进行时再不断从缓冲区取出音频数据写入到这个文件中，所以这里的 ChunkSize 一开始就设置为 0。</p>
-<p>另外，再给一个 samsung 的实现思路，它是读取录制完后的音频文件再往文件头写入 wave 的头部信息，本质上是一样的，但相对好理解些。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">private void rawToWave(final File rawFile, final File waveFile) throws IOException &#123;</div><div class="line"></div><div class="line">        byte[] rawData = new byte[(int) rawFile.length()];</div><div class="line">        DataInputStream input = null;</div><div class="line">        try &#123;</div><div class="line">            input = new DataInputStream(new FileInputStream(rawFile));</div><div class="line">            input.read(rawData);</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (input != null) &#123;</div><div class="line">                input.close();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        DataOutputStream output = null;</div><div class="line">        try &#123;</div><div class="line">            output = new DataOutputStream(new FileOutputStream(waveFile));</div><div class="line">            // WAVE header</div><div class="line">            // see http://ccrma.stanford.edu/courses/422/projects/WaveFormat/</div><div class="line">            writeString(output, &quot;RIFF&quot;); // chunk id</div><div class="line">            writeInt(output, 36 + rawData.length); // chunk size</div><div class="line">            writeString(output, &quot;WAVE&quot;); // format</div><div class="line">            writeString(output, &quot;fmt &quot;); // subchunk 1 id</div><div class="line">            writeInt(output, 16); // subchunk 1 size</div><div class="line">            writeShort(output, (short) 1); // audio format (1 = PCM)</div><div class="line">            writeShort(output, (short) 1); // number of channels</div><div class="line">            writeInt(output, SAMPLE_RATE); // sample rate</div><div class="line">            writeInt(output, SAMPLE_RATE * 2); // byte rate</div><div class="line">            writeShort(output, (short) 2); // block align</div><div class="line">            writeShort(output, (short) 16); // bits per sample</div><div class="line">            writeString(output, &quot;data&quot;); // subchunk 2 id</div><div class="line">            writeInt(output, rawData.length); // subchunk 2 size</div><div class="line">            // Audio data (conversion big endian -&gt; little endian)</div><div class="line">            short[] shorts = new short[rawData.length / 2];</div><div class="line">            ByteBuffer.wrap(rawData).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);</div><div class="line">            ByteBuffer bytes = ByteBuffer.allocate(shorts.length * 2);</div><div class="line">            for (short s : shorts) &#123;</div><div class="line">                bytes.putShort(s);</div><div class="line">            &#125;</div><div class="line">            output.write(bytes.array());</div><div class="line">        &#125; finally &#123;</div><div class="line">            if (output != null) &#123;</div><div class="line">                output.close();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h4 id="3-麦克风音量获取"><a href="#3-麦克风音量获取" class="headerlink" title="3.麦克风音量获取"></a>3.麦克风音量获取</h4><h5 id="3-1-基础知识"><a href="#3-1-基础知识" class="headerlink" title="3.1 基础知识"></a>3.1 基础知识</h5><p>度量声音强度的单位，大家最熟悉的就是分贝。计算公式如下：</p>
-<p><img src="http://upload.wikimedia.org/math/8/e/a/8eae7519d0c9f264e89ececeaaeb1d05.png" alt=""></p>
-<p>分子是测量值的声压，分母是参考值的声压（20微帕，人类所能听到的最小声压）。<br>在 Android 设备上传感器可以提供的物理量是场的幅值（amplitude），常用下列公式计算分贝值：</p>
-<p><img src="http://upload.wikimedia.org/math/9/0/2/9023cb5d56a945e9332196fabacb463a.png" alt=""></p>
-<p>从SDK中读取了某段音频数据的振幅后，取最大振幅或平均振幅（可以用平方和平均，或绝对值的和平均），代入上述公式的A1。这里的 A0 取值似情况而定，这里不做讨论。</p>
-<p>MediaRecorder 有一个无参方法 getMaxAmplitude 即可获得一小段时间内音源数据中的最大振幅。而 AudioRecord 没有提供类似的方法，但是我们可以获得具体的音源数据值来进行换算。调用 AudioRecord 的 read(byte[] audioData, int offsetInBytes, int sizeInBytes) 方法从缓冲区读取到我们传入的字节数组buffer 后，便可以对其进行操作，如求平方和或绝对值的平均值。这样可以避免个别极端值的影响，使计算的结果更加稳定。求得平均值之后，如果是平方和则代入常数系数为 10 的公式中，如果是绝对值的则代入常数系数为 20 的公式中，算出分贝值。</p>
-<p>我们先来获取振幅，关键代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">AudioRecord audioRecorder;</div><div class="line">byte[] buffer;</div><div class="line">int bufferSize;</div><div class="line">// 振幅</div><div class="line">int mAmplitude= 0;</div><div class="line">// Number of frames written to file on each output(only in uncompressed mode)</div><div class="line">private int framePeriod;</div><div class="line">...</div><div class="line">// 初始化,sampleRate 是采样率，这里我设置的是 44100 Hz，Google Android 文档明确表明只有以下3个参数是可以在所有设备上保证支持的，44100 Hz，AudioFormat.CHANNEL_IN_MONO(单声道)，AudioFormat.ENCODING_PCM_16BIT(位宽)</div><div class="line"></div><div class="line">bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);</div><div class="line"></div><div class="line">// MediaRecorder.AudioSource.MIC,音频采集的输入源</div><div class="line">audioRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">buffer = new byte[framePeriod*bSamples/8*nChannels];</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">// 开始录音</div><div class="line">audioRecorder.start();</div><div class="line">// 读取缓冲区音频数据</div><div class="line">audioRecorder.read(buffer, 0, buffer.length); // Fill buffer</div><div class="line">            try</div><div class="line">            &#123;</div><div class="line">                randomAccessWriter.write(buffer); // Write buffer to file</div><div class="line">                payloadSize += buffer.length;</div><div class="line">                    for (int i=0; i&lt;buffer.length/2; i++)</div><div class="line">                    &#123; // 16bit sample size</div><div class="line">                        short curSample = getShort(buffer[i*2], buffer[i*2+1]);</div><div class="line">                        if (curSample &gt; mAmplitude)</div><div class="line">                        &#123; // Check amplitude</div><div class="line">                            mAmplitude = curSample;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">              &#125;</div><div class="line">            catch (IOException e)</div><div class="line">            &#123;</div><div class="line"></div><div class="line">            &#125;</div></pre></td></tr></table></figure>
-<p>上面的 mAmplitude 就是振幅了。现在我们需要换算成分贝，直接代入公式，只需简单的这么一句代码就行了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int mVolume = (int)(10 * Math.log10(amplitude));</div></pre></td></tr></table></figure>
-<p>上面的 mAmplitude 时刻都在变化的，除非录音结束。所以，我们可以通过 mAmplitude 来实现诸如绘制声音频率图、声波图等效果。</p>
-<h5 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h5><ul>
-<li><a href="http://blog.csdn.net/bluesoal/article/details/932395" target="_blank" rel="external">《wav文件格式分析详解》</a></li>
-</ul>
-<ul>
-<li><a href="http://ju.outofmemory.cn/entry/247659" target="_blank" rel="external">《如何存储和解析wav文件》</a></li>
-</ul>
-<ul>
-<li><a href="http://ticktick.blog.51cto.com/823160/1748506" target="_blank" rel="external">《Android 音频开发基础知识》</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Android/">Android</a>
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
-
-
-
-  
-    <article id="post-Android-内存泄漏总结" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/14/Android-内存泄漏总结/" class="article-date">
-  	<time datetime="2016-09-14T05:13:19.000Z" itemprop="datePublished">2016-09-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/14/Android-内存泄漏总结/">Android 内存泄漏总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 <strong>总结</strong> 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。</p>
-<p>我会从 java 内存泄漏的基础知识开始，并通过具体例子来说明 Android 引起内存泄漏的各种原因，以及如何利用工具来分析应用内存泄漏，最后再做总结。</p>
-<p>篇幅有些长，大家可以分几节来看！</p>
-<h3 id="Java-内存分配策略"><a href="#Java-内存分配策略" class="headerlink" title="Java 内存分配策略"></a>Java 内存分配策略</h3><p>Java 程序运行时的内存分配策略有三种,分别是静态分配,栈式分配,和堆式分配，对应的，三种存储策略使用的内存空间主要分别是静态存储区（也称方法区）、栈区和堆区。</p>
-<ul>
-<li><p>静态存储区（方法区）：主要存放静态数据、全局 static 数据和常量。这块内存在程序编译时就已经分配好，并且在程序整个运行期间都存在。</p>
-</li>
-<li><p>栈区 ：当方法被执行时，方法体内的局部变量都在栈上创建，并在方法执行结束时这些局部变量所持有的内存将会自动被释放。因为栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限。</p>
-</li>
-<li><p>堆区 ： 又称动态内存分配，通常就是指在程序运行时直接 new 出来的内存。这部分内存在不使用时将会由 Java 垃圾回收器来负责回收。</p>
-</li>
-</ul>
-<h5 id="栈与堆的区别："><a href="#栈与堆的区别：" class="headerlink" title="栈与堆的区别："></a>栈与堆的区别：</h5><p>在方法体内定义的（局部变量）一些基本类型的变量和对象的引用变量都是在方法的栈内存中分配的。当在一段方法块中定义一个变量时，Java 就会在栈中为该变量分配内存空间，当超过该变量的作用域后，该变量也就无效了，分配给它的内存空间也将被释放掉，该内存空间可以被重新使用。</p>
-<p>堆内存用来存放所有由 new 创建的对象（包括该对象其中的所有成员变量）和数组。在堆中分配的内存，将由 Java 垃圾回收器来自动管理。在堆中产生了一个数组或者对象后，还可以在栈中定义一个特殊的变量，这个变量的取值等于数组或者对象在堆内存中的首地址，这个特殊的变量就是我们上面说的引用变量。我们可以通过这个引用变量来访问堆中的对象或者数组。</p>
-<p>举个例子:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class Sample() &#123;</div><div class="line">	int s1 = 0;</div><div class="line">	Sample mSample1 = new Sample();</div><div class="line"></div><div class="line">	public void method() &#123;</div><div class="line">		int s2 = 1;</div><div class="line">		Sample mSample2 = new Sample();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Sample mSample3 = new Sample();</div></pre></td></tr></table></figure>
-<p>Sample 类的局部变量 s2 和引用变量 mSample2 都是存在于栈中，但 mSample2 指向的对象是存在于堆上的。<br>mSample3 指向的对象实体存放在堆上，包括这个对象的所有成员变量 s1 和 mSample1，而它自己存在于栈中。</p>
-<p>结论：</p>
-<p>局部变量的基本数据类型和引用存储于栈中，引用的对象实体存储于堆中。—— 因为它们属于方法中的变量，生命周期随方法而结束。</p>
-<p>成员变量全部存储与堆中（包括基本数据类型，引用和引用的对象实体）—— 因为它们属于类，类对象终究是要被new出来使用的。</p>
-<p>了解了 Java 的内存分配之后，我们再来看看 Java 是怎么管理内存的。</p>
-<h3 id="Java是如何管理内存"><a href="#Java是如何管理内存" class="headerlink" title="Java是如何管理内存"></a>Java是如何管理内存</h3><p>Java的内存管理就是对象的分配和释放问题。在 Java 中，程序员需要通过关键字 new 为每个对象申请内存空间 (基本类型除外)，所有的对象都在堆 (Heap)中分配空间。另外，对象的释放是由 GC 决定和执行的。在 Java 中，内存的分配是由程序完成的，而内存的释放是由 GC 完成的，这种收支两条线的方法确实简化了程序员的工作。但同时，它也加重了JVM的工作。这也是 Java 程序运行速度较慢的原因之一。因为，GC 为了能够正确释放对象，GC 必须监控每一个对象的运行状态，包括对象的申请、引用、被引用、赋值等，GC 都需要进行监控。</p>
-<p>监视对象状态是为了更加准确地、及时地释放对象，而释放对象的根本原则就是该对象不再被引用。</p>
-<p>为了更好理解 GC 的工作原理，我们可以将对象考虑为有向图的顶点，将引用关系考虑为图的有向边，有向边从引用者指向被引对象。另外，每个线程对象可以作为一个图的起始顶点，例如大多程序从 main 进程开始执行，那么该图就是以 main 进程顶点开始的一棵根树。在这个有向图中，根顶点可达的对象都是有效对象，GC将不回收这些对象。如果某个对象 (连通子图)与这个根顶点不可达(注意，该图为有向图)，那么我们认为这个(这些)对象不再被引用，可以被 GC 回收。<br>以下，我们举一个例子说明如何用有向图表示内存管理。对于程序的每一个时刻，我们都有一个有向图表示JVM的内存分配情况。以下右图，就是左边程序运行到第6行的示意图。</p>
-<p><img src="http://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/1.gif" alt=""></p>
-<p>Java使用有向图的方式进行内存管理，可以消除引用循环的问题，例如有三个对象，相互引用，只要它们和根进程不可达的，那么GC也是可以回收它们的。这种方式的优点是管理内存的精度很高，但是效率较低。另外一种常用的内存管理技术是使用计数器，例如COM模型采用计数器方式管理构件，它与有向图相比，精度行低(很难处理循环引用的问题)，但执行效率很高。</p>
-<h3 id="什么是Java中的内存泄露"><a href="#什么是Java中的内存泄露" class="headerlink" title="什么是Java中的内存泄露"></a>什么是Java中的内存泄露</h3><p>在Java中，内存泄漏就是存在一些被分配的对象，这些对象有下面两个特点，首先，这些对象是可达的，即在有向图中，存在通路可以与其相连；其次，这些对象是无用的，即程序以后不会再使用这些对象。如果对象满足这两个条件，这些对象就可以判定为Java中的内存泄漏，这些对象不会被GC所回收，然而它却占用内存。</p>
-<p>在C++中，内存泄漏的范围更大一些。有些对象被分配了内存空间，然后却不可达，由于C++中没有GC，这些内存将永远收不回来。在Java中，这些不可达的对象都由GC负责回收，因此程序员不需要考虑这部分的内存泄露。</p>
-<p>通过分析，我们得知，对于C++，程序员需要自己管理边和顶点，而对于Java程序员只需要管理边就可以了(不需要管理顶点的释放)。通过这种方式，Java提高了编程的效率。</p>
-<p><img src="http://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/2.gif" alt=""></p>
-<p>因此，通过以上分析，我们知道在Java中也有内存泄漏，但范围比C++要小一些。因为Java从语言上保证，任何对象都是可达的，所有的不可达对象都由GC管理。</p>
-<p>对于程序员来说，GC基本是透明的，不可见的。虽然，我们只有几个函数可以访问GC，例如运行GC的函数System.gc()，但是根据Java语言规范定义， 该函数不保证JVM的垃圾收集器一定会执行。因为，不同的JVM实现者可能使用不同的算法管理GC。通常，GC的线程的优先级别较低。JVM调用GC的策略也有很多种，有的是内存使用到达一定程度时，GC才开始工作，也有定时执行的，有的是平缓执行GC，有的是中断式执行GC。但通常来说，我们不需要关心这些。除非在一些特定的场合，GC的执行影响应用程序的性能，例如对于基于Web的实时系统，如网络游戏等，用户不希望GC突然中断应用程序执行而进行垃圾回收，那么我们需要调整GC的参数，让GC能够通过平缓的方式释放内存，例如将垃圾回收分解为一系列的小步骤执行，Sun提供的HotSpot JVM就支持这一特性。</p>
-<p>同样给出一个 Java 内存泄漏的典型例子，</p>
-<pre><code>Vector v = new Vector(10);
-for (int i = 1; i &lt; 100; i++) {
-    Object o = new Object();
-    v.add(o);
-    o = null;
-}
-</code></pre><p>在这个例子中，我们循环申请Object对象，并将所申请的对象放入一个 Vector 中，如果我们仅仅释放引用本身，那么 Vector 仍然引用该对象，所以这个对象对 GC 来说是不可回收的。因此，如果对象加入到Vector 后，还必须从 Vector 中删除，最简单的方法就是将 Vector 对象设置为 null。</p>
-<h3 id="Android中常见的内存泄漏汇总"><a href="#Android中常见的内存泄漏汇总" class="headerlink" title="Android中常见的内存泄漏汇总"></a>Android中常见的内存泄漏汇总</h3><ul>
-<li><p>集合类泄漏</p>
-<p>  集合类如果仅仅有添加元素的方法，而没有相应的删除机制，导致内存被占用。如果这个集合类是全局性的变量 (比如类中的静态属性，全局性的 map 等即有静态引用或 final 一直指向它)，那么没有相应的删除机制，很可能导致集合所占用的内存只增不减。比如上面的典型例子就是其中一种情况，当然实际上我们在项目中肯定不会写这么 2B 的代码，但稍不注意还是很容易出现这种情况，比如我们都喜欢通过 HashMap 做一些缓存之类的事，这种情况就要多留一些心眼。</p>
-</li>
-<li><p>单例造成的内存泄漏</p>
-<p>由于单例的静态特性使得其生命周期跟应用的生命周期一样长，所以如果使用不恰当的话，很容易造成内存泄漏。比如下面一个典型的例子，</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class AppManager &#123;</div><div class="line">private static AppManager instance;</div><div class="line">private Context context;</div><div class="line">private AppManager(Context context) &#123;</div><div class="line">this.context = context;</div><div class="line">&#125;</div><div class="line">public static AppManager getInstance(Context context) &#123;</div><div class="line">if (instance == null) &#123;</div><div class="line">instance = new AppManager(context);</div><div class="line">&#125;</div><div class="line">return instance;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这是一个普通的单例模式，当创建这个单例的时候，由于需要传入一个Context，所以这个Context的生命周期的长短至关重要：</p>
-<p>1、如果此时传入的是 Application 的 Context，因为 Application 的生命周期就是整个应用的生命周期，所以这将没有任何问题。</p>
-<p>2、如果此时传入的是 Activity 的 Context，当这个 Context 所对应的 Activity 退出时，由于该 Context 的引用被单例对象所持有，其生命周期等于整个应用程序的生命周期，所以当前 Activity 退出时它的内存并不会被回收，这就造成泄漏了。</p>
-<p>正确的方式应该改为下面这种方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class AppManager &#123;</div><div class="line">private static AppManager instance;</div><div class="line">private Context context;</div><div class="line">private AppManager(Context context) &#123;</div><div class="line">this.context = context.getApplicationContext();// 使用Application 的context</div><div class="line">&#125;</div><div class="line">public static AppManager getInstance(Context context) &#123;</div><div class="line">if (instance == null) &#123;</div><div class="line">instance = new AppManager(context);</div><div class="line">&#125;</div><div class="line">return instance;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>或者这样写，连 Context 都不用传进来了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">在你的 Application 中添加一个静态方法，getContext() 返回 Application 的 context，</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">context = getApplicationContext();</div><div class="line"></div><div class="line">...</div><div class="line">   /**</div><div class="line">     * 获取全局的context</div><div class="line">     * @return 返回全局context对象</div><div class="line">     */</div><div class="line">    public static Context getContext()&#123;</div><div class="line">        return context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">public class AppManager &#123;</div><div class="line">private static AppManager instance;</div><div class="line">private Context context;</div><div class="line">private AppManager() &#123;</div><div class="line">this.context = MyApplication.getContext();// 使用Application 的context</div><div class="line">&#125;</div><div class="line">public static AppManager getInstance() &#123;</div><div class="line">if (instance == null) &#123;</div><div class="line">instance = new AppManager();</div><div class="line">&#125;</div><div class="line">return instance;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>匿名内部类/非静态内部类和异步线程</p>
-<ul>
-<li><p>非静态内部类创建静态实例造成的内存泄漏</p>
-<p>有的时候我们可能会在启动频繁的Activity中，为了避免重复创建相同的数据资源，可能会出现这种写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends AppCompatActivity &#123;</div><div class="line">private static TestResource mResource = null;</div><div class="line">@Override</div><div class="line">protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">super.onCreate(savedInstanceState);</div><div class="line">setContentView(R.layout.activity_main);</div><div class="line">if(mManager == null)&#123;</div><div class="line">mManager = new TestResource();</div><div class="line">&#125;</div><div class="line">//...</div><div class="line">&#125;</div><div class="line">class TestResource &#123;</div><div class="line">//...</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>这样就在Activity内部创建了一个非静态内部类的单例，每次启动Activity时都会使用该单例的数据，这样虽然避免了资源的重复创建，不过这种写法却会造成内存泄漏，因为非静态内部类默认会持有外部类的引用，而该非静态内部类又创建了一个静态的实例，该实例的生命周期和应用的一样长，这就导致了该静态实例一直会持有该Activity的引用，导致Activity的内存资源不能正常回收。正确的做法为：</p>
-<p>将该内部类设为静态内部类或将该内部类抽取出来封装成一个单例，如果需要使用Context，请按照上面推荐的使用Application 的 Context。当然，Application 的 context 不是万能的，所以也不能随便乱用，对于有些地方则必须使用 Activity 的 Context，对于Application，Service，Activity三者的Context的应用场景如下：</p>
-<p><img src="http://img.blog.csdn.net/20151123144226349" alt=""></p>
-<p><strong>其中：</strong> NO1表示 Application 和 Service 可以启动一个 Activity，不过需要创建一个新的 task 任务队列。而对于 Dialog 而言，只有在 Activity 中才能创建</p>
-<ul>
-<li><p>匿名内部类</p>
-<p> android开发经常会继承实现Activity/Fragment/View，此时如果你使用了匿名类，并被异步线程持有了，那要小心了，如果没有任何措施这样一定会导致泄露</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   public class MainActivity extends Activity &#123;</div><div class="line">    ...</div><div class="line">    Runnable ref1 = new MyRunable();</div><div class="line">    Runnable ref2 = new Runnable() &#123;</div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">       ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>ref1和ref2的区别是，ref2使用了匿名内部类。我们来看看运行时这两个引用的内存：</p>
-<p><img src="http://img2.tbcdn.cn/L1/461/1/fb05ff6d2e68f309b94dd84352c81acfe0ae839e" alt=""></p>
-<p>可以看到，ref1没什么特别的。<br>但ref2这个匿名类的实现对象里面多了一个引用：<br>this$0这个引用指向MainActivity.this，也就是说当前的MainActivity实例会被ref2持有，如果将这个引用再传入一个异步线程，此线程和此Acitivity生命周期不一致的时候，就造成了Activity的泄露。</p>
-<ul>
-<li><p>Handler 造成的内存泄漏</p>
-<p> Handler 的使用造成的内存泄漏问题应该说是最为常见了，很多时候我们为了避免 ANR 而不在主线程进行耗时操作，在处理网络任务或者封装一些请求回调等api都借助Handler来处理，但 Handler 不是万能的，对于 Handler 的使用代码编写一不规范即有可能造成内存泄漏。另外，我们知道 Handler、Message 和 MessageQueue 都是相互关联在一起的，万一 Handler 发送的 Message 尚未被处理，则该 Message 及发送它的 Handler 对象将被线程 MessageQueue 一直持有。<br> 由于 Handler 属于 TLS(Thread Local Storage) 变量, 生命周期和 Activity 是不一致的。因此这种实现方式一般很难保证跟 View 或者 Activity 的生命周期保持一致，故很容易导致无法正确释放。</p>
-<p> 举个例子：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">   public class SampleActivity extends Activity &#123;</div><div class="line"></div><div class="line">  private final Handler mLeakyHandler = new Handler() &#123;</div><div class="line">    @Override</div><div class="line">    public void handleMessage(Message msg) &#123;</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">    // Post a message and delay its execution for 10 minutes.</div><div class="line">    mLeakyHandler.postDelayed(new Runnable() &#123;</div><div class="line">      @Override</div><div class="line">      public void run() &#123; /* ... */ &#125;</div><div class="line">    &#125;, 1000 * 60 * 10);</div><div class="line"></div><div class="line">    // Go back to the previous Activity.</div><div class="line">    finish();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>在该 SampleActivity 中声明了一个延迟10分钟执行的消息 Message，mLeakyHandler 将其 push 进了消息队列 MessageQueue 里。当该 Activity 被 finish() 掉时，延迟执行任务的 Message 还会继续存在于主线程中，它持有该 Activity 的 Handler 引用，所以此时 finish() 掉的 Activity 就不会被回收了从而造成内存泄漏（因 Handler 为非静态内部类，它会持有外部类的引用，在这里就是指 SampleActivity）。</p>
-<p>修复方法：在 Activity 中避免使用非静态内部类，比如上面我们将 Handler 声明为静态的，则其存活期跟 Activity 的生命周期就无关了。同时通过弱引用的方式引入 Activity，避免直接将 Activity 作为 context 传进去，见下面代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class SampleActivity extends Activity &#123;</div><div class="line"></div><div class="line">  /**</div><div class="line">   * Instances of static inner classes do not hold an implicit</div><div class="line">   * reference to their outer class.</div><div class="line">   */</div><div class="line">  private static class MyHandler extends Handler &#123;</div><div class="line">    private final WeakReference&lt;SampleActivity&gt; mActivity;</div><div class="line"></div><div class="line">    public MyHandler(SampleActivity activity) &#123;</div><div class="line">      mActivity = new WeakReference&lt;SampleActivity&gt;(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void handleMessage(Message msg) &#123;</div><div class="line">      SampleActivity activity = mActivity.get();</div><div class="line">      if (activity != null) &#123;</div><div class="line">        // ...</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private final MyHandler mHandler = new MyHandler(this);</div><div class="line"></div><div class="line">  /**</div><div class="line">   * Instances of anonymous classes do not hold an implicit</div><div class="line">   * reference to their outer class when they are &quot;static&quot;.</div><div class="line">   */</div><div class="line">  private static final Runnable sRunnable = new Runnable() &#123;</div><div class="line">      @Override</div><div class="line">      public void run() &#123; /* ... */ &#125;</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">    // Post a message and delay its execution for 10 minutes.</div><div class="line">    mHandler.postDelayed(sRunnable, 1000 * 60 * 10);</div><div class="line"></div><div class="line">    // Go back to the previous Activity.</div><div class="line">    finish();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>综述，即推荐使用静态内部类 + WeakReference 这种方式。每次使用前注意判空。</p>
-<p>前面提到了 WeakReference，所以这里就简单的说一下 Java 对象的几种引用类型。</p>
-<p>Java对引用的分类有 Strong reference, SoftReference, WeakReference, PhatomReference 四种。</p>
-<p><img src="https://gw.alicdn.com/tps/TB1U6TNLVXXXXchXFXXXXXXXXXX-644-546.jpg" alt=""></p>
-<p>在Android应用的开发中，为了防止内存溢出，在处理一些占用内存大而且声明周期较长的对象时候，可以尽量应用软引用和弱引用技术。</p>
-<p>软/弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收器回收，Java虚拟机就会把这个软引用加入到与之关联的引用队列中。利用这个队列可以得知被回收的软/弱引用的对象列表，从而为缓冲器清除已失效的软/弱引用。</p>
-<p>假设我们的应用会用到大量的默认图片，比如应用中有默认的头像，默认游戏图标等等，这些图片很多地方会用到。如果每次都去读取图片，由于读取文件需要硬件操作，速度较慢，会导致性能较低。所以我们考虑将图片缓存起来，需要的时候直接从内存中读取。但是，由于图片占用内存空间比较大，缓存很多图片需要很多的内存，就可能比较容易发生OutOfMemory异常。这时，我们可以考虑使用软/弱引用技术来避免这个问题发生。以下就是高速缓冲器的雏形：</p>
-<p>首先定义一个HashMap，保存软引用对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private Map &lt;String, SoftReference&lt;Bitmap&gt;&gt; imageCache = new HashMap &lt;String, SoftReference&lt;Bitmap&gt;&gt; ();</div></pre></td></tr></table></figure>
-<p>再来定义一个方法，保存Bitmap的软引用到HashMap。</p>
-<p><img src="https://gw.alicdn.com/tps/TB1oW_FLVXXXXXuaXXXXXXXXXXX-679-717.jpg" alt=""></p>
-<p>使用软引用以后，在OutOfMemory异常发生之前，这些缓存的图片资源的内存空间可以被释放掉的，从而避免内存达到上限，避免Crash发生。</p>
-<p>如果只是想避免OutOfMemory异常的发生，则可以使用软引用。如果对于应用的性能更在意，想尽快回收一些占用内存比较大的对象，则可以使用弱引用。</p>
-<p>另外可以根据对象是否经常使用来判断选择软引用还是弱引用。如果该对象可能会经常使用的，就尽量用软引用。如果该对象不被使用的可能性更大些，就可以用弱引用。</p>
-<p>ok，继续回到主题。前面所说的，创建一个静态Handler内部类，然后对 Handler 持有的对象使用弱引用，这样在回收时也可以回收 Handler 持有的对象，但是这样做虽然避免了 Activity 泄漏，不过 Looper 线程的消息队列中还是可能会有待处理的消息，所以我们在 Activity 的 Destroy 时或者 Stop 时应该移除消息队列 MessageQueue 中的消息。</p>
-<p>下面几个方法都可以移除 Message：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public final void removeCallbacks(Runnable r);</div><div class="line"></div><div class="line">public final void removeCallbacks(Runnable r, Object token);</div><div class="line"></div><div class="line">public final void removeCallbacksAndMessages(Object token);</div><div class="line"></div><div class="line">public final void removeMessages(int what);</div><div class="line"></div><div class="line">public final void removeMessages(int what, Object object);</div></pre></td></tr></table></figure>
-<ul>
-<li><p>尽量避免使用 static 成员变量</p>
-<p> 如果成员变量被声明为 static，那我们都知道其生命周期将与整个app进程生命周期一样。</p>
-<p> 这会导致一系列问题，如果你的app进程设计上是长驻内存的，那即使app切到后台，这部分内存也不会被释放。按照现在手机app内存管理机制，占内存较大的后台进程将优先回收，yi’wei如果此app做过进程互保保活，那会造成app在后台频繁重启。当手机安装了你参与开发的app以后一夜时间手机被消耗空了电量、流量，你的app不得不被用户卸载或者静默。<br>这里修复的方法是：</p>
-</li>
-</ul>
-<p>不要在类初始时初始化静态成员。可以考虑lazy初始化。<br>架构设计上要思考是否真的有必要这样做，尽量避免。如果架构需要这么设计，那么此对象的生命周期你有责任管理起来。</p>
-<ul>
-<li><p>避免 override finalize()</p>
-<p> 1、finalize 方法被执行的时间不确定，不能依赖与它来释放紧缺的资源。时间不确定的原因是：</p>
-<pre><code>*   虚拟机调用GC的时间不确定
-
-*  Finalize daemon线程被调度到的时间不确定
-</code></pre><p> 2、finalize 方法只会被执行一次，即使对象被复活，如果已经执行过了 finalize 方法，再次被 GC 时也不会再执行了，原因是：</p>
-<p> 含有 finalize 方法的 object 是在 new 的时候由虚拟机生成了一个 finalize reference 在来引用到该Object的，而在 finalize 方法执行的时候，该 object 所对应的 finalize Reference 会被释放掉，即使在这个时候把该 object 复活(即用强引用引用住该 object )，再第二次被 GC 的时候由于没有了 finalize reference 与之对应，所以 finalize 方法不会再执行。</p>
-<p> 3、含有Finalize方法的object需要至少经过两轮GC才有可能被释放。</p>
-<p>详情见这里 <a href="http://blog.csdn.net/kai_gong/article/details/24188803" target="_blank" rel="external">深入分析过dalvik的代码</a></p>
-</li>
-<li><p>资源未关闭造成的内存泄漏</p>
-<p> 对于使用了BraodcastReceiver，ContentObserver，File，游标 Cursor，Stream，Bitmap等资源的使用，应该在Activity销毁时及时关闭或者注销，否则这些资源将不会被回收，造成内存泄漏。</p>
-</li>
-<li><p>一些不良代码造成的内存压力</p>
-<p> 有些代码并不造成内存泄露，但是它们，或是对没使用的内存没进行有效及时的释放，或是没有有效的利用已有的对象而是频繁的申请新内存。</p>
-<p> 比如：</p>
-<pre><code>- Bitmap 没调用 recycle()方法，对于 Bitmap 对象在不使用时,我们应该先调用 recycle() 释放内存，然后才它设置为 null. 因为加载 Bitmap 对象的内存空间，一部分是 java 的，一部分 C   的（因为 Bitmap 分配的底层是通过 JNI 调用的 )。 而这个 recyle() 就是针对 C 部分的内存释放。
-
-- 构造 Adapter 时，没有使用缓存的 convertView ,每次都在创建新的 converView。这里推荐使用 ViewHolder。
-</code></pre></li>
-</ul>
-<h3 id="工具分析"><a href="#工具分析" class="headerlink" title="工具分析"></a>工具分析</h3><p>Java 内存泄漏的分析工具有很多，但众所周知的要数 MAT(Memory Analysis Tools) 和 YourKit 了。由于篇幅问题，我这里就只对 <a href="http://www.eclipse.org/mat/" target="_blank" rel="external">MAT</a> 的使用做一下介绍。–&gt; <a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-ecl-ma/index.html" target="_blank" rel="external">MAT 的安装</a></p>
-<ul>
-<li><p>MAT分析heap的总内存占用大小来初步判断是否存在泄露</p>
-<p>打开 DDMS 工具，在左边 Devices 视图页面选中“Update Heap”图标，然后在右边切换到 Heap 视图，点击 Heap 视图中的“Cause GC”按钮，到此为止需检测的进程就可以被监视。</p>
-<p><img src="https://gw.alicdn.com/tps/TB1pdf2LVXXXXXeXXXXXXXXXXXX-690-514.jpg" alt=""></p>
-<p>Heap视图中部有一个Type叫做data object，即数据对象，也就是我们的程序中大量存在的类类型的对象。在data object一行中有一列是“Total Size”，其值就是当前进程中所有Java数据对象的内存总量，一般情况下，这个值的大小决定了是否会有内存泄漏。可以这样判断：</p>
-<p>进入某应用，不断的操作该应用，同时注意观察data object的Total Size值，正常情况下Total Size值都会稳定在一个有限的范围内，也就是说由于程序中的的代码良好，没有造成对象不被垃圾回收的情况。</p>
-<p>所以说虽然我们不断的操作会不断的生成很多对象，而在虚拟机不断的进行GC的过程中，这些对象都被回收了，内存占用量会会落到一个稳定的水平；反之如果代码中存在没有释放对象引用的情况，则data object的Total Size值在每次GC后不会有明显的回落。随着操作次数的增多Total Size的值会越来越大，直到到达一个上限后导致进程被杀掉。</p>
-</li>
-<li><p>MAT分析hprof来定位内存泄露的原因所在</p>
-<p>这是出现内存泄露后使用MAT进行问题定位的有效手段。</p>
-<p>A)Dump出内存泄露当时的内存镜像hprof，分析怀疑泄露的类：</p>
-<p><img src="https://gw.alicdn.com/tps/TB1r2zZLVXXXXcHXXXXXXXXXXXX-640-167.jpg" alt=""></p>
-<p>B)分析持有此类对象引用的外部对象</p>
-<p><img src="https://gw.alicdn.com/tps/TB17XvOLVXXXXbiXFXXXXXXXXXX-640-90.png" alt=""></p>
-<p>C)分析这些持有引用的对象的GC路径</p>
-<p><img src="https://gw.alicdn.com/tps/TB10yTwLVXXXXaRapXXXXXXXXXX-640-278.png" alt=""></p>
-<p>D)逐个分析每个对象的GC路径是否正常</p>
-<p><img src="https://gw.alicdn.com/tps/TB1CWTQLVXXXXamXFXXXXXXXXXX-640-90.png" alt=""></p>
-<p>从这个路径可以看出是一个antiRadiationUtil工具类对象持有了MainActivity的引用导致MainActivity无法释放。此时就要进入代码分析此时antiRadiationUtil的引用持有是否合理（如果antiRadiationUtil持有了MainActivity的context导致节目退出后MainActivity无法销毁，那一般都属于内存泄露了）。</p>
-</li>
-<li><p>MAT对比操作前后的hprof来定位内存泄露的根因所在</p>
-<p>为查找内存泄漏，通常需要两个 Dump结果作对比，打开 Navigator History面板，将两个表的 Histogram结果都添加到 Compare Basket中去</p>
-<p>A） 第一个HPROF 文件(usingFile &gt; Open Heap Dump ).</p>
-<p>B）打开Histogram view.</p>
-<p>C）在NavigationHistory view里 (如果看不到就从Window &gt;show view&gt;MAT- Navigation History ), 右击histogram然后选择Add to Compare Basket .</p>
-<p><img src="https://gw.alicdn.com/tps/TB1p1rULVXXXXbyXpXXXXXXXXXX-525-212.png" alt=""></p>
-<p>D）打开第二个HPROF 文件然后重做步骤2和3.</p>
-<p>E）切换到Compare Basket view, 然后点击Compare the Results (视图右上角的红色”!”图标)。</p>
-<p><img src="https://gw.alicdn.com/tps/TB1p0zKLVXXXXX.XVXXXXXXXXXX-640-98.png" alt=""></p>
-<p>F）分析对比结果</p>
-<p><img src="https://gw.alicdn.com/tps/TB1lwDMLVXXXXcUXFXXXXXXXXXX-640-115.png" alt=""></p>
-<p>可以看出两个hprof的数据对象对比结果。</p>
-<p>通过这种方式可以快速定位到操作前后所持有的对象增量，从而进一步定位出当前操作导致内存泄露的具体原因是泄露了什么数据对象。</p>
-<p>注意：</p>
-<p>如果是用 MAT Eclipse 插件获取的 Dump文件，不需要经过转换则可在MAT中打开，Adt会自动进行转换。</p>
-<p>而手机SDk Dump 出的文件要经过转换才能被 MAT识别，Android SDK提供了这个工具 hprof-conv (位于 sdk/tools下)</p>
-<p>首先，要通过控制台进入到你的 android sdk tools 目录下执行以下命令：</p>
-<p>./hprof-conv xxx-a.hprof xxx-b.hprof</p>
-<p>例如 hprof-conv input.hprof out.hprof</p>
-<p>此时才能将out.hprof放在eclipse的MAT中打开。</p>
-</li>
-</ul>
-<p>Ok，下面将给大家介绍一个屌炸天的工具 – LeakCanary 。</p>
-<h3 id="使用-LeakCanary-检测-Android-的内存泄漏"><a href="#使用-LeakCanary-检测-Android-的内存泄漏" class="headerlink" title="使用 LeakCanary 检测 Android 的内存泄漏"></a>使用 LeakCanary 检测 Android 的内存泄漏</h3><p>什么是 <a href="https://github.com/square/leakcanary" target="_blank" rel="external">LeakCanary</a> 呢？为什么选择它来检测 Android 的内存泄漏呢？</p>
-<p>别急，让我来慢慢告诉大家！</p>
-<p>LeakCanary 是国外一位大神 Pierre-Yves Ricau 开发的一个用于检测内存泄露的开源类库。一般情况下，在对战内存泄露中，我们都会经过以下几个关键步骤：</p>
-<p>1、了解 OutOfMemoryError 情况。</p>
-<p>2、重现问题。</p>
-<p>3、在发生内存泄露的时候，把内存 Dump 出来。</p>
-<p>4、在发生内存泄露的时候，把内存 Dump 出来。</p>
-<p>5、计算这个对象到 GC roots 的最短强引用路径。</p>
-<p>6、确定引用路径中的哪个引用是不该有的，然后修复问题。</p>
-<p>很复杂对吧？</p>
-<p>如果有一个类库能在发生 OOM 之前把这些事情全部都搞定，然后你只要修复这些问题就好了。LeakCanary 做的就是这件事情。你可以在 debug 包中轻松检测内存泄露。</p>
-<p>一起来看这个例子（摘自 LeakCanary 中文使用说明，下面会附上所有的参考文档链接）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Cat &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Box &#123;</div><div class="line">  Cat hiddenCat;</div><div class="line">&#125;</div><div class="line">class Docker &#123;</div><div class="line">    // 静态变量，将不会被回收，除非加载 Docker 类的 ClassLoader 被回收。</div><div class="line">    static Box container;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// ...</div><div class="line"></div><div class="line">Box box = new Box();</div><div class="line"></div><div class="line">// 薛定谔之猫</div><div class="line">Cat schrodingerCat = new Cat();</div><div class="line">box.hiddenCat = schrodingerCat;</div><div class="line">Docker.container = box;</div></pre></td></tr></table></figure>
-<p>创建一个RefWatcher，监控对象引用情况。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 我们期待薛定谔之猫很快就会消失（或者不消失），我们监控一下</div><div class="line">refWatcher.watch(schrodingerCat);</div></pre></td></tr></table></figure>
-<p>当发现有内存泄露的时候，你会看到一个很漂亮的 leak trace 报告:</p>
-<ul>
-<li>GC ROOT static Docker.container</li>
-<li>references Box.hiddenCat</li>
-<li>leaks Cat instance</li>
-</ul>
-<p>我们知道，你很忙，每天都有一大堆需求。所以我们把这个事情弄得很简单，你只需要添加一行代码就行了。然后 LeakCanary 就会自动侦测 activity 的内存泄露了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class ExampleApplication extends Application &#123;</div><div class="line">  @Override public void onCreate() &#123;</div><div class="line">    super.onCreate();</div><div class="line">    LeakCanary.install(this);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后你会在通知栏看到这样很漂亮的一个界面:</p>
-<p><img src="https://corner.squareup.com/images/leakcanary/leaktrace.png" alt=""></p>
-<p>以很直白的方式将内存泄露展现在我们的面前。</p>
-<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>一个非常简单的 LeakCanary demo: <a href="https://github.com/liaohuqiu/leakcanary-demo" target="_blank" rel="external">一个非常简单的 LeakCanary demo: https://github.com/liaohuqiu/leakcanary-demo</a></p>
-<h4 id="接入"><a href="#接入" class="headerlink" title="接入"></a>接入</h4><p>在 build.gradle 中加入引用，不同的编译使用不同的引用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">  debugCompile &apos;com.squareup.leakcanary:leakcanary-android:1.3&apos;</div><div class="line">  releaseCompile &apos;com.squareup.leakcanary:leakcanary-android-no-op:1.3&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h4><p>使用 RefWatcher 监控那些本该被回收的对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RefWatcher refWatcher = &#123;...&#125;;</div><div class="line"></div><div class="line">// 监控</div><div class="line">refWatcher.watch(schrodingerCat);</div></pre></td></tr></table></figure>
-<p>LeakCanary.install() 会返回一个预定义的 RefWatcher，同时也会启用一个 ActivityRefWatcher，用于自动监控调用 Activity.onDestroy() 之后泄露的 activity。</p>
-<p>在Application中进行配置 ：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class ExampleApplication extends Application &#123;</div><div class="line"></div><div class="line">  public static RefWatcher getRefWatcher(Context context) &#123;</div><div class="line">    ExampleApplication application = (ExampleApplication) context.getApplicationContext();</div><div class="line">    return application.refWatcher;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private RefWatcher refWatcher;</div><div class="line"></div><div class="line">  @Override public void onCreate() &#123;</div><div class="line">    super.onCreate();</div><div class="line">    refWatcher = LeakCanary.install(this);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用 RefWatcher 监控 Fragment：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseFragment extends Fragment &#123;</div><div class="line"></div><div class="line">  @Override public void onDestroy() &#123;</div><div class="line">    super.onDestroy();</div><div class="line">    RefWatcher refWatcher = ExampleApplication.getRefWatcher(getActivity());</div><div class="line">    refWatcher.watch(this);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用 RefWatcher 监控 Activity：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    ......</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">            //在自己的应用初始Activity中加入如下两行代码</div><div class="line">        RefWatcher refWatcher = ExampleApplication.getRefWatcher(this);</div><div class="line">        refWatcher.watch(this);</div><div class="line"></div><div class="line">        textView = (TextView) findViewById(R.id.tv);</div><div class="line">        textView.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                startAsyncTask();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void async() &#123;</div><div class="line"></div><div class="line">        startAsyncTask();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void startAsyncTask() &#123;</div><div class="line">        // This async task is an anonymous class and therefore has a hidden reference to the outer</div><div class="line">        // class MainActivity. If the activity gets destroyed before the task finishes (e.g. rotation),</div><div class="line">        // the activity instance will leak.</div><div class="line">        new AsyncTask&lt;Void, Void, Void&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            protected Void doInBackground(Void... params) &#123;</div><div class="line">                // Do some slow work in background</div><div class="line">                SystemClock.sleep(20000);</div><div class="line">                return null;</div><div class="line">            &#125;</div><div class="line">        &#125;.execute();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h4><p>1.RefWatcher.watch() 创建一个 KeyedWeakReference 到要被监控的对象。</p>
-<p>2.然后在后台线程检查引用是否被清除，如果没有，调用GC。</p>
-<p>3.如果引用还是未被清除，把 heap 内存 dump 到 APP 对应的文件系统中的一个 .hprof 文件中。</p>
-<p>4.在另外一个进程中的 HeapAnalyzerService 有一个 HeapAnalyzer 使用HAHA 解析这个文件。</p>
-<p>5.得益于唯一的 reference key, HeapAnalyzer 找到 KeyedWeakReference，定位内存泄露。</p>
-<p>6.HeapAnalyzer 计算 到 GC roots 的最短强引用路径，并确定是否是泄露。如果是的话，建立导致泄露的引用链。</p>
-<p>7.引用链传递到 APP 进程中的 DisplayLeakService， 并以通知的形式展示出来。</p>
-<p>ok,这里就不再深入了，想要了解更多就到 <a href="https://github.com/square/leakcanary" target="_blank" rel="external">作者 github 主页</a> 这去哈。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li><p>对 Activity 等组件的引用应该控制在 Activity 的生命周期之内； 如果不能就考虑使用 getApplicationContext 或者 getApplication，以避免 Activity 被外部长生命周期的对象引用而泄露。</p>
-</li>
-<li><p>尽量不要在静态变量或者静态内部类中使用非静态外部成员变量（包括context )，即使要使用，也要考虑适时把外部成员变量置空；也可以在内部类中使用弱引用来引用外部类的变量。</p>
-</li>
-<li><p>对于生命周期比Activity长的内部类对象，并且内部类中使用了外部类的成员变量，可以这样做避免内存泄漏：</p>
-<ul>
-<li>将内部类改为静态内部类</li>
-<li>静态内部类中使用弱引用来引用外部类的成员变量</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>Handler 的持有的引用对象最好使用弱引用，资源释放时也可以清空 Handler 里面的消息。比如在 Activity onStop 或者 onDestroy 的时候，取消掉该 Handler 对象的 Message和 Runnable.</p>
-</li>
-<li><p>在 Java 的实现过程中，也要考虑其对象释放，最好的方法是在不使用某对象时，显式地将此对象赋值为 null，比如使用完Bitmap 后先调用 recycle()，再赋为null,清空对图片等资源有直接引用或者间接引用的数组（使用 array.clear() ; array = null）等，最好遵循谁创建谁释放的原则。</p>
-</li>
-<li><p>正确关闭资源，对于使用了BraodcastReceiver，ContentObserver，File，游标 Cursor，Stream，Bitmap等资源的使用，应该在Activity销毁时及时关闭或者注销。</p>
-</li>
-<li><p>保持对对象生命周期的敏感，特别注意单例、静态对象、全局性集合等的生命周期。</p>
-</li>
-</ul>
-<h4 id="以上部分图片、实例代码和文段都摘自或参考以下文章-："><a href="#以上部分图片、实例代码和文段都摘自或参考以下文章-：" class="headerlink" title="以上部分图片、实例代码和文段都摘自或参考以下文章 ："></a>以上部分图片、实例代码和文段都摘自或参考以下文章 ：</h4><p>支付宝：</p>
-<p><a href="http://www.atatech.org/articles/44198" target="_blank" rel="external">Android怎样coding避免内存泄露</a></p>
-<p><a href="http://www.atatech.org/articles/44197/?frm=mail_daily&amp;uid=130319" target="_blank" rel="external">支付宝钱包Android内存治理</a></p>
-<p>IBM ：</p>
-<p><a href="http://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/" target="_blank" rel="external">Java的内存泄漏</a></p>
-<p>Android Design Patterns ：</p>
-<p><a href="http://www.androiddesignpatterns.com/2013/01/inner-class-handler-memory-leak.html" target="_blank" rel="external">How to Leak a Context: Handlers &amp; Inner Classes</a></p>
-<p>伯乐在线团队：</p>
-<p><a href="http://android.jobbole.com/82198/" target="_blank" rel="external">Android性能优化之常见的内存泄漏</a></p>
-<p>我厂同学 ：</p>
-<p><a href="http://blog.csdn.net/kai_gong/article/details/24188803" target="_blank" rel="external">Dalvik虚拟机 Finalize 方法执行分析</a></p>
-<p>腾讯bugly ：</p>
-<p><a href="http://bugly.qq.com/blog/?p=832" target="_blank" rel="external">内存泄露从入门到精通三部曲之基础知识篇</a></p>
-<p><a href="http://bugly.qq.com/blog/?p=872" target="_blank" rel="external">内存泄露从入门到精通三部曲之排查方法篇</a></p>
-<p><a href="http://bugly.qq.com/blog/?p=884" target="_blank" rel="external">内存泄露从入门到精通三部曲之常见原因与用户实践</a></p>
-<p>LeakCanary :</p>
-<p><a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="external">LeakCanary 中文使用说明</a></p>
-<p><a href="http://www.liaohuqiu.net/cn/posts/leak-canary/" target="_blank" rel="external">LeakCanary: 让内存泄露无所遁形</a></p>
-<p><a href="https://github.com/square/leakcanary" target="_blank" rel="external">https://github.com/square/leakcanary</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Android/">Android</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="聊聊-Android-的-Service-组件" data-title="聊聊 Android 的 Service 组件" data-url="http://G96968586.github.io/2016/09/15/聊聊-Android-的-Service-组件/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -872,8 +490,8 @@ for (int i = 1; i &lt; 100; i++) {
 		fancybox: true,
 		mathjax: true,
 		animate: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

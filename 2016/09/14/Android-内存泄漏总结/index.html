@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Android 内存泄漏总结 | 箫鉴哥博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Android 内存泄漏总结内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
-我会从">
+  <meta name="description" content="内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从 java 内存泄漏的基础知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 内存泄漏总结">
 <meta property="og:url" content="http://G96968586.github.io/2016/09/14/Android-内存泄漏总结/index.html">
 <meta property="og:site_name" content="箫鉴哥博客">
-<meta property="og:description" content="Android 内存泄漏总结内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
-我会从">
+<meta property="og:description" content="内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从 java 内存泄漏的基础知识">
 <meta property="og:image" content="http://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/1.gif">
 <meta property="og:image" content="http://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/2.gif">
 <meta property="og:image" content="http://img.blog.csdn.net/20151123144226349">
@@ -29,11 +29,11 @@
 <meta property="og:image" content="https://gw.alicdn.com/tps/TB1p0zKLVXXXXX.XVXXXXXXXXXX-640-98.png">
 <meta property="og:image" content="https://gw.alicdn.com/tps/TB1lwDMLVXXXXcUXFXXXXXXXXXX-640-115.png">
 <meta property="og:image" content="https://corner.squareup.com/images/leakcanary/leaktrace.png">
-<meta property="og:updated_time" content="2016-09-14T16:06:28.000Z">
+<meta property="og:updated_time" content="2016-09-15T15:17:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 内存泄漏总结">
-<meta name="twitter:description" content="Android 内存泄漏总结内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
-我会从">
+<meta name="twitter:description" content="内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从 java 内存泄漏的基础知识">
 <meta name="twitter:image" content="http://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/1.gif">
   
     <link rel="alternative" href="/atom.xml" title="箫鉴哥博客" type="application/atom+xml">
@@ -52,16 +52,16 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="0" class="js-avatar">
+			<img src="https://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
 			
 		</a>
 
 		<hgroup>
-		  <h1 class="header-author"><a href="/">huijian.xhj</a></h1>
+		  <h1 class="header-author"><a href="/">箫鉴哥</a></h1>
 		</hgroup>
 
 		
-		<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧!</p>
+		<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
 		
 
 		
@@ -88,7 +88,7 @@
 						</div>
 						
 					</div>
-					
+
 				</div>
 				<div class="tips-box hide">
 					<div class="tips-arrow"></div>
@@ -99,7 +99,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -121,26 +121,24 @@
 					<nav class="header-nav">
 						<div class="social">
 							
-								<a class="github" target="_blank" href="#" title="github">github</a>
+								<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
 					        
-								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+								<a class="weibo" target="_blank" href="http://weibo.com/p/1005051813501992/home?from=page_100505&mod=TAB#place" title="weibo">weibo</a>
 					        
-								<a class="rss" target="_blank" href="#" title="rss">rss</a>
-					        
-								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+								<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
 					        
 						</div>
 					</nav>
 				</section>
-				
+
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/内存泄漏/" style="font-size: 10px;">内存泄漏</a>
+						
 					</div>
 				</section>
 				
-				
+
 				
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
@@ -170,7 +168,7 @@
 				
 			</div>
 		</div>
-	</header>				
+	</header>
 </div>
 
     </div>
@@ -178,20 +176,20 @@
       <nav id="mobile-nav">
   	<div class="overlay">
   		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">huijian.xhj</h1>
+  		<h1 class="header-author js-mobile-header hide">箫鉴哥</h1>
   	</div>
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img lazy-src="0" class="js-avatar">
+					<img src="nullhttps://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
 				
 			</div>
 			<hgroup>
-			  <h1 class="header-author">huijian.xhj</h1>
+			  <h1 class="header-author">箫鉴哥</h1>
 			</hgroup>
 			
-			<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧!</p>
+			<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
 			
 			<nav class="header-menu">
 				<ul>
@@ -206,13 +204,11 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github">github</a>
+						<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+						<a class="weibo" target="_blank" href="http://weibo.com/p/1005051813501992/home?from=page_100505&mod=TAB#place" title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="#" title="rss">rss</a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+						<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
 			        
 				</div>
 			</nav>
@@ -245,10 +241,6 @@
       
       <div class="article-info article-info-post">
         
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存泄漏/">内存泄漏</a></li></ul>
-	</div>
-
         
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/Android/">Android</a>
@@ -261,7 +253,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Android-内存泄漏总结"><a href="#Android-内存泄漏总结" class="headerlink" title="Android 内存泄漏总结"></a>Android 内存泄漏总结</h2><p>内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 <strong>总结</strong> 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。</p>
+        <p>内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 <strong>总结</strong> 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。</p>
 <p>我会从 java 内存泄漏的基础知识开始，并通过具体例子来说明 Android 引起内存泄漏的各种原因，以及如何利用工具来分析应用内存泄漏，最后再做总结。</p>
 <p>篇幅有些长，大家可以分几节来看！</p>
 <h3 id="Java-内存分配策略"><a href="#Java-内存分配策略" class="headerlink" title="Java 内存分配策略"></a>Java 内存分配策略</h3><p>Java 程序运行时的内存分配策略有三种,分别是静态分配,栈式分配,和堆式分配，对应的，三种存储策略使用的内存空间主要分别是静态存储区（也称方法区）、栈区和堆区。</p>
@@ -534,6 +526,20 @@ for (int i = 1; i &lt; 100; i++) {
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2016/09/15/Android-音频技术开发总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android 音频技术开发总结
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
@@ -588,7 +594,7 @@ for (int i = 1; i &lt; 100; i++) {
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 huijian.xhj
+    		&copy; 2016 箫鉴哥
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -605,7 +611,7 @@ for (int i = 1; i &lt; 100; i++) {
 	var yiliaConfig = {
 		fancybox: true,
 		mathjax: true,
-		animate: true,
+		animate: false,
 		isHome: false,
 		isPost: true,
 		isArchive: false,
