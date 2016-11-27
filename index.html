@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/样式/" style="font-size: 10px;">样式</a> <a href="/tags/每周总结/" style="font-size: 20px;">每周总结</a> <a href="/tags/热修复/" style="font-size: 10px;">热修复</a> <a href="/tags/转载/" style="font-size: 20px;">转载</a>
+						<a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/样式/" style="font-size: 10px;">样式</a> <a href="/tags/每周总结/" style="font-size: 20px;">每周总结</a> <a href="/tags/热修复/" style="font-size: 10px;">热修复</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
 					</div>
 				</section>
 				
@@ -198,6 +198,133 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-weekly-1125" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/11/27/weekly-1125/" class="article-date">
+  	<time datetime="2016-11-27T15:46:11.000Z" itemprop="datePublished">2016-11-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/27/weekly-1125/">weekly-1125 </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>Android Logcat的Material颜色主题</li>
+</ul>
+<p>要改变 Android Studio 的 Logcat 你需要这样做：进入 Preferences ( Windows 上是 Settings / Linux machines ) → Editor → Colors &amp; Fonts → Android Logcat，然后为每种类型的log设置前景颜色(foreground)。</p>
+<p><img src="http://p3.pstatp.com/large/10f3000b2045b867f40e" alt="img"></p>
+<p>我使用的material颜色：</p>
+<p>Assert #BA68C8</p>
+<p>Debug #2196F3</p>
+<p>Error #F44336</p>
+<p>Info #4CAF50</p>
+<p>Verbose #BBBBBB</p>
+<p>Warning #FF9800</p>
+<p>注意里面有几个现有的主题，可以直接修改现有主题(不建议)，或者点击save as按钮拷贝一个主题并改名为Material theme Color然后再改变每种类型log的颜色。</p>
+<ul>
+<li>防止当前应用崩溃时 Logcat 清除 log</li>
+</ul>
+<p>在 Android Monitor 面板的右上方点击下拉菜单中的 choose Edit filter configuration：</p>
+<p><img src="http://p1.pstatp.com/large/11af000b840a002fe833" alt="img"></p>
+<ul>
+<li>无干扰模式</li>
+</ul>
+<p>你可以到 View → Enter Distraction Free Mode 里启用它</p>
+<p><img src="http://p1.pstatp.com/large/10f3000b2046565442d3" alt="img"></p>
+<p>在无干扰模式下，编辑器占据了整个IntelliJ IDEA窗口，没有任何tab或者工具按钮。代码居中显示。[ IntelliJ Idea Viewing Modes ]</p>
+<p><img src="http://p3.pstatp.com/large/10e6000fb226567e1a0f" alt="img"></p>
+<ul>
+<li>使用 Live Templates</li>
+</ul>
+<p>你可以使用快捷键：cmd + j (Windows / Linux: ctrl + j)。</p>
+<p><img src="http://p3.pstatp.com/large/11b100005c12e0ddbb70" alt="img"></p>
+<p>可以使用已经定义好了的 Live Templates，比如 Toasts 或者 if 语句。</p>
+<p>可以使用自定义的 templates。这里是 Reto Meier 的一篇不错的参考文章。你也可以参考 IntelliJ IDEA 的文档。</p>
+<ul>
+<li>option + enter</li>
+</ul>
+<p>把一个硬编码的字符串放到资源文件中：option + enter (Windows / Linux: alt + enter)。光标必须在这个文字之上时才能使用这个快捷键。看下面的gif图：</p>
+<p><img src="http://p3.pstatp.com/large/10f3000b2047df7703c4" alt="img"></p>
+<ul>
+<li>查看远程分支</li>
+</ul>
+<p>git branch -a</p>
+<ul>
+<li>查看本地分支</li>
+</ul>
+<p>git branch</p>
+<ul>
+<li>CSS实现单行、多行文本溢出显示省略号（…）</li>
+</ul>
+<p>如果实现单行文本的溢出显示省略号同学们应该都知道用 text-overflow:ellipsis 属性来，当然还需要加宽度 width 属来兼容部分浏览。</p>
+<p>实现方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">overflow: hidden;</div><div class="line">text-overflow:ellipsis;</div><div class="line">white-space: nowrap;</div></pre></td></tr></table></figure>
+<p>效果图：<br><img src="http://www.daqianduan.com/wp-content/uploads/2015/10/dome1.png" alt=""></p>
+<p>但是这个属性只支持单行文本的溢出显示省略号，如果我们要实现多行文本溢出显示省略号呢。</p>
+<p>接下来重点说一说多行文本溢出显示省略号，如下。</p>
+<p>实现方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">display: -webkit-box;</div><div class="line">-webkit-box-orient: vertical;</div><div class="line">-webkit-line-clamp: <span class="number">3</span>;</div><div class="line">overflow: hidden;</div></pre></td></tr></table></figure>
+<p>效果图：<br><img src="http://www.daqianduan.com/wp-content/uploads/2015/10/dome2.png" alt=""></p>
+<p>适用范围：<br>因使用了WebKit的CSS扩展属性，该方法适用于WebKit浏览器及移动端；</p>
+<p>注：</p>
+<p>-webkit-line-clamp;<br>用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。</p>
+<p>常见结合属性：</p>
+<p>display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。</p>
+<p>-webkit-box-orient; 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。</p>
+<ul>
+<li>input 输入框点击时去掉外边框方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">input &#123;</div><div class="line">  outline: white ;<span class="comment">/* 颜色随便设置 */</span></div><div class="line">  border: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/每周总结/">每周总结</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/WeeklyTask/">WeeklyTask</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-ADB-常用命令" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1029,83 +1156,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/Android/">Android</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-快速排序优化分析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/23/快速排序优化分析/" class="article-date">
-  	<time datetime="2016-09-23T12:19:32.000Z" itemprop="datePublished">2016-09-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/23/快速排序优化分析/">快速排序优化分析</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>转自我在 CSDN 的一篇博文，<a href="http://blog.csdn.net/g96968586/article/details/24271639" target="_blank" rel="external">原文链接</a>在这里，谢谢大家支持！</p>
-</blockquote>
-<p>上一篇的《浅谈快速排序》 <a href="http://blog.csdn.net/g96968586/article/details/24185967" target="_blank" rel="external">http://blog.csdn.net/g96968586/article/details/24185967</a>  </p>
-<p>中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会发生什么情况呢？</p>
-<p>前一篇的Partition函数代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span> <span class="params">( SqList *L,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span>  </span></div><div class="line">&#123;  </div><div class="line">       <span class="keyword">int</span> pivotkey;  </div><div class="line">       pivotkey = L-&gt;r[low];   <span class="comment">/* 用子表的第一个记录作枢轴记录 */</span>  </div><div class="line">       <span class="keyword">while</span>(low &lt; high)   <span class="comment">/* 从表的两端交替向中间扫描 */</span>  </div><div class="line">       &#123;  </div><div class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[high] &gt;= pivotkey)    high - - ;  </div><div class="line">            swap(L,low,high);    <span class="comment">/* 将比枢轴记录小的记录交换到低端 */</span>  </div><div class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[low] &lt;= pivotkey )   low ++;  </div><div class="line">            swap(L,low,high);  <span class="comment">/* 将比枢轴记录大的记录交换到高端 */</span>  </div><div class="line">        &#125;  </div><div class="line">          <span class="keyword">return</span> low;   <span class="comment">/*  返回枢轴所在位置 */</span>  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>如果我们对数组{9,1,5,8,3,7,4,6,2}进行排序，由代码第四行“pivotkey = L-&gt;r[low]; ”知道，我们应该选取9作为第一个枢轴pivotkey，此时经过一轮“pivot=Partition(L,1,9)”，它只是更换了9和2的位置，并把9返回给pivot。整个数组并没有实质性的变化。如图示，</p>
-<p><img src="http://img.blog.csdn.net/20140421211948156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>换句话说，第四行代码“pivotkey = L-&gt;r[low]; ”变成了一个潜在的瓶颈。排序速度的快慢取决于L-&gt;r[l1]的关键字处在整个序列的位置，L-&gt;r[1]太大或太小都回影响性能。在我们现实中，带排序的序列极有可能是基本有序的，如果我们总是固定地选择第一个关键字作为首个枢轴，就变成了极为不合理的做法。<br>这里的改进方法我们采用三数取中法。即取三个关键字先进行排序，将中间数作为枢轴，一般是取整个待排序的左端、右端和中间三个数，也可以随机选取。这样至少这个中间数一定不会是最小或者是最大的数，从概率来说，取三个数均为最小或最大的可能性微乎其微，因此中间数位于较为中间的值的可能性就大大提高了。<br>我们现在在Partition函数的第三行和第四行中间加入这么一段代码，</p>
-<p><img src="http://img.blog.csdn.net/20140421211805765?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>这样子，如果我们对数组{9,1,5,8,3,7,4,6,2}，取左9、中间3、右2来比较，最终使得L-&gt;r[low] = 3,一定要比9和2来的更合理。</p>
-<p>下面来优化一些不必要的交换。<br>大家发现了没，上一篇中，对于50这个关键字，其位置变化是1-&gt;9-&gt;3-&gt;6-&gt;5，可其实它的最终目标就是5，当中的一些交换是不需要的。因此，我们再次对Partition函数进行优化。</p>
-<p><img src="http://img.blog.csdn.net/20140421212022000?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>优化之后少了多次交换数据的操作，在性能上又得到了部分的提高。</p>
-<p>看程序分析，</p>
-<p><img src="http://img.blog.csdn.net/20140421212232265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p><img src="http://img.blog.csdn.net/20140421212330640?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/DataStructure/">数据结构</a>
 	</div>
 
 
