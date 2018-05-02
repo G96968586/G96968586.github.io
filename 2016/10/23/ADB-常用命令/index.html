@@ -1,268 +1,145 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>ADB 常用命令 | 箫鉴哥博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ADB 常用命令总结：
-显示系统全部的 Android 平台
-android list targets
-output:
-123456789101112131415161718192021222324252627➜  android list targetsAvailable Android targets:----------id: 1 or &amp;quot;android-21&amp;quot;">
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="ADB 常用命令"/>
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2016/10/23/ADB-常用命令/"/>
+
+
+<meta name="description" content="ADB 常用命令总结： 显示系统全部的 Android 平台 android list targets output: 123456789101112131415161718192021222324252627➜  android list targetsAvailable Android targets:----------id: 1 or &quot;android-21&quot;     Name: Andr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ADB 常用命令">
 <meta property="og:url" content="http://G96968586.github.io/2016/10/23/ADB-常用命令/index.html">
-<meta property="og:site_name" content="箫鉴哥博客">
-<meta property="og:description" content="ADB 常用命令总结：
-显示系统全部的 Android 平台
-android list targets
-output:
-123456789101112131415161718192021222324252627➜  android list targetsAvailable Android targets:----------id: 1 or &amp;quot;android-21&amp;quot;">
-<meta property="og:updated_time" content="2016-10-31T05:55:29.000Z">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="ADB 常用命令总结： 显示系统全部的 Android 平台 android list targets output: 123456789101112131415161718192021222324252627➜  android list targetsAvailable Android targets:----------id: 1 or &quot;android-21&quot;     Name: Andr">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-02T12:37:06.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ADB 常用命令">
-<meta name="twitter:description" content="ADB 常用命令总结：
-显示系统全部的 Android 平台
-android list targets
-output:
-123456789101112131415161718192021222324252627➜  android list targetsAvailable Android targets:----------id: 1 or &amp;quot;android-21&amp;quot;">
+<meta name="twitter:description" content="ADB 常用命令总结： 显示系统全部的 Android 平台 android list targets output: 123456789101112131415161718192021222324252627➜  android list targetsAvailable Android targets:----------id: 1 or &quot;android-21&quot;     Name: Andr">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
   
-    <link rel="alternative" href="/atom.xml" title="箫鉴哥博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="//favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img src="https://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">箫鉴哥</a></h1>
-		</hgroup>
 
-		
-		<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
-		
+    <title> ADB 常用命令 - 箫鉴哥 </title>
+  </head>
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
 
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>Menu</li>
-						<li>Tags</li>
-						
-						<li>Links</li>
-						
-						
-						<li>Über</li>
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="/">关于我</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
-					        
-								<a class="weibo" target="_blank" href="http://weibo.com/1813501992" title="weibo">weibo</a>
-					        
-								<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
-					        
-						</div>
-					</nav>
-				</section>
-
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/样式/" style="font-size: 10px;">样式</a> <a href="/tags/每周总结/" style="font-size: 20px;">每周总结</a> <a href="/tags/热修复/" style="font-size: 10px;">热修复</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
-					</div>
-				</section>
-				
-
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">技术只是解决问题的选择，而不是解决问题的根本。</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
 </div>
 
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">箫鉴哥</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				
-					<img src="nullhttps://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-				
-			</div>
-			<hgroup>
-			  <h1 class="header-author">箫鉴哥</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/">关于我</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/1813501992" title="weibo">weibo</a>
-			        
-						<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-
-      <div class="body-wrap"><article id="post-ADB-常用命令" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/23/ADB-常用命令/" class="article-date">
-  	<time datetime="2016-10-23T14:30:30.000Z" itemprop="datePublished">2016-10-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      ADB 常用命令
-    </h1>
-  
-
       </header>
-      
-      <div class="article-info article-info-post">
+      <div id="content">
         
+    <div id="primary">
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Android/">Android</a>
-	</div>
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          ADB 常用命令
+        
+      </h1>
+
+      <time class="post-time">
+          Oct 23 2016
+      </time>
+    </header>
 
 
-        <div class="clearfix"></div>
-      </div>
-      
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="ADB-常用命令总结："><a href="#ADB-常用命令总结：" class="headerlink" title="ADB 常用命令总结："></a>ADB 常用命令总结：</h3><ul>
+            <div class="post-content">
+            <h3 id="ADB-常用命令总结："><a href="#ADB-常用命令总结：" class="headerlink" title="ADB 常用命令总结："></a>ADB 常用命令总结：</h3><ul>
 <li><p>显示系统全部的 Android 平台</p>
 <p><code>android list targets</code></p>
 <p>output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">➜  android list targets</div><div class="line">Available Android targets:</div><div class="line">----------</div><div class="line">id: 1 or &quot;android-21&quot;</div><div class="line">     Name: Android 5.0.1</div><div class="line">     Type: Platform</div><div class="line">     API level: 21</div><div class="line">     Revision: 2</div><div class="line">     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in</div><div class="line"> Tag/ABIs : no ABIs.</div><div class="line">----------</div><div class="line">id: 2 or &quot;android-22&quot;</div><div class="line">     Name: Android 5.1.1</div><div class="line">     Type: Platform</div><div class="line">     API level: 22</div><div class="line">     Revision: 2</div><div class="line">     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in, AndroidWearRound, AndroidWearRound400x400, AndroidWearRoundChin320x290, AndroidWearRoundChin360x325, AndroidWearRoundChin360x330, AndroidWearSquare, AndroidWearSquare320x320, AndroidWearRound, AndroidWearRound400x400, AndroidWearRoundChin320x290, AndroidWearRoundChin360x325, AndroidWearRoundChin360x330, AndroidWearSquare, AndroidWearSquare320x320</div><div class="line"> Tag/ABIs : android-tv/armeabi-v7a, android-tv/x86, android-wear/armeabi-v7a, android-wear/x86, default/armeabi-v7a, default/x86, default/x86_64</div><div class="line">----------</div><div class="line">id: 3 or &quot;android-23&quot;</div><div class="line">     Name: Android 6.0</div><div class="line">     Type: Platform</div><div class="line">     API level: 23</div><div class="line">     Revision: 3</div><div class="line">     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in</div><div class="line"> Tag/ABIs : no ABIs.</div><div class="line">...</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">➜  android list targets</span><br><span class="line">Available Android targets:</span><br><span class="line">----------</span><br><span class="line">id: 1 or "android-21"</span><br><span class="line">     Name: Android 5.0.1</span><br><span class="line">     Type: Platform</span><br><span class="line">     API level: 21</span><br><span class="line">     Revision: 2</span><br><span class="line">     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in</span><br><span class="line"> Tag/ABIs : no ABIs.</span><br><span class="line">----------</span><br><span class="line">id: 2 or "android-22"</span><br><span class="line">     Name: Android 5.1.1</span><br><span class="line">     Type: Platform</span><br><span class="line">     API level: 22</span><br><span class="line">     Revision: 2</span><br><span class="line">     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in, AndroidWearRound, AndroidWearRound400x400, AndroidWearRoundChin320x290, AndroidWearRoundChin360x325, AndroidWearRoundChin360x330, AndroidWearSquare, AndroidWearSquare320x320, AndroidWearRound, AndroidWearRound400x400, AndroidWearRoundChin320x290, AndroidWearRoundChin360x325, AndroidWearRoundChin360x330, AndroidWearSquare, AndroidWearSquare320x320</span><br><span class="line"> Tag/ABIs : android-tv/armeabi-v7a, android-tv/x86, android-wear/armeabi-v7a, android-wear/x86, default/armeabi-v7a, default/x86, default/x86_64</span><br><span class="line">----------</span><br><span class="line">id: 3 or "android-23"</span><br><span class="line">     Name: Android 6.0</span><br><span class="line">     Type: Platform</span><br><span class="line">     API level: 23</span><br><span class="line">     Revision: 3</span><br><span class="line">     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in</span><br><span class="line"> Tag/ABIs : no ABIs.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装应用</p>
 <p><code>adb install xxx.apk</code><br>output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  adb install newjob.apk</div><div class="line">[100%] /data/local/tmp/newjob.apk</div><div class="line">pkg: /data/local/tmp/newjob.apk</div><div class="line">Success</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  adb install newjob.apk</span><br><span class="line"><span class="meta">[100%</span>] /data/local/tmp/newjob.apk</span><br><span class="line">pkg: /data/local/tmp/newjob.apk</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
 <p>如果手机已经存在 newjob 应用，则会报</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  adb install newjob.apk</div><div class="line">[100%] /data/local/tmp/newjob.apk</div><div class="line">pkg: /data/local/tmp/newjob.apk</div><div class="line">Failure [INSTALL_FAILED_ALREADY_EXISTS]</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  adb install newjob.apk</span><br><span class="line"><span class="meta">[100%</span>] /data/local/tmp/newjob.apk</span><br><span class="line">pkg: /data/local/tmp/newjob.apk</span><br><span class="line">Failure [INSTALL_FAILED_ALREADY_EXISTS]</span><br></pre></td></tr></table></figure>
 <p>这时候，加一个 -r 参数，代表重新安装，就不会报上面的错误了，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  adb install -r newjob.apk</div><div class="line">[100%] /data/local/tmp/newjob.apk</div><div class="line">pkg: /data/local/tmp/newjob.apk</div><div class="line">Success</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  adb install -r newjob.apk</span><br><span class="line"><span class="meta">[100%</span>] /data/local/tmp/newjob.apk</span><br><span class="line">pkg: /data/local/tmp/newjob.apk</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Push 将文件写入手机存储系统</p>
 <p><code>adb push &lt;local&gt; &lt;remote&gt;</code></p>
@@ -272,45 +149,45 @@ output:
 </li>
 <li><p>Pull 获取手机中的文件</p>
 <p> <code>adb pull &lt;remote&gt; &lt;local&gt;</code>       </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  adb pull /sdcard/ newjob.apk</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  adb pull /sdcard/ newjob.apk</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看 Log 日志</p>
 <p> <code>adb shell</code>  进入 adb 命令行窗口，</p>
 <p> <code>logcat | grep &quot;XX&quot;</code></p>
 <p> eg:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">➜  adb shell</div><div class="line"> shell@virgo:/ $ logcat | grep &quot;NJ&quot;</div><div class="line"> 10-21 11:18:34.767  2572  4823 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</div><div class="line"> 10-21 14:12:03.610  2572  5054 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob/.module.main.NJMainActivity&#125; from uid 10154 on display 0</div><div class="line"> 10-21 15:49:33.229  2572  2659 I ActivityManager:   Force finishing activity ActivityRecord&#123;c06ee19 u0 com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity t673&#125;</div><div class="line"> 10-21 15:49:38.330  2572  5128 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</div><div class="line"> 10-21 15:55:29.015  2572  5054 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</div><div class="line"> 10-21 16:25:23.751  2572  4785 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">➜  adb shell</span><br><span class="line"> shell@virgo:/ $ logcat | grep "NJ"</span><br><span class="line"> 10-21 11:18:34.767  2572  4823 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</span><br><span class="line"> 10-21 14:12:03.610  2572  5054 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob/.module.main.NJMainActivity&#125; from uid 10154 on display 0</span><br><span class="line"> 10-21 15:49:33.229  2572  2659 I ActivityManager:   Force finishing activity ActivityRecord&#123;c06ee19 u0 com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity t673&#125;</span><br><span class="line"> 10-21 15:49:38.330  2572  5128 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</span><br><span class="line"> 10-21 15:55:29.015  2572  5054 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</span><br><span class="line"> 10-21 16:25:23.751  2572  4785 I ActivityManager: START u0 &#123;cmp=com.taobao.newjob.debug/com.taobao.newjob.module.main.NJMainActivity&#125; from uid 10151 on display 0</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>卸载应用</p>
 <p><code>adb uninstall 包名</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  adb uninstall com.taobao.newjob</div><div class="line">Success</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  adb uninstall com.taobao.newjob</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看系统盘符</p>
 <p><code>adb shell df</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">➜  adb shell df</div><div class="line">Filesystem               Size     Used     Free   Blksize</div><div class="line">/dev                   800.0M   116.0K   799.9M   4096</div><div class="line">/var                     1.4G     0.0K     1.4G   4096</div><div class="line">/sys/fs/cgroup           1.4G     0.0K     1.4G   4096</div><div class="line">/sys/fs/cgroup/memory: Permission denied</div><div class="line">/mnt                     1.4G     0.0K     1.4G   4096</div><div class="line">/sys/fs/cgroup           1.4G     0.0K     1.4G   4096</div><div class="line">/sys/fs/cgroup/memory: Permission denied</div><div class="line">/sys/fs/cgroup/freezer: Permission denied</div><div class="line">/system                  1.5G     1.3G   223.6M   4096</div><div class="line">/data                   12.2G     4.7G     7.5G   4096</div><div class="line">/cache                 377.8M     6.3M   371.5M   4096</div><div class="line">/persist                15.7M     4.1M    11.6M   4096</div><div class="line">/firmware               64.0M    53.1M    10.9M   16384</div><div class="line">/storage                 1.4G     0.0K     1.4G   4096</div><div class="line">/mnt/runtime/default/emulated: Permission denied</div><div class="line">/storage/emulated       12.2G     4.7G     7.5G   4096</div><div class="line">/mnt/runtime/read/emulated: Permission denied</div><div class="line">/mnt/runtime/write/emulated: Permission denied</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">➜  adb shell df</span><br><span class="line">Filesystem               Size     Used     Free   Blksize</span><br><span class="line">/dev                   800.0M   116.0K   799.9M   4096</span><br><span class="line">/var                     1.4G     0.0K     1.4G   4096</span><br><span class="line">/sys/fs/cgroup           1.4G     0.0K     1.4G   4096</span><br><span class="line">/sys/fs/cgroup/memory: Permission denied</span><br><span class="line">/mnt                     1.4G     0.0K     1.4G   4096</span><br><span class="line">/sys/fs/cgroup           1.4G     0.0K     1.4G   4096</span><br><span class="line">/sys/fs/cgroup/memory: Permission denied</span><br><span class="line">/sys/fs/cgroup/freezer: Permission denied</span><br><span class="line">/system                  1.5G     1.3G   223.6M   4096</span><br><span class="line">/data                   12.2G     4.7G     7.5G   4096</span><br><span class="line">/cache                 377.8M     6.3M   371.5M   4096</span><br><span class="line">/persist                15.7M     4.1M    11.6M   4096</span><br><span class="line">/firmware               64.0M    53.1M    10.9M   16384</span><br><span class="line">/storage                 1.4G     0.0K     1.4G   4096</span><br><span class="line">/mnt/runtime/default/emulated: Permission denied</span><br><span class="line">/storage/emulated       12.2G     4.7G     7.5G   4096</span><br><span class="line">/mnt/runtime/read/emulated: Permission denied</span><br><span class="line">/mnt/runtime/write/emulated: Permission denied</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看所有已安装的应用</p>
 <p><code>adb shell pm list packages -f</code>，后面的参数追加 -s 表示列出系统应用，-3 表示列出三方应用，-f 表示列出应用关联的APK</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">➜ adb shell pm list packages -f</div><div class="line">package:/data/app/com.homelink.android-1/base.apk=com.homelink.android</div><div class="line">package:/system/priv-app/TelephonyProvider/TelephonyProvider.apk=com.android.providers.telephony</div><div class="line">package:/system/app/PowerKeeper/PowerKeeper.apk=com.miui.powerkeeper</div><div class="line">package:/data/app/io.appium.settings-1/base.apk=io.appium.settings</div><div class="line">package:/system/priv-app/CalendarProvider/CalendarProvider.apk=com.android.providers.calendar</div><div class="line">package:/system/priv-app/MediaProvider/MediaProvider.apk=com.android.providers.media</div><div class="line">package:/system/app/MiLinkService/MiLinkService.apk=com.milink.service</div><div class="line">package:/system/priv-app/SpacesTrustAgent/SpacesTrustAgent.apk=com.securespaces.android.trustagent</div><div class="line">package:/system/app/XiaomiAccount/XiaomiAccount.apk=com.xiaomi.account</div><div class="line">package:/system/app/shutdownlistener/shutdownlistener.apk=com.qualcomm.shutdownlistner</div><div class="line">package:/system/priv-app/WallpaperCropper/WallpaperCropper.apk=com.android.wallpapercropper</div><div class="line">package:/system/priv-app/CNEService/CNEService.apk=com.quicinc.cne.CNEService</div><div class="line">package:/system/app/MiLivetalk/MiLivetalk.apk=com.miui.milivetalk</div><div class="line">package:/system/app/Updater/Updater.apk=com.android.updater</div><div class="line">package:/system/app/DocumentsUI/DocumentsUI.apk=com.android.documentsui</div><div class="line">package:/system/app/Galaxy4/Galaxy4.apk=com.android.galaxy4</div><div class="line">package:/system/priv-app/ExternalStorageProvider/ExternalStorageProvider.apk=com.android.externalstorage</div><div class="line">package:/system/priv-app/MiGameCenterSDKService/MiGameCenterSDKService.apk=com.xiaomi.gamecenter.sdk.service</div><div class="line">...</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">➜ adb shell pm list packages -f</span><br><span class="line">package:/data/app/com.homelink.android-1/base.apk=com.homelink.android</span><br><span class="line">package:/system/priv-app/TelephonyProvider/TelephonyProvider.apk=com.android.providers.telephony</span><br><span class="line">package:/system/app/PowerKeeper/PowerKeeper.apk=com.miui.powerkeeper</span><br><span class="line">package:/data/app/io.appium.settings-1/base.apk=io.appium.settings</span><br><span class="line">package:/system/priv-app/CalendarProvider/CalendarProvider.apk=com.android.providers.calendar</span><br><span class="line">package:/system/priv-app/MediaProvider/MediaProvider.apk=com.android.providers.media</span><br><span class="line">package:/system/app/MiLinkService/MiLinkService.apk=com.milink.service</span><br><span class="line">package:/system/priv-app/SpacesTrustAgent/SpacesTrustAgent.apk=com.securespaces.android.trustagent</span><br><span class="line">package:/system/app/XiaomiAccount/XiaomiAccount.apk=com.xiaomi.account</span><br><span class="line">package:/system/app/shutdownlistener/shutdownlistener.apk=com.qualcomm.shutdownlistner</span><br><span class="line">package:/system/priv-app/WallpaperCropper/WallpaperCropper.apk=com.android.wallpapercropper</span><br><span class="line">package:/system/priv-app/CNEService/CNEService.apk=com.quicinc.cne.CNEService</span><br><span class="line">package:/system/app/MiLivetalk/MiLivetalk.apk=com.miui.milivetalk</span><br><span class="line">package:/system/app/Updater/Updater.apk=com.android.updater</span><br><span class="line">package:/system/app/DocumentsUI/DocumentsUI.apk=com.android.documentsui</span><br><span class="line">package:/system/app/Galaxy4/Galaxy4.apk=com.android.galaxy4</span><br><span class="line">package:/system/priv-app/ExternalStorageProvider/ExternalStorageProvider.apk=com.android.externalstorage</span><br><span class="line">package:/system/priv-app/MiGameCenterSDKService/MiGameCenterSDKService.apk=com.xiaomi.gamecenter.sdk.service</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>模拟输入</p>
 <p> <code>adb shell input keyevent code</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">➜  adb shell input keyevent 3 (home)</div><div class="line">➜  adb shell input keyevent 4 (back)</div><div class="line">➜  adb shell input keyevent 19 (up)</div><div class="line">➜  adb shell input keyevent 20 (down)</div><div class="line">➜  adb shell input keyevent 21 (left)</div><div class="line">➜  adb shell input keyevent 22 (right)</div><div class="line">➜  adb shell input keyevent 82 (menu)</div><div class="line">...</div><div class="line">(其他请参考 API 文档)</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  adb shell input keyevent 3 (home)</span><br><span class="line">➜  adb shell input keyevent 4 (back)</span><br><span class="line">➜  adb shell input keyevent 19 (up)</span><br><span class="line">➜  adb shell input keyevent 20 (down)</span><br><span class="line">➜  adb shell input keyevent 21 (left)</span><br><span class="line">➜  adb shell input keyevent 22 (right)</span><br><span class="line">➜  adb shell input keyevent 82 (menu)</span><br><span class="line">...</span><br><span class="line">(其他请参考 API 文档)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看 Activity 运行状态</p>
 <p> <code>adb shell dumpsys activity activities</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">➜  adb shell dumpsys activity activities | grep &quot;newjob&quot;</div><div class="line"> * TaskRecord&#123;6a88af6 #752 A=com.taobao.newjob U=0 sz=1&#125;</div><div class="line"> userId=0 effectiveUid=u0a154 mCallingUid=u0a154 mCallingPackage=com.taobao.newjob</div><div class="line"> affinity=com.taobao.newjob</div><div class="line"> intent=&#123;act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.taobao.newjob/.module.launch.LaunchActivity&#125;</div><div class="line"> realActivity=com.taobao.newjob/.module.launch.LaunchActivity</div><div class="line"> Activities=[ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;]</div><div class="line"> * Hist #0: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</div><div class="line"> packageName=com.taobao.newjob processName=com.taobao.newjob</div><div class="line"> launchedFromUid=10154 launchedFromPackage=com.taobao.newjob userId=0</div><div class="line"> app=ProcessRecord&#123;4340cfa 15047:com.taobao.newjob/u0a154&#125;</div><div class="line"> Intent &#123; flg=0x10000000 cmp=com.taobao.newjob/.module.main.NJMainActivity &#125;</div><div class="line"> frontOfTask=true task=TaskRecord&#123;6a88af6 #752 A=com.taobao.newjob U=0 sz=1&#125;</div><div class="line"> taskAffinity=com.taobao.newjob</div><div class="line"> realActivity=com.taobao.newjob/.module.main.NJMainActivity</div><div class="line"> baseDir=/data/app/com.taobao.newjob-1/base.apk</div><div class="line"> dataDir=/data/user/0/com.taobao.newjob</div><div class="line"> TaskRecord&#123;6a88af6 #752 A=com.taobao.newjob U=0 sz=1&#125;</div><div class="line"> Run #2: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</div><div class="line"> mResumedActivity: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</div><div class="line"> mLastPausedActivity: ActivityRecord&#123;28c42b5 u0 com.taobao.newjob/.module.launch.LaunchActivity t752 f&#125;</div><div class="line"> mFocusedActivity: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">➜  adb shell dumpsys activity activities | grep "newjob"</span><br><span class="line"> * TaskRecord&#123;6a88af6 #752 A=com.taobao.newjob U=0 sz=1&#125;</span><br><span class="line"> userId=0 effectiveUid=u0a154 mCallingUid=u0a154 mCallingPackage=com.taobao.newjob</span><br><span class="line"> affinity=com.taobao.newjob</span><br><span class="line"> intent=&#123;act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.taobao.newjob/.module.launch.LaunchActivity&#125;</span><br><span class="line"> realActivity=com.taobao.newjob/.module.launch.LaunchActivity</span><br><span class="line"> Activities=[ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;]</span><br><span class="line"> * Hist #0: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</span><br><span class="line"> packageName=com.taobao.newjob processName=com.taobao.newjob</span><br><span class="line"> launchedFromUid=10154 launchedFromPackage=com.taobao.newjob userId=0</span><br><span class="line"> app=ProcessRecord&#123;4340cfa 15047:com.taobao.newjob/u0a154&#125;</span><br><span class="line"> Intent &#123; flg=0x10000000 cmp=com.taobao.newjob/.module.main.NJMainActivity &#125;</span><br><span class="line"> frontOfTask=true task=TaskRecord&#123;6a88af6 #752 A=com.taobao.newjob U=0 sz=1&#125;</span><br><span class="line"> taskAffinity=com.taobao.newjob</span><br><span class="line"> realActivity=com.taobao.newjob/.module.main.NJMainActivity</span><br><span class="line"> baseDir=/data/app/com.taobao.newjob-1/base.apk</span><br><span class="line"> dataDir=/data/user/0/com.taobao.newjob</span><br><span class="line"> TaskRecord&#123;6a88af6 #752 A=com.taobao.newjob U=0 sz=1&#125;</span><br><span class="line"> Run #2: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</span><br><span class="line"> mResumedActivity: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</span><br><span class="line"> mLastPausedActivity: ActivityRecord&#123;28c42b5 u0 com.taobao.newjob/.module.launch.LaunchActivity t752 f&#125;</span><br><span class="line"> mFocusedActivity: ActivityRecord&#123;b3c21c2 u0 com.taobao.newjob/.module.main.NJMainActivity t752&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>列出前台 Activity</p>
 <p><code>adb shell dumpsys activity activities | grep mFocusedActivity</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  adb shell dumpsys activity activities | grep mFocusedActivity</div><div class="line">   mFocusedActivity: ActivityRecord&#123;a798935 u0 com.taobao.taobao/com.taobao.tao.homepage.MainActivity3 t1023&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  adb shell dumpsys activity activities | grep mFocusedActivity</span><br><span class="line">   mFocusedActivity: ActivityRecord&#123;a798935 u0 com.taobao.taobao/com.taobao.tao.homepage.MainActivity3 t1023&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>启动一个 Activity</p>
 <p><code>adb shell am start -n 包名/包名+类名</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  adb shell am start -n com.taobao.newjob/com.taobao.newjob.module.launch.LaunchActivity</div><div class="line">Starting: Intent &#123; cmp=com.taobao.newjob/.module.launch.LaunchActivity &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  adb shell am start -n com.taobao.newjob/com.taobao.newjob.module.launch.LaunchActivity</span><br><span class="line">Starting: Intent &#123; cmp=com.taobao.newjob/.module.launch.LaunchActivity &#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>启动一个 Service</p>
 <p><code>adb shell am startservice -n 包名/包名+类名</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  adb shell am startservice -n com.taobao.newjob.debug/com.taobao.newjob.services.NJRequestImageService</div><div class="line">Starting service: Intent &#123; cmp=com.taobao.newjob.debug/com.taobao.newjob.services.NJRequestImageService &#125;</div><div class="line">Error: Requires permission not exported from uid 10188</div><div class="line">// 这里因为我的 service 设置了 exported = false，所以启动失败</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  adb shell am startservice -n com.taobao.newjob.debug/com.taobao.newjob.services.NJRequestImageService</span><br><span class="line">Starting service: Intent &#123; cmp=com.taobao.newjob.debug/com.taobao.newjob.services.NJRequestImageService &#125;</span><br><span class="line">Error: Requires permission not exported from uid 10188</span><br><span class="line">// 这里因为我的 service 设置了 exported = false，所以启动失败</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>发送指定的广播</p>
 <p><code>adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n 包名/包名+类名</code><br>我们可以在调试时，执行这个命令发送指定广播来 debug，特别是一些很难制作的情景的广播。</p>
@@ -322,11 +199,11 @@ output:
 <p><code>adb reboot</code></p>
 </li>
 <li><p>当电脑上有多个设备 online 时，指定链接到某个设备向其发送命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  ~ adb devices (先查看有哪些设备)</div><div class="line">List of devices attached</div><div class="line">192.168.57.101:5555     device</div><div class="line">1d760d8a        device</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ adb devices (先查看有哪些设备)</span><br><span class="line">List of devices attached</span><br><span class="line">192.168.57.101:5555     device</span><br><span class="line">1d760d8a        device</span><br></pre></td></tr></table></figure>
 <p>​现在我们链接下面的那个设备 1d760d8a，通过<code>adb -s &lt;serial number&gt; cmd</code>指定向其发送 shell 命令，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  ~ adb -s 1d760d8a shell</div><div class="line">shell@virgo:/ $</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ adb -s 1d760d8a shell</span><br><span class="line">shell@virgo:/ $</span><br></pre></td></tr></table></figure>
 <p>导出一个应用的数据库到本地 Desktop 目录下面，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  ~ adb -s 192.168.57.101:5555 pull /data/data/com.taobao.newjob.debug/databases/logdb.db ~/Desktop</div><div class="line">[100%] /data/data/com.taobao.newjob.debug/databases/logdb.db</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ adb -s 192.168.57.101:5555 pull /data/data/com.taobao.newjob.debug/databases/logdb.db ~/Desktop</span><br><span class="line"><span class="meta">[100%</span>] /data/data/com.taobao.newjob.debug/databases/logdb.db</span><br></pre></td></tr></table></figure>
 <p>运行其它命令同上面。</p>
 </li>
 <li><p>启动/停止 adb</p>
@@ -334,7 +211,7 @@ output:
 </li>
 <li><p>清除 apk 数据</p>
 <p><code>adb shell pm clear 包名</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  ~ adb shell pm clear com.taobao.taobao</div><div class="line">Success</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ adb shell pm clear com.taobao.taobao</span><br><span class="line">Success</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>强行停止应用</p>
 <p><code>adb shell am force-stop 包名</code></p>
@@ -344,148 +221,88 @@ output:
 </li>
 <li><p>查看系统属性</p>
 <p><code>adb shell cat /system/build.prop</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">➜  ~ adb shell cat /system/build.prop</div><div class="line"> # begin build properties</div><div class="line"> # autogenerated by buildinfo.sh</div><div class="line"> ro.build.id=MMB29M</div><div class="line"> ro.build.display.id=MMB29M</div><div class="line"> ro.build.version.incremental=6.10.13</div><div class="line"> ro.build.version.sdk=23</div><div class="line"> ro.build.version.preview_sdk=0</div><div class="line"> ro.build.version.codename=REL</div><div class="line"> ro.build.version.all_codenames=REL</div><div class="line"> ro.build.version.release=6.0.1</div><div class="line"></div><div class="line"> ro.build.version.security_patch=2016-09-01</div><div class="line"> ro.build.version.base_os=</div><div class="line"> ro.build.date=Thu Oct 13 12:11:20 CST 2016</div><div class="line"> ro.build.date.utc=1476331880</div><div class="line"> ro.build.type=user</div><div class="line"> ro.build.user=builder</div><div class="line"> ro.build.host=c3-miui-ota-bd22</div><div class="line"> ro.build.tags=release-keys</div><div class="line"> ro.build.flavor=virgo-user</div><div class="line"> ro.product.model=MI 3W</div><div class="line"> ro.product.brand=Xiaomi</div><div class="line"> ro.product.name=virgo</div><div class="line"> ro.product.device=virgo</div><div class="line"> ro.product.board=MSM8974</div><div class="line"> ...</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ adb shell cat /system/build.prop</span><br><span class="line"><span class="meta"> #</span> begin build properties</span><br><span class="line"><span class="meta"> #</span> autogenerated by buildinfo.sh</span><br><span class="line"> ro.build.id=MMB29M</span><br><span class="line"> ro.build.display.id=MMB29M</span><br><span class="line"> ro.build.version.incremental=6.10.13</span><br><span class="line"> ro.build.version.sdk=23</span><br><span class="line"> ro.build.version.preview_sdk=0</span><br><span class="line"> ro.build.version.codename=REL</span><br><span class="line"> ro.build.version.all_codenames=REL</span><br><span class="line"> ro.build.version.release=6.0.1</span><br><span class="line"></span><br><span class="line"> ro.build.version.security_patch=2016-09-01</span><br><span class="line"> ro.build.version.base_os=</span><br><span class="line"> ro.build.date=Thu Oct 13 12:11:20 CST 2016</span><br><span class="line"> ro.build.date.utc=1476331880</span><br><span class="line"> ro.build.type=user</span><br><span class="line"> ro.build.user=builder</span><br><span class="line"> ro.build.host=c3-miui-ota-bd22</span><br><span class="line"> ro.build.tags=release-keys</span><br><span class="line"> ro.build.flavor=virgo-user</span><br><span class="line"> ro.product.model=MI 3W</span><br><span class="line"> ro.product.brand=Xiaomi</span><br><span class="line"> ro.product.name=virgo</span><br><span class="line"> ro.product.device=virgo</span><br><span class="line"> ro.product.board=MSM8974</span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>屏幕截图</p>
 <p>​<code>adb shell screencap -p /路径/xxx.png</code></p>
 </li>
 </ul>
 
-      
-    </div>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/11/27/weekly-1125/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">weekly-1125 </span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/10/13/weekly-1014/">
+        <span class="next-text nav-default">weekly 1014</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
     
   </div>
-  
+
+
+      </footer>
     
-<nav id="article-nav">
-  
-    <a href="/2016/11/27/weekly-1125/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          weekly-1125 
-        
+  </article>
+
+    </div>
+
       </div>
-    </a>
-  
-  
-    <a href="/2016/10/13/weekly-1014/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">weekly 1014</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
 
-  
-</article>
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
 
+      </footer>
 
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">Share to: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ADB-常用命令" data-title="ADB 常用命令" data-url="http://G96968586.github.io/2016/10/23/ADB-常用命令/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"huijian"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2017 箫鉴哥
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: false,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false,
-		root: /
-	}
-</script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
+    
 
 
 
 
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
 
+  
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  </div>
-</body>
+  </body>
 </html>

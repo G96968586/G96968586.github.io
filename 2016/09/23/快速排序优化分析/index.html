@@ -1,268 +1,147 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>快速排序优化分析 | 箫鉴哥博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="转自我在 CSDN 的一篇博文，原文链接在这里，谢谢大家支持！
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-上一篇的《浅谈快速排序》 http://blog.csdn.net/g96968586/article/details/24185967  
-中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会">
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="快速排序优化分析"/>
+
+
+
+
+  <meta name="keywords" content="转载," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2016/09/23/快速排序优化分析/"/>
+
+
+<meta name="description" content="转自我在 CSDN 的一篇博文，原文链接在这里，谢谢大家支持！  上一篇的《浅谈快速排序》 http://blog.csdn.net/g96968586/article/details/24185967   中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会">
+<meta name="keywords" content="转载">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速排序优化分析">
 <meta property="og:url" content="http://G96968586.github.io/2016/09/23/快速排序优化分析/index.html">
-<meta property="og:site_name" content="箫鉴哥博客">
-<meta property="og:description" content="转自我在 CSDN 的一篇博文，原文链接在这里，谢谢大家支持！
-
-上一篇的《浅谈快速排序》 http://blog.csdn.net/g96968586/article/details/24185967  
-中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="转自我在 CSDN 的一篇博文，原文链接在这里，谢谢大家支持！  上一篇的《浅谈快速排序》 http://blog.csdn.net/g96968586/article/details/24185967   中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20140421211948156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20140421211805765?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20140421212022000?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20140421212232265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20140421212330640?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:updated_time" content="2016-09-24T06:26:03.000Z">
+<meta property="og:updated_time" content="2018-05-02T12:38:09.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速排序优化分析">
-<meta name="twitter:description" content="转自我在 CSDN 的一篇博文，原文链接在这里，谢谢大家支持！
-
-上一篇的《浅谈快速排序》 http://blog.csdn.net/g96968586/article/details/24185967  
-中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会">
+<meta name="twitter:description" content="转自我在 CSDN 的一篇博文，原文链接在这里，谢谢大家支持！  上一篇的《浅谈快速排序》 http://blog.csdn.net/g96968586/article/details/24185967   中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20140421211948156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
   
-    <link rel="alternative" href="/atom.xml" title="箫鉴哥博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="//favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img src="https://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">箫鉴哥</a></h1>
-		</hgroup>
 
-		
-		<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
-		
+    <title> 快速排序优化分析 - 箫鉴哥 </title>
+  </head>
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
 
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>Menu</li>
-						<li>Tags</li>
-						
-						<li>Links</li>
-						
-						
-						<li>Über</li>
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="/">关于我</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
-					        
-								<a class="weibo" target="_blank" href="http://weibo.com/1813501992" title="weibo">weibo</a>
-					        
-								<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
-					        
-						</div>
-					</nav>
-				</section>
-
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/样式/" style="font-size: 10px;">样式</a> <a href="/tags/每周总结/" style="font-size: 20px;">每周总结</a> <a href="/tags/热修复/" style="font-size: 10px;">热修复</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
-					</div>
-				</section>
-				
-
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">技术只是解决问题的选择，而不是解决问题的根本。</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
 </div>
 
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">箫鉴哥</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				
-					<img src="nullhttps://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-				
-			</div>
-			<hgroup>
-			  <h1 class="header-author">箫鉴哥</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/">关于我</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/1813501992" title="weibo">weibo</a>
-			        
-						<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-
-      <div class="body-wrap"><article id="post-快速排序优化分析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/23/快速排序优化分析/" class="article-date">
-  	<time datetime="2016-09-23T12:19:32.000Z" itemprop="datePublished">2016-09-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      快速排序优化分析
-    </h1>
-  
-
       </header>
-      
-      <div class="article-info article-info-post">
+      <div id="content">
         
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
-	</div>
-
+    <div id="primary">
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/DataStructure/">数据结构</a>
-	</div>
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          快速排序优化分析
+        
+      </h1>
+
+      <time class="post-time">
+          Sep 23 2016
+      </time>
+    </header>
 
 
-        <div class="clearfix"></div>
-      </div>
-      
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>转自我在 CSDN 的一篇博文，<a href="http://blog.csdn.net/g96968586/article/details/24271639" target="_blank" rel="external">原文链接</a>在这里，谢谢大家支持！</p>
+            <div class="post-content">
+            <blockquote>
+<p>转自我在 CSDN 的一篇博文，<a href="http://blog.csdn.net/g96968586/article/details/24271639" target="_blank" rel="noopener">原文链接</a>在这里，谢谢大家支持！</p>
 </blockquote>
-<p>上一篇的《浅谈快速排序》 <a href="http://blog.csdn.net/g96968586/article/details/24185967" target="_blank" rel="external">http://blog.csdn.net/g96968586/article/details/24185967</a>  </p>
-<p>中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会发生什么情况呢？</p>
-<p>前一篇的Partition函数代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span> <span class="params">( SqList *L,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span>  </span></div><div class="line">&#123;  </div><div class="line">       <span class="keyword">int</span> pivotkey;  </div><div class="line">       pivotkey = L-&gt;r[low];   <span class="comment">/* 用子表的第一个记录作枢轴记录 */</span>  </div><div class="line">       <span class="keyword">while</span>(low &lt; high)   <span class="comment">/* 从表的两端交替向中间扫描 */</span>  </div><div class="line">       &#123;  </div><div class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[high] &gt;= pivotkey)    high - - ;  </div><div class="line">            swap(L,low,high);    <span class="comment">/* 将比枢轴记录小的记录交换到低端 */</span>  </div><div class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[low] &lt;= pivotkey )   low ++;  </div><div class="line">            swap(L,low,high);  <span class="comment">/* 将比枢轴记录大的记录交换到高端 */</span>  </div><div class="line">        &#125;  </div><div class="line">          <span class="keyword">return</span> low;   <span class="comment">/*  返回枢轴所在位置 */</span>  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上一篇的《浅谈快速排序》 <a href="http://blog.csdn.net/g96968586/article/details/24185967" target="_blank" rel="noopener">http://blog.csdn.net/g96968586/article/details/24185967</a>  </p>
+<p>中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会发生什么情况呢？<br><a id="more"></a></p>
+<p>前一篇的Partition函数代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span> <span class="params">( SqList *L,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">       <span class="keyword">int</span> pivotkey;  </span><br><span class="line">       pivotkey = L-&gt;r[low];   <span class="comment">/* 用子表的第一个记录作枢轴记录 */</span>  </span><br><span class="line">       <span class="keyword">while</span>(low &lt; high)   <span class="comment">/* 从表的两端交替向中间扫描 */</span>  </span><br><span class="line">       &#123;  </span><br><span class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[high] &gt;= pivotkey)    high - - ;  </span><br><span class="line">            swap(L,low,high);    <span class="comment">/* 将比枢轴记录小的记录交换到低端 */</span>  </span><br><span class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[low] &lt;= pivotkey )   low ++;  </span><br><span class="line">            swap(L,low,high);  <span class="comment">/* 将比枢轴记录大的记录交换到高端 */</span>  </span><br><span class="line">        &#125;  </span><br><span class="line">          <span class="keyword">return</span> low;   <span class="comment">/*  返回枢轴所在位置 */</span>  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如果我们对数组{9,1,5,8,3,7,4,6,2}进行排序，由代码第四行“pivotkey = L-&gt;r[low]; ”知道，我们应该选取9作为第一个枢轴pivotkey，此时经过一轮“pivot=Partition(L,1,9)”，它只是更换了9和2的位置，并把9返回给pivot。整个数组并没有实质性的变化。如图示，</p>
 <p><img src="http://img.blog.csdn.net/20140421211948156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
 <p>换句话说，第四行代码“pivotkey = L-&gt;r[low]; ”变成了一个潜在的瓶颈。排序速度的快慢取决于L-&gt;r[l1]的关键字处在整个序列的位置，L-&gt;r[1]太大或太小都回影响性能。在我们现实中，带排序的序列极有可能是基本有序的，如果我们总是固定地选择第一个关键字作为首个枢轴，就变成了极为不合理的做法。<br>这里的改进方法我们采用三数取中法。即取三个关键字先进行排序，将中间数作为枢轴，一般是取整个待排序的左端、右端和中间三个数，也可以随机选取。这样至少这个中间数一定不会是最小或者是最大的数，从概率来说，取三个数均为最小或最大的可能性微乎其微，因此中间数位于较为中间的值的可能性就大大提高了。<br>我们现在在Partition函数的第三行和第四行中间加入这么一段代码，</p>
@@ -275,141 +154,87 @@
 <p><img src="http://img.blog.csdn.net/20140421212232265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
 <p><img src="http://img.blog.csdn.net/20140421212330640?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
 
-      
-    </div>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/转载/">转载</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/09/24/微信Tinker的一切都在这里，包括源码-一/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">微信 Tinker 的一切都在这里，包括源码(一)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/09/23/浅谈快速排序/">
+        <span class="next-text nav-default">浅谈快速排序</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
     
   </div>
-  
+
+
+      </footer>
     
-<nav id="article-nav">
-  
-    <a href="/2016/09/24/微信Tinker的一切都在这里，包括源码-一/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          微信 Tinker 的一切都在这里，包括源码(一)
-        
+  </article>
+
+    </div>
+
       </div>
-    </a>
-  
-  
-    <a href="/2016/09/23/浅谈快速排序/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">浅谈快速排序</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
 
-  
-</article>
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
 
+      </footer>
 
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">Share to: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="快速排序优化分析" data-title="快速排序优化分析" data-url="http://G96968586.github.io/2016/09/23/快速排序优化分析/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"huijian"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2017 箫鉴哥
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: false,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false,
-		root: /
-	}
-</script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
+    
 
 
 
 
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
 
+  
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  </div>
-</body>
+  </body>
 </html>

@@ -1,384 +1,220 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>样式辅助文件 flexbox.scss | 箫鉴哥博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970.FBH,.FBV &amp;#123;  display: -webkit-box;  display: -webkit-flex;  disp">
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="样式辅助文件 flexbox.scss"/>
+
+
+
+
+  <meta name="keywords" content="样式,代码," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2016/09/25/样式辅助文件flexbox-scss/"/>
+
+
+<meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970.FBH,.FBV &amp;#123;  display: -webkit-box;  display: -webkit-flex;  disp">
+<meta name="keywords" content="样式,代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="样式辅助文件 flexbox.scss">
 <meta property="og:url" content="http://G96968586.github.io/2016/09/25/样式辅助文件flexbox-scss/index.html">
-<meta property="og:site_name" content="箫鉴哥博客">
+<meta property="og:site_name" content="箫鉴哥">
 <meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970.FBH,.FBV &amp;#123;  display: -webkit-box;  display: -webkit-flex;  disp">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2016-09-25T15:55:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="样式辅助文件 flexbox.scss">
 <meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970.FBH,.FBV &amp;#123;  display: -webkit-box;  display: -webkit-flex;  disp">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
   
-    <link rel="alternative" href="/atom.xml" title="箫鉴哥博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="//favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img src="https://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">箫鉴哥</a></h1>
-		</hgroup>
 
-		
-		<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
-		
+    <title> 样式辅助文件 flexbox.scss - 箫鉴哥 </title>
+  </head>
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>Menu</li>
-						<li>Tags</li>
-						
-						<li>Links</li>
-						
-						
-						<li>Über</li>
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="/">关于我</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
-					        
-								<a class="weibo" target="_blank" href="http://weibo.com/1813501992" title="weibo">weibo</a>
-					        
-								<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
-					        
-						</div>
-					</nav>
-				</section>
-
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/代码/" style="font-size: 10px;">代码</a> <a href="/tags/样式/" style="font-size: 10px;">样式</a> <a href="/tags/每周总结/" style="font-size: 20px;">每周总结</a> <a href="/tags/热修复/" style="font-size: 10px;">热修复</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
-					</div>
-				</section>
-				
-
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">技术只是解决问题的选择，而不是解决问题的根本。</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>
-</div>
-
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">箫鉴哥</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				
-					<img src="nullhttps://gw.alicdn.com/tps/TB1mZsZNXXXXXXDXVXXXXXXXXXX-200-200.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-				
-			</div>
-			<hgroup>
-			  <h1 class="header-author">箫鉴哥</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">如果没能一次成功，那就叫它1.0版吧</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/">关于我</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/G96968586" title="github">github</a>
-			        
-						<a class="weibo" target="_blank" href="http://weibo.com/1813501992" title="weibo">weibo</a>
-			        
-						<a class="mail" target="_blank" href="mailto:huijian.xhj@gmail.com" title="mail">mail</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-
-      <div class="body-wrap"><article id="post-样式辅助文件flexbox-scss" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/25/样式辅助文件flexbox-scss/" class="article-date">
-  	<time datetime="2016-09-25T15:50:21.000Z" itemprop="datePublished">2016-09-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      样式辅助文件 flexbox.scss
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
     </h1>
-  
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
 
       </header>
-      
-      <div class="article-info article-info-post">
+      <div id="content">
         
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码/">代码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/样式/">样式</a></li></ul>
-	</div>
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          样式辅助文件 flexbox.scss
+        
+      </h1>
+
+      <time class="post-time">
+          Sep 25 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.FBH</span>,</span><br><span class="line"><span class="selector-class">.FBV</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-flex;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBV</span> &#123;</span><br><span class="line">  -webkit-box-orient: vertical;</span><br><span class="line">  -webkit-box-<span class="attribute">direction</span>: normal;</span><br><span class="line">  -webkit-<span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBAS</span> &#123;</span><br><span class="line">  -webkit-box-align: start;</span><br><span class="line">  -webkit-<span class="attribute">align-items</span>: flex-start;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBAC</span> &#123;</span><br><span class="line">  -webkit-box-align: center;</span><br><span class="line">  -webkit-<span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBAE</span> &#123;</span><br><span class="line">  -webkit-box-align: end;</span><br><span class="line">  -webkit-<span class="attribute">align-items</span>: flex-end;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-end;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBJS</span> &#123;</span><br><span class="line">  -webkit-box-pack: start;</span><br><span class="line">  -webkit-<span class="attribute">justify-content</span>: flex-start;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBJC</span> &#123;</span><br><span class="line">  -webkit-box-pack: center;</span><br><span class="line">  -webkit-<span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBJE</span> &#123;</span><br><span class="line">  -webkit-box-pack: end;</span><br><span class="line">  -webkit-<span class="attribute">justify-content</span>: flex-end;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-end;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBJ</span> &#123;</span><br><span class="line">  -webkit-box-pack: justify;</span><br><span class="line">  -webkit-<span class="attribute">justify-content</span>: space-between;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FB1</span>, <span class="selector-class">.FB2</span>, <span class="selector-class">.FB3</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FBH</span> &gt; <span class="selector-class">.FB1</span>,</span><br><span class="line"><span class="selector-class">.FBH</span> &gt; <span class="selector-class">.FB2</span>,</span><br><span class="line"><span class="selector-class">.FBH</span> &gt; <span class="selector-class">.FB3</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FB1</span> &#123;</span><br><span class="line">  -webkit-box-<span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">  -webkit-<span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FB2</span> &#123;</span><br><span class="line">  -webkit-box-<span class="attribute">flex</span>: <span class="number">2</span>;</span><br><span class="line">  -webkit-<span class="attribute">flex</span>: <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.FB3</span> &#123;</span><br><span class="line">  -webkit-box-<span class="attribute">flex</span>: <span class="number">3</span>;</span><br><span class="line">  -webkit-<span class="attribute">flex</span>: <span class="number">3</span>;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/样式/">样式</a>
+		  
+			<a href="/tags/代码/">代码</a>
+		  
+		</div>
+		
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/CSS/">CSS</a>
-	</div>
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/10/08/weekly-1008/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">weekly 1008</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/09/24/微信Tinker的一切都在这里，包括源码-一/">
+        <span class="next-text nav-default">微信 Tinker 的一切都在这里，包括源码(一)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
 
 
-        <div class="clearfix"></div>
+      </footer>
+    
+  </article>
+
+    </div>
+
       </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.FBH</span>,</div><div class="line"><span class="selector-class">.FBV</span> &#123;</div><div class="line">  <span class="attribute">display</span>: -webkit-box;</div><div class="line">  <span class="attribute">display</span>: -webkit-flex;</div><div class="line">  <span class="attribute">display</span>: flex;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBV</span> &#123;</div><div class="line">  -webkit-box-orient: vertical;</div><div class="line">  -webkit-box-<span class="attribute">direction</span>: normal;</div><div class="line">  -webkit-<span class="attribute">flex-direction</span>: column;</div><div class="line">  <span class="attribute">flex-direction</span>: column;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBAS</span> &#123;</div><div class="line">  -webkit-box-align: start;</div><div class="line">  -webkit-<span class="attribute">align-items</span>: flex-start;</div><div class="line">  <span class="attribute">align-items</span>: flex-start;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBAC</span> &#123;</div><div class="line">  -webkit-box-align: center;</div><div class="line">  -webkit-<span class="attribute">align-items</span>: center;</div><div class="line">  <span class="attribute">align-items</span>: center;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBAE</span> &#123;</div><div class="line">  -webkit-box-align: end;</div><div class="line">  -webkit-<span class="attribute">align-items</span>: flex-end;</div><div class="line">  <span class="attribute">align-items</span>: flex-end;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBJS</span> &#123;</div><div class="line">  -webkit-box-pack: start;</div><div class="line">  -webkit-<span class="attribute">justify-content</span>: flex-start;</div><div class="line">  <span class="attribute">justify-content</span>: flex-start;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBJC</span> &#123;</div><div class="line">  -webkit-box-pack: center;</div><div class="line">  -webkit-<span class="attribute">justify-content</span>: center;</div><div class="line">  <span class="attribute">justify-content</span>: center;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBJE</span> &#123;</div><div class="line">  -webkit-box-pack: end;</div><div class="line">  -webkit-<span class="attribute">justify-content</span>: flex-end;</div><div class="line">  <span class="attribute">justify-content</span>: flex-end;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBJ</span> &#123;</div><div class="line">  -webkit-box-pack: justify;</div><div class="line">  -webkit-<span class="attribute">justify-content</span>: space-between;</div><div class="line">  <span class="attribute">justify-content</span>: space-between;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FB1</span>, <span class="selector-class">.FB2</span>, <span class="selector-class">.FB3</span>&#123;</div><div class="line">  <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FBH</span> &gt; <span class="selector-class">.FB1</span>,</div><div class="line"><span class="selector-class">.FBH</span> &gt; <span class="selector-class">.FB2</span>,</div><div class="line"><span class="selector-class">.FBH</span> &gt; <span class="selector-class">.FB3</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FB1</span> &#123;</div><div class="line">  -webkit-box-<span class="attribute">flex</span>: <span class="number">1</span>;</div><div class="line">  -webkit-<span class="attribute">flex</span>: <span class="number">1</span>;</div><div class="line">  <span class="attribute">flex</span>: <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FB2</span> &#123;</div><div class="line">  -webkit-box-<span class="attribute">flex</span>: <span class="number">2</span>;</div><div class="line">  -webkit-<span class="attribute">flex</span>: <span class="number">2</span>;</div><div class="line">  <span class="attribute">flex</span>: <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.FB3</span> &#123;</div><div class="line">  -webkit-box-<span class="attribute">flex</span>: <span class="number">3</span>;</div><div class="line">  -webkit-<span class="attribute">flex</span>: <span class="number">3</span>;</div><div class="line">  <span class="attribute">flex</span>: <span class="number">3</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-      
-    </div>
+      <footer id="colophon"><span class="copyright-year">
     
-  </div>
-  
+        &copy;
     
-<nav id="article-nav">
-  
-    <a href="/2016/10/08/weekly-1008/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          weekly 1008
-        
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
       </div>
-    </a>
-  
-  
-    <a href="/2016/09/24/微信Tinker的一切都在这里，包括源码-一/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">微信 Tinker 的一切都在这里，包括源码(一)</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">Share to: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="样式辅助文件flexbox-scss" data-title="样式辅助文件 flexbox.scss" data-url="http://G96968586.github.io/2016/09/25/样式辅助文件flexbox-scss/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"huijian"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2017 箫鉴哥
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: false,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false,
-		root: /
-	}
-</script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
+    
 
 
 
 
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
 
+  
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  </div>
-</body>
+  </body>
 </html>
