@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="学习搭建你的第一个 PWA"/>
+
+
+
+
+  <meta name="keywords" content="PWA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2017/10/25/PWA/"/>
+
+
+<meta name="description" content="什么是 PWA ？ PWA 有哪些特点？PWA 在国内的发展情况怎么样？相对传统的 web 页面，PWA 能够给我们带来更多什么优势？想了解这些问题，可以看看这篇文章《下一代 Web 应用模型 —— Progressive Web App》。本文的目的是教你如何搭建一个 PWA 应用，带你从中了解到 PWA 的一些技术实现细节和注意事项。">
+<meta name="keywords" content="PWA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习搭建你的第一个 PWA">
+<meta property="og:url" content="http://G96968586.github.io/2017/10/25/PWA/index.html">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="什么是 PWA ？ PWA 有哪些特点？PWA 在国内的发展情况怎么样？相对传统的 web 页面，PWA 能够给我们带来更多什么优势？想了解这些问题，可以看看这篇文章《下一代 Web 应用模型 —— Progressive Web App》。本文的目的是教你如何搭建一个 PWA 应用，带你从中了解到 PWA 的一些技术实现细节和注意事项。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1OkN2SpXXXXcJaFXXXXXXXXXX-350-228.png_100x100.jpg">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1kXGVSpXXXXXsXXXXXXXXXXXX-1728-1436.png_500x500.jpg">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1Ps5vSpXXXXcrXFXXXXXXXXXX-918-456.png_500x500.jpg">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1_fCvSpXXXXckXFXXXXXXXXXX-580-712.png_400x400.jpg">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1fzSJSpXXXXX7XpXXXXXXXXXX-758-1340.png_500x500.jpg">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1KXmVSpXXXXXBXXXXXXXXXXXX-1249-923.jpg">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB14XC0SpXXXXXHXXXXXXXXXXXX-754-1338.png_500x500.jpg">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1it5fSpXXXXceapXXXXXXXXXX-632-419.png">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1jgh6SpXXXXayaVXXXXXXXXXX-1490-858.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1Hd1HSpXXXXa5XFXXXXXXXXXX-1494-534.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1v.KDSpXXXXcCXFXXXXXXXXXX-424-73.png">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1EXiaSpXXXXabaFXXXXXXXXXX-1466-862.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1Zo1oSpXXXXcdaXXXXXXXXXXX-1292-524.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1l3udSpXXXXbRapXXXXXXXXXX-752-898.png_400x400">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1mRGRSpXXXXaZXpXXXXXXXXXX-1662-816.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1NzqASpXXXXcVXpXXXXXXXXXX-1894-1258.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1rPOPSpXXXXXzXpXXXXXXXXXX-700-1212.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1ly9fSpXXXXcBapXXXXXXXXXX-1970-566.png">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1QByCSpXXXXXHXVXXXXXXXXXX-2448-1328.png_600x600">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1Ahh6SpXXXXbeaVXXXXXXXXXX-2420-914.png_600x600">
+<meta property="og:updated_time" content="2018-05-06T13:28:47.291Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习搭建你的第一个 PWA">
+<meta name="twitter:description" content="什么是 PWA ？ PWA 有哪些特点？PWA 在国内的发展情况怎么样？相对传统的 web 页面，PWA 能够给我们带来更多什么优势？想了解这些问题，可以看看这篇文章《下一代 Web 应用模型 —— Progressive Web App》。本文的目的是教你如何搭建一个 PWA 应用，带你从中了解到 PWA 的一些技术实现细节和注意事项。">
+<meta name="twitter:image" content="https://gw.alicdn.com/tfs/TB1OkN2SpXXXXcJaFXXXXXXXXXX-350-228.png_100x100.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 学习搭建你的第一个 PWA - 箫鉴哥 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          学习搭建你的第一个 PWA
+        
+      </h1>
+
+      <time class="post-time">
+          Oct 25 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>什么是 PWA ？ PWA 有哪些特点？PWA 在国内的发展情况怎么样？相对传统的 web 页面，PWA 能够给我们带来更多什么优势？想了解这些问题，可以看看这篇文章<a href="https://huangxuan.me/2017/02/09/nextgen-web-pwa/" target="_blank" rel="noopener">《下一代 Web 应用模型 —— Progressive Web App》</a>。本文的目的是教你如何搭建一个 PWA 应用，带你从中了解到 PWA 的一些技术实现细节和注意事项。<br><a id="more"></a></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>Chrome 52 或更高版本</li>
+<li>安装 <a href="https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=zh-cn" target="_blank" rel="noopener">Web Server for Chrome</a> <img src="https://gw.alicdn.com/tfs/TB1OkN2SpXXXXcJaFXXXXXXXXXX-350-228.png_100x100.jpg" alt="image | center"><br>，当然，或使用自己选择的网络服务器</li>
+<li>IDE 或文本编辑器</li>
+<li>官方示例代码 <a href="https://github.com/googlecodelabs/your-first-pwapp/archive/master.zip" target="_blank" rel="noopener">-&gt;传送门</a></li>
+</ul>
+<h2 id="解压代码"><a href="#解压代码" class="headerlink" title="解压代码"></a>解压代码</h2><p>解压官方代码，你会发现在文件夹 your-first-pwapp-master 里有下面的目录结构：</p>
+<p>├── <a href="http://CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a><br>├── final<br>├── LICENSE<br>├── <a href="http://README.md" target="_blank" rel="noopener">README.md</a><br>├── resources<br>├── step-02<br>├── step-04<br>├── step-05<br>├── step-06<br>├── step-07<br>├── step-08<br>├── work<br>│    ├── favicon.ico<br>│    ├── images<br>│    ├── index.html -&gt; 后面会提到的 App Shell<br>│    ├── scripts<br>│    ├── styles</p>
+<h2 id="验证-Web-Server-for-Chrome"><a href="#验证-Web-Server-for-Chrome" class="headerlink" title="验证 Web Server for Chrome"></a>验证 Web Server for Chrome</h2><p>首次安装完 Web Server for Chrome 后，打开它，会看到下面的窗口，<br><img src="https://gw.alicdn.com/tfs/TB1kXGVSpXXXXXsXXXXXXXXXXXX-1728-1436.png_500x500.jpg" alt="image | center"></p>
+<p>点击 choose folder 按钮，然后选择 work 文件夹，<br><img src="https://gw.alicdn.com/tfs/TB1Ps5vSpXXXXcrXFXXXXXXXXXX-918-456.png_500x500.jpg" alt="image | center"></p>
+<p>在 Options 下，选中“Automatically show index.html”旁边的框，如下所示：<br><img src="https://gw.alicdn.com/tfs/TB1_fCvSpXXXXckXFXXXXXXXXXX-580-712.png_400x400.jpg" alt="image | center"></p>
+<p>你也可以修改默认的端口号：8887<br>然后将标记为“Web Server:STARTED”的切换按钮向左滑动，然后向右滑动，停止并重启服务器。<br>现在打开 Chrome，按住 option + command + I 进入开发者工具模式，再按住 shift + command + M进入移动端模式，访问 <a href="http://127.0.0.1:8887" target="_blank" rel="noopener">http://127.0.0.1:8887</a> ，将会看到下面的页面，<br><img src="https://gw.alicdn.com/tfs/TB1fzSJSpXXXXX7XpXXXXXXXXXX-758-1340.png_500x500.jpg" alt="image | center"></p>
+<p>有一个转不停的菊花。</p>
+<h2 id="构建-App-Shell"><a href="#构建-App-Shell" class="headerlink" title="构建 App Shell"></a>构建 App Shell</h2><p>App Shell 是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base64 图片，不依赖于 JS 框架，是确保获得可靠而又出色性能的组件之一。它的第一次加载速度非常快，并且能够立即缓存。“缓存”意味着 Shell 文件一旦通过网络完成加载，就会保存到本地设备中。以后每当用户打开应用时，就会自动从本地设备的缓存中打开 Shell 文件，这样应用就能超快启动。<br><img src="https://gw.alicdn.com/tfs/TB1KXmVSpXXXXXBXXXXXXXXXXXX-1249-923.jpg" alt="image | center"></p>
+<p>App Shell 将核心应用基础架构、 UI 与数据分离。所有 UI 和基础架构都利用服务工作线程缓存在本地，这样在后续加载时，PWA 只需检索必要的数据，而不必加载所有内容。换句话讲，App Shell 就类似于你在开发 Native 应用时需要向应用商店发布的一组代码。它是让你的应用成功起步所需的核心组件，但可能并不包含数据。</p>
+<h3 id="设计-App-Shell"><a href="#设计-App-Shell" class="headerlink" title="设计 App Shell"></a>设计 App Shell</h3><p>第一步是将设计细分成其核心组件。</p>
+<p>问问自己：</p>
+<ul>
+<li><p>哪些内容需要立即呈现在屏幕上？</p>
+</li>
+<li><p>还有哪些其他 UI 组件对我们的应用很重要？</p>
+</li>
+<li><p>App Shell 需要哪些支持资源？例如图像、JavaScript、样式等。</p>
+</li>
+</ul>
+<p>示例代码是一个天气应用，将其作为我们的第一个 Progressive Web App。其关键组件将包括：</p>
+<ul>
+<li>标头，其中包含标题和添加/刷新按钮</li>
+<li>预报卡片容器</li>
+<li>预报卡片模板</li>
+<li>用于添加新城市的对话框</li>
+<li>加载指示器</li>
+</ul>
+<h3 id="实现-App-Shell"><a href="#实现-App-Shell" class="headerlink" title="实现 App Shell"></a>实现 App Shell</h3><p>在示例代码 work 目录下，找到 index.html，这是一个实现好的 App Shell，里面已经完成了大部分的 UI，接下来，可以着手连接代码，让一切运转起来！</p>
+<p>在 work 目录下找到 script/app.js，打开 app.js 可以找到以下内容：</p>
+<ul>
+<li>一个 <code>app</code> 对象，其中包含应用所需的一些关键信息。</li>
+<li>标头中所有按钮 (<code>add/refresh</code>) 和“Add City”对话框中所有按钮 (<code>add/cancel</code>) 的事件侦听器。</li>
+<li>一个用于添加或更新预报卡片的方法 (<code>app.updateForecastCard</code>)。</li>
+<li>一个用于从 Firebase Public Weather API 获取最新天气预报数据的方法 (<code>app.getForecast</code>)。</li>
+<li>一个用于遍历现有卡片并调用 <code>app.getForecast</code> 以获取最新预报数据的方法 (<code>app.updateForecasts</code>)。</li>
+<li>可用来快速测试渲染效果的一些虚假数据 (<code>initialWeatherForecast</code>)。</li>
+</ul>
+<p>示例代码提供了 mock 的天气预报数据，为了了解数据是如何渲染的，我们取消 <code>index.html</code> 文件底部的以下行的注释：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;script src="scripts/app.js" async&gt;&lt;/script&gt;--&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下来，取消 <code>app.js</code> 文件底部的以下行的注释：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.updateForecastCard(initialWeatherForecast);</span></span><br></pre></td></tr></table></figure>
+<p>刷新浏览器，你将看到如下图所示的界面：</p>
+<p><img src="https://gw.alicdn.com/tfs/TB14XC0SpXXXXXHXXXXXXXXXXXX-754-1338.png_500x500.jpg" alt="image | center"></p>
+<h2 id="从快速首次加载开始"><a href="#从快速首次加载开始" class="headerlink" title="从快速首次加载开始"></a>从快速首次加载开始</h2><p>Progressive Web App 应启动迅速，并且立即就能使用。在目前状态下，我们的天气应用虽启动迅速，却无法使用，因为没有任何数据。我们可以发出 AJAX 请求来获取该数据，但那会额外增加一个请求，使首次加载时间变得更长。可以改为在首次加载时提供真实数据。</p>
+<h3 id="注入天气预报数据"><a href="#注入天气预报数据" class="headerlink" title="注入天气预报数据"></a>注入天气预报数据</h3><p>在示例代码中，模拟服务器将天气预报直接注入 JavaScript 中，但在生产应用中，最新天气预报数据将由服务器根据用户的 IP 地址地理定位进行注入。</p>
+<p>代码已经包含我们即将注入的数据。这就是前面步骤中使用的 <code>initialWeatherForecast</code>。</p>
+<h3 id="区分首次运行"><a href="#区分首次运行" class="headerlink" title="区分首次运行"></a>区分首次运行</h3><p>我们怎么知道什么时候显示这些信息呢？因为未来加载时天气应用将从缓存中获取，届时这些信息可能不再相关了。比如，用户在后续访问时加载应用，他们可能已改换城市，因此，我们需要加载的是这些城市的信息，而不一定是他们查询过的第一个城市。</p>
+<p>用户首选项（比如用户订阅的城市列表）应利用 IndexedDB 或其他快速存储机制存储在本地。为尽可能简化此代码实验室，我们使用了 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage</a>，但它并非生产应用的理想选择，因为它是一种封闭的同步存储机制，在某些设备上可能会运行得非常缓慢。</p>
+<p>首先，让我们添加必要的代码来保存用户首选项。在 app.js 文件中，找到下面的 TODO 注释，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TODO add saveSelectedCities function here</span></span><br></pre></td></tr></table></figure>
+<p>在注释下方添加下面的代码，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Save list of cities to localStorage.</span></span><br><span class="line">  app.saveSelectedCities = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> selectedCities = <span class="built_in">JSON</span>.stringify(app.selectedCities);</span><br><span class="line">    localStorage.selectedCities = selectedCities;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<p>接下来，添加启动代码，以检查用户是否保存了任何城市并渲染这些城市，或使用注入的数据。找到以下注释：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TODO add startup code here</span></span><br></pre></td></tr></table></figure>
+<p>并在注释下方添加以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/************************************************************************</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * Code required to start the app</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">NOTE:</span>To simplify this codelab, we've used localStorage.</span></span><br><span class="line"><span class="comment">   *   localStorage is a synchronous API and has serious performance</span></span><br><span class="line"><span class="comment">   *   implications.It should not be used in production applications!</span></span><br><span class="line"><span class="comment">   *   Instead, check out IDB (https://www.npmjs.com/package/idb) or</span></span><br><span class="line"><span class="comment">   *   SimpleDB (https://gist.github.com/inexorabletash/c8069c042b734519680c)</span></span><br><span class="line"><span class="comment">   ************************************************************************/</span></span><br><span class="line"></span><br><span class="line">  app.selectedCities = localStorage.selectedCities;</span><br><span class="line">  <span class="keyword">if</span> (app.selectedCities) &#123;</span><br><span class="line">    app.selectedCities = <span class="built_in">JSON</span>.parse(app.selectedCities);</span><br><span class="line">    app.selectedCities.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">city</span>) </span>&#123;</span><br><span class="line">      app.getForecast(city.key, city.label);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/* The user is using the app for the first time, or the user has not</span></span><br><span class="line"><span class="comment">     * saved any cities, so show the user some fake data.A real app in this</span></span><br><span class="line"><span class="comment">     * scenario could guess the user's location via IP lookup and then inject</span></span><br><span class="line"><span class="comment">     * that data into the page.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    app.updateForecastCard(initialWeatherForecast);</span><br><span class="line">    app.selectedCities = [</span><br><span class="line">      &#123;<span class="attr">key</span>: initialWeatherForecast.key, <span class="attr">label</span>: initialWeatherForecast.label&#125;</span><br><span class="line">    ];</span><br><span class="line">    app.saveSelectedCities();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>启动代码会检查本地存储中是否存储了任何城市。如果存储了城市，它就会解析本地存储数据，然后为保存的每个城市显示预报卡片。如果没有存储城市，启动代码会使用虚假的预报数据，并将其保存为默认城市。</p>
+<p>最后，我们需要修改“Add City”按钮处理程序，以便将所选的城市添加到本地存储。</p>
+<p>更新 <code>butAddCity</code> 点击处理程序，以便匹配以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'butAddCity'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Add the newly selected city</span></span><br><span class="line">    <span class="keyword">var</span> select = <span class="built_in">document</span>.getElementById(<span class="string">'selectCityToAdd'</span>);</span><br><span class="line">    <span class="keyword">var</span> selected = select.options[select.selectedIndex];</span><br><span class="line">    <span class="keyword">var</span> key = selected.value;</span><br><span class="line">    <span class="keyword">var</span> label = selected.textContent;</span><br><span class="line">    <span class="keyword">if</span> (!app.selectedCities) &#123;</span><br><span class="line">      app.selectedCities = [];</span><br><span class="line">    &#125;</span><br><span class="line">    app.getForecast(key, label);</span><br><span class="line">    app.selectedCities.push(&#123;<span class="attr">key</span>: key, <span class="attr">label</span>: label&#125;);</span><br><span class="line">    app.saveSelectedCities();</span><br><span class="line">    app.toggleAddDialog(<span class="literal">false</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>新添加的内容是 <code>app.selectedCities</code> 的初始化，以及对 <code>app.selectedCities.push()</code> 和 <code>app.saveSelectedCities()</code> 的调用。</p>
+<p>OK，再次刷新浏览器，运行时，应用应该会立即向用户显示来自 <code>initialWeatherForecast</code> 的天气预报数据。点击右上角的图标，增加新的城市，并验证应用是否加载了两个天气预报卡片并显示了最新信息。</p>
+<h2 id="利用-Service-Worker-预缓存-App-Shell"><a href="#利用-Service-Worker-预缓存-App-Shell" class="headerlink" title="利用 Service Worker 预缓存 App Shell"></a>利用 Service Worker 预缓存 App Shell</h2><p>Progressive Web App 必须快速并且可安装，这意味着它们能够在在线、离线以及间歇性、弱网络连接下工作。要实现此目标，我们需要利用服务工作线程缓存我们的 App Shell，让其始终都能快速而又可靠地投入使用。</p>
+<h3 id="在服务工作线程可用时注册它"><a href="#在服务工作线程可用时注册它" class="headerlink" title="在服务工作线程可用时注册它"></a>在服务工作线程可用时注册它</h3><p>使应用离线工作的第一步是注册一个 Service Worker 服务工作线程，这是一个无需打开网页或用户交互便可实现后台功能的脚本。</p>
+<p>只需要两步骤：</p>
+<ul>
+<li>让浏览器将 JavaScript 文件注册为服务工作线程</li>
+<li>创建包含此服务工作线程的 JavaScript 文件</li>
+</ul>
+<p>首先我们需要检查浏览器是否支持服务工作线程，如果支持，则注册服务工作线程。在 app.js 找到下面注释之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TODO add service worker code here</span></span><br></pre></td></tr></table></figure>
+<p>添加下面代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) &#123;</span><br><span class="line">    navigator.serviceWorker</span><br><span class="line">             .register(<span class="string">'./service-worker.js'</span>)</span><br><span class="line">             .then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Service Worker Registered'</span>); &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="缓存网站资源"><a href="#缓存网站资源" class="headerlink" title="缓存网站资源"></a>缓存网站资源</h3><p>注册服务工作线程后，用户首次访问页面时将会触发安装事件。在此事件处理程序内，我们将缓存应用所需的全部资源。触发服务工作线程时，它会打开 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache" target="_blank" rel="noopener">caches</a> 对象并为其填充加载 App Shell 所需的资源。在 work 目录下，创建 service-worker.js 文件，这个文件之所以必须位于应用的根文件夹内，是因为服务工作线程的作用域由该文件所在的目录定义。在 service-worker.js 添加下面代码，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cacheName = <span class="string">'weatherPWA-step-6-1'</span>;</span><br><span class="line"><span class="keyword">var</span> filesToCache = [];</span><br><span class="line"></span><br><span class="line">self.addEventListener(<span class="string">'install'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Install'</span>);</span><br><span class="line">  e.waitUntil(</span><br><span class="line">    caches.open(cacheName).then(<span class="function"><span class="keyword">function</span>(<span class="params">cache</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Caching app shell'</span>);</span><br><span class="line">      <span class="keyword">return</span> cache.addAll(filesToCache);</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>首先，我们需要通过 <code>caches.open()</code> 打开缓存并提供一个缓存名称。提供缓存名称可让我们对文件进行版本控制，或将数据与 App Shell 分开，以便我们能轻松地更新某个数据，而不会影响其他数据。</p>
+<p>缓存打开后，我们便可调用 <code>cache.addAll()</code>，这个带有网址列表参数的方法随即从服务器获取文件，并将响应添加到缓存内。遗憾的是，<code>cache.addAll()</code> 具有原子性，如果任何一个文件失败，整个缓存步骤也将失败！</p>
+<h3 id="使用-DevTools-了解和调试服务工作线程"><a href="#使用-DevTools-了解和调试服务工作线程" class="headerlink" title="使用 DevTools 了解和调试服务工作线程"></a>使用 DevTools 了解和调试服务工作线程</h3><p>重新加载页面之前，打开 DevTools，转至 <strong>Application </strong>面板的 <strong>Service Worker </strong>窗口，如下所示：</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1it5fSpXXXXceapXXXXXXXXXX-632-419.png" alt="image | center"></p>
+<p>如果看到类似于这样的空白页面，就表示当前打开的页面没有注册服务工作线程。</p>
+<p>现在，重新加载页面。Service Worker 窗口现在应该像下面这样，表示页面正在运行服务工作线程。</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1jgh6SpXXXXayaVXXXXXXXXXX-1490-858.png_600x600" alt="image | center"></p>
+<p>现在，我们将要插入一点其他内容，说明我们在开发服务工作线程时可能会遇到的 Gotcha。为了说明这一问题，需要在 <code>service-worker.js</code> 文件中的 <code>install</code> 侦听器下面添加 <code>activate</code> 事件侦听器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Activate'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>activate</code> 事件会在服务工作线程启动时触发。</p>
+<p>打开 DevTools Console，重新加载页面，切换到 Application 面板中的 Service Worker 窗口，然后点击激活的服务工作线程上的 Inspect。可以看到 <code>[ServiceWorker] Activate</code> 消息记录到控制台，但并没有发生。请查看 Service Worker 窗口，我们会看到新的服务工作线程（包含激活事件侦听器）处于“等待”状态。</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1Hd1HSpXXXXa5XFXXXXXXXXXX-1494-534.png_600x600" alt="image | center"></p>
+<p>从根本上说，只要页面有打开的标签，以前的服务工作线程就会继续控制页面。因此，你可以关闭然后重新打开页面，或者按 <strong>skipWaiting </strong>按钮，但是更长期的解决方案只需启用 DevTools 的 Service Worker 窗口上的 <strong>Update on Reload </strong>复选框。如果启用此复选框，服务工作线程会在每次页面重新加载时强制更新。</p>
+<p>现在启用 <strong>update on reload </strong>复选框，并重新加载页面，以确认新的服务工作线程被激活。</p>
+<p><strong>注：</strong> 你可能会在 Application 面板的 Service Worker 窗口中发到一个错误（类似于以下内容），完全可以忽略此错误。</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1v.KDSpXXXXcCXFXXXXXXXXXX-424-73.png" alt="image | center"></p>
+<p>有关在 DevTools 中检查和调试服务工作线程的内容就到此结束。现在，我们来展开 <code>activate</code> 事件侦听器，添加以下逻辑来更新缓存。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Activate'</span>);</span><br><span class="line">  e.waitUntil(</span><br><span class="line">    caches.keys().then(<span class="function"><span class="keyword">function</span>(<span class="params">keyList</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.all(keyList.map(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key !== cacheName) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Removing old cache'</span>, key);</span><br><span class="line">          <span class="keyword">return</span> caches.delete(key);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;));</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> self.clients.claim();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面代码可以确保我们的服务工作线程在任何 App Shell 文件更改时更新其缓存。为了使其工作，我们需要在服务工作线程文件的顶部增加 <code>cacheName</code> 变量。</p>
+<p>最后，我们更新 App Shell 所需的文件列表。在数组中，我们需要加入应用所需的全部文件，包括图像、JavaScript、样式表等。在接近 <code>service-worker.js</code> 文件顶部的地方，使用以下代码替换 <code>var filesToCache = [];</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> filesToCache = [</span><br><span class="line">  <span class="string">'/'</span>,</span><br><span class="line">  <span class="string">'/index.html'</span>,</span><br><span class="line">  <span class="string">'/scripts/app.js'</span>,</span><br><span class="line">  <span class="string">'/styles/inline.css'</span>,</span><br><span class="line">  <span class="string">'/images/clear.png'</span>,</span><br><span class="line">  <span class="string">'/images/cloudy-scattered-showers.png'</span>,</span><br><span class="line">  <span class="string">'/images/cloudy.png'</span>,</span><br><span class="line">  <span class="string">'/images/fog.png'</span>,</span><br><span class="line">  <span class="string">'/images/ic_add_white_24px.svg'</span>,</span><br><span class="line">  <span class="string">'/images/ic_refresh_white_24px.svg'</span>,</span><br><span class="line">  <span class="string">'/images/partly-cloudy.png'</span>,</span><br><span class="line">  <span class="string">'/images/rain.png'</span>,</span><br><span class="line">  <span class="string">'/images/scattered-showers.png'</span>,</span><br><span class="line">  <span class="string">'/images/sleet.png'</span>,</span><br><span class="line">  <span class="string">'/images/snow.png'</span>,</span><br><span class="line">  <span class="string">'/images/thunderstorm.png'</span>,</span><br><span class="line">  <span class="string">'/images/wind.png'</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p>现在应用现在还不能离线运行。我们虽然已缓存了 App Shell 组件，但仍需从本地缓存加载它们。</p>
+<h3 id="从缓存提供-App-Shell"><a href="#从缓存提供-App-Shell" class="headerlink" title="从缓存提供 App Shell"></a>从缓存提供 App Shell</h3><p>服务工作线程提供了拦截 Progressive Web App 发出的请求并在服务工作线程内对它们进行处理的能力。这意味着我们可以决定想要如何处理请求，并可提供我们自己的已缓存响应。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'fetch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Do something interesting with the fetch here</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>现在我们从缓存提供 App Shell。将以下代码添加到 <code>service-worker.js</code> 文件的底部：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'fetch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Fetch'</span>, e.request.url);</span><br><span class="line">  e.respondWith(</span><br><span class="line">    caches.match(e.request).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> response || fetch(e.request);</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>caches.match()</code> 会由内而外对触发<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener"> fetch </a>事件的网络请求进行评估，并检查以确认它是否位于缓存内。它随即使用已缓存版本作出响应，或者利用 <code>fetch</code> 从网络获取一个副本。<code>response</code> 通过 <code>e.respondWith()</code> 传回至网页。</p>
+<p>又到测试环节了，现在我们的应用可以离线运行了。重新加载页面，然后转至 DevTools 的 <strong>Application</strong> 面板的 <strong>Cache Storage</strong> 窗口。展开这个部分，可以看到左侧列出的 App Shell 缓存的名称。当我们点击 App Shell 缓存后，可以看到它当前缓存的所有资源。</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1EXiaSpXXXXabaFXXXXXXXXXX-1466-862.png_600x600" alt="image | center"></p>
+<p>现在，测试一下离线模式。回到 DevTools 的 <strong>Service Worker</strong> 窗口，然后勾上 <strong>Offline</strong> 复选框。启用后，可以看到 <strong>Network</strong> 面板标签旁边显示很小的黄色警告图标。这表示当前正处于离线状态。</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1Zo1oSpXXXXcdaXXXXXXXXXXX-1292-524.png_600x600" alt="image | center"></p>
+<p>重新刷新页面，你会发现天气预报卡片还是出来了！请注意它加载初始（虚假）天气数据的方式。</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1l3udSpXXXXbRapXXXXXXXXXX-752-898.png_400x400" alt="image | center"></p>
+<p>下一步就是修改应用和服务工作线程逻辑，以便能够缓存天气数据，并在应用处于离线状态时从缓存中返回最新数据。</p>
+<p>如果要开始刷新和清除已保存的所有数据（localStoarge、indexedDB 数据、缓存文件）以及移除任何服务工作线程，请使用 Application 标签中的 Clear storage。</p>
+<h2 id="使用-Service-Worker-缓存天气预报数据"><a href="#使用-Service-Worker-缓存天气预报数据" class="headerlink" title="使用 Service Worker 缓存天气预报数据"></a>使用 Service Worker 缓存天气预报数据</h2><h3 id="拦截网络请求并缓存响应"><a href="#拦截网络请求并缓存响应" class="headerlink" title="拦截网络请求并缓存响应"></a>拦截网络请求并缓存响应</h3><p>我们需要修改服务工作线程，以拦截发给 weather API 的请求，并将其响应存储在缓存内，以便我们在稍后访问它们。</p>
+<p>我们在服务工作线程中添加一个 <code>dataCacheName</code>，以便将应用数据与 App Shell 分离。更新 App Shell 并清除较旧缓存时，我们的数据将保持不变，可随时用于实现超快速加载。注意，如果未来你的数据格式发生变化，你需要相应的处理手段，并且需要确保 App Shell 和内容保持同步。</p>
+<p>在 <code>service-worker.js</code> 文件顶部添加下面一行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dataCacheName = <span class="string">'weatherData-v1'</span>;</span><br></pre></td></tr></table></figure>
+<p>然后，更新 <code>activate</code> 事件处理程序，使其不会在清除 App Shell 缓存时删除数据缓存。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (key !== cacheName &amp;&amp; key !== dataCacheName) &#123;</span><br></pre></td></tr></table></figure>
+<p>最后，更新 <code>fetch</code> 事件处理程序，将发给 data API 的请求与其他请求分开处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'fetch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[Service Worker] Fetch'</span>, e.request.url);</span><br><span class="line">  <span class="keyword">var</span> dataUrl = <span class="string">'https://query.yahooapis.com/v1/public/yql'</span>;</span><br><span class="line">  <span class="keyword">if</span> (e.request.url.indexOf(dataUrl) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * When the request URL contains dataUrl, the app is asking for fresh</span></span><br><span class="line"><span class="comment">     * weather data. In this case, the service worker always goes to the</span></span><br><span class="line"><span class="comment">     * network and then caches the response. This is called the "Cache then</span></span><br><span class="line"><span class="comment">     * network" strategy:</span></span><br><span class="line"><span class="comment">     * https://jakearchibald.com/2014/offline-cookbook/#cache-then-network</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    e.respondWith(</span><br><span class="line">      caches.open(dataCacheName).then(<span class="function"><span class="keyword">function</span>(<span class="params">cache</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fetch(e.request).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">          cache.put(e.request.url, response.clone());</span><br><span class="line">          <span class="keyword">return</span> response;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">    );</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * The app is asking for app shell files. In this scenario the app uses the</span></span><br><span class="line"><span class="comment">     * "Cache, falling back to the network" offline strategy:</span></span><br><span class="line"><span class="comment">     * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    e.respondWith(</span><br><span class="line">      caches.match(e.request).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> response || fetch(e.request);</span><br><span class="line">      &#125;)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上代码会拦截请求，并检查网址是否以 weather API 的地址开头。如果是，我们将使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">fetch</a> 发出请求。返回请求后，我们的代码会打开缓存，克隆响应，将其存储在缓存内，最后将响应返回给原始请求者。</p>
+<p>我们的应用还不能完全离线工作。我们已经实现了 App Shell 的缓存和检索，但尽管我们缓存了数据，应用也没有查看缓存来看看其中是否有任何天气数据。</p>
+<h3 id="发出请求"><a href="#发出请求" class="headerlink" title="发出请求"></a>发出请求</h3><p>如前面所述，应用需要发起两个异步请求，一个发向缓存，一个发向网络。应用利用 <code>window</code> 中提供的 <code>caches</code> 对象来访问缓存和检索最新数据。这是“渐进式增强”的一个典范，因为可能并非所有浏览器都提供 <code>caches</code> 对象，即使没有该对象，网络请求仍应正常工作。</p>
+<p>为此，我们需要做的是：</p>
+<ol>
+<li>检查全局 <code>window</code> 对象中是否提供了 <code>caches</code> 对象</li>
+<li>从缓存请求数据</li>
+<li>如果服务器请求仍未完成，则用缓存的数据更新应用</li>
+<li>从服务器请求数据</li>
+<li>保存数据以便稍后快速访问</li>
+<li>使用来自服务器的最新数据更新应用</li>
+</ol>
+<h3 id="从缓存获取数据"><a href="#从缓存获取数据" class="headerlink" title="从缓存获取数据"></a>从缓存获取数据</h3><p>接下来，我们需要检查并确保 <code>caches</code> 对象存在，并从该对象请求最新数据。找到 <code>app.getForecast()</code> 中的 <code>TODO add cache logic here</code> 注释，然后在注释下方添加以下代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">'caches'</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">     <span class="comment">/*</span></span><br><span class="line"><span class="comment">      * Check if the service worker has already cached this city's weather</span></span><br><span class="line"><span class="comment">      * data. If the service worker has the data, then display the cached</span></span><br><span class="line"><span class="comment">      * data while the app fetches the latest data.</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     caches.match(url).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (response) &#123;</span><br><span class="line">         response.json().then(<span class="function"><span class="keyword">function</span> <span class="title">updateFromCache</span>(<span class="params">json</span>) </span>&#123;</span><br><span class="line">           <span class="keyword">var</span> results = json.query.results;</span><br><span class="line">           results.key = key;</span><br><span class="line">           results.label = label;</span><br><span class="line">           results.created = json.query.created;</span><br><span class="line">           app.updateForecastCard(results);</span><br><span class="line">         &#125;);</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>我们的天气应用现在会发出两个异步数据请求，一个去请求 <code>cache</code> ，一个去请求远程 API 数据，一般情况下缓存请求会先把结果返回，此时我们的页面将以极快的速度（几十微秒）渲染，并更新卡片。随后，远程返回响应后将直接使用 weather API 的最新数据更新卡片。</p>
+<p>请注意缓存请求和 XHR 请求都以更新预报卡片的调用结束。应用如何知道它是否显示了最新数据？<code>app.updateForecastCard</code> 中的以下代码会处理这个问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cardLastUpdatedElem = card.querySelector(<span class="string">'.card-last-updated'</span>);</span><br><span class="line">    <span class="keyword">var</span> cardLastUpdated = cardLastUpdatedElem.textContent;</span><br><span class="line">    <span class="keyword">if</span> (cardLastUpdated) &#123;</span><br><span class="line">      cardLastUpdated = <span class="keyword">new</span> <span class="built_in">Date</span>(cardLastUpdated);</span><br><span class="line">      <span class="comment">// Bail if the card has more recent data then the data</span></span><br><span class="line">      <span class="keyword">if</span> (dataLastUpdated.getTime() &lt; cardLastUpdated.getTime()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>每次更新卡片时，应用都会在卡片上隐藏的属性中存储数据的时间戳。仅当卡片上已经存在的时间戳晚于传递给函数的数据时，应用才会释放。</p>
+<p>现在应用应能完全离线运行了。保存两个城市，按应用上的 refresh 按钮获取最新的天气数据，然后转为离线状态并重新加载页面。</p>
+<p>转至 DevTools 的 <strong>Application</strong> 面板的 <strong>Cache Storage</strong> 窗口。展开这个部分，你可以看到左侧列出的 App Shell 和数据缓存的名称。如果每个城市存储有数据，即可打开数据缓存。</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1mRGRSpXXXXaZXpXXXXXXXXXX-1662-816.png_600x600" alt="image | center"></p>
+<h2 id="添加至主屏幕"><a href="#添加至主屏幕" class="headerlink" title="添加至主屏幕"></a>添加至主屏幕</h2><p>通过 Add To Home Screen 功能，我们可以像从应用商店安装本机应用那样，选择为设备添加一个快捷链接，并且过程要顺畅得多。</p>
+<h3 id="通过-manifest-json-文件声明应用清单"><a href="#通过-manifest-json-文件声明应用清单" class="headerlink" title="通过 manifest.json 文件声明应用清单"></a>通过 manifest.json 文件声明应用清单</h3><p>网络应用清单是一个简单的 JSON 文件，利用网络应用清单，你的网络应用可以：</p>
+<ul>
+<li>在用户的 Android 主屏幕进行丰富的呈现</li>
+<li>在没有网址栏的 Android 设备上以全屏模式启动</li>
+<li>控制屏幕方向以获得最佳查看效果</li>
+<li>定义网站的“启动画面”启动体验和主题颜色</li>
+<li>追踪你是从主屏幕还是从网址栏启动</li>
+</ul>
+<p>在 work 文件夹中创建名称为 manifest.json 的文件，并复制/粘贴以下内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"Weather"</span>,</span><br><span class="line">  <span class="attr">"short_name"</span>: <span class="string">"Weather"</span>,</span><br><span class="line">  <span class="attr">"icons"</span>: [&#123;</span><br><span class="line">    <span class="attr">"src"</span>: <span class="string">"images/icons/icon-128x128.png"</span>,</span><br><span class="line">      <span class="attr">"sizes"</span>: <span class="string">"128x128"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"image/png"</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      <span class="attr">"src"</span>: <span class="string">"images/icons/icon-144x144.png"</span>,</span><br><span class="line">      <span class="attr">"sizes"</span>: <span class="string">"144x144"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"image/png"</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      <span class="attr">"src"</span>: <span class="string">"images/icons/icon-152x152.png"</span>,</span><br><span class="line">      <span class="attr">"sizes"</span>: <span class="string">"152x152"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"image/png"</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      <span class="attr">"src"</span>: <span class="string">"images/icons/icon-192x192.png"</span>,</span><br><span class="line">      <span class="attr">"sizes"</span>: <span class="string">"192x192"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"image/png"</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      <span class="attr">"src"</span>: <span class="string">"images/icons/icon-256x256.png"</span>,</span><br><span class="line">      <span class="attr">"sizes"</span>: <span class="string">"256x256"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"image/png"</span></span><br><span class="line">    &#125;],</span><br><span class="line">  <span class="attr">"start_url"</span>: <span class="string">"/index.html"</span>,</span><br><span class="line">  <span class="attr">"display"</span>: <span class="string">"standalone"</span>,</span><br><span class="line">  <span class="attr">"background_color"</span>: <span class="string">"#3E4EB8"</span>,</span><br><span class="line">  <span class="attr">"theme_color"</span>: <span class="string">"#2F3BA2"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此清单支持一组适用于各种屏幕尺寸的图标。</p>
+<p>现在将以下行添加到 <code>index.html</code> 文件中的 <code>&lt;head&gt;</code> 元素底部：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"manifest"</span> <span class="attr">href</span>=<span class="string">"/manifest.json"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最佳做法：</p>
+<ul>
+<li>在你网站的所有网页上放置该清单链接，这样一来，无论用户首次访问时登陆哪个网页，Chrome 都会立即检索到它。</li>
+<li>在 Chrome 上首选使用 <code>short_name</code>，如果存在，则优先于 name 字段使用。</li>
+<li>为不同密度的屏幕定义图标集。Chrome 会尝试使用最接近 48dp 的图标，例如它会在 2 倍像素的设备上使用 96px，在 3 倍像素的设备上使用 144px。</li>
+<li>请记得提供尺寸对启动画面而言合理的图标，并且别忘了设置 <code>background_color</code>。</li>
+</ul>
+<p>在 <code>index.html</code> 中，向 <code>&lt;head&gt;</code> 元素底部添加以下代码，以适配 iOS Safari：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Add to home screen for Safari on iOS --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="attr">content</span>=<span class="string">"black"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"Weather PWA"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="string">"images/icons/icon-152x152.png"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试验证，打开 DevTool，切换到 <strong>Application </strong>面板上的 <strong>Manifest </strong>窗口，</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1NzqASpXXXXcVXpXXXXXXXXXX-1894-1258.png_600x600" alt="image | center"></p>
+<p>发现浏览器已经将其解析出来了。切换到 Web Server for Chrome，勾上<code>Accessible on local network</code> 选项</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1rPOPSpXXXXXzXpXXXXXXXXXX-700-1212.png_600x600" alt="image | center"></p>
+<p>将网络服务器切换到 <code>STOPPED</code>，然后重新切换到 <code>STARTED</code>。你会看到在 Web Server URL(s) 下面有一个可以远程访问的地址，使用手机访问这个页面，就可以在手机上体验这个 PWA 了。</p>
+<p>如果使用这种测试方式，你会在控制台中看到服务工作线程错误，这是因为未通过 HTTPS 提供服务工作线程。</p>
+<p>在移动 Android 设备上使用 Chrome，尝试将应用添加到主屏幕并验证启动屏幕能否正确显示以及使用的图标是否正确。</p>
+<h2 id="部署到-Firebase"><a href="#部署到-Firebase" class="headerlink" title="部署到 Firebase"></a>部署到 Firebase</h2><p>如果你从未接触过 Firebase，需要先创建你的帐户并安装一些工具。</p>
+<ol>
+<li>在 <a href="https://firebase.google.com/console/?hl=zh-cn" target="_blank" rel="noopener">https://firebase.google.com/console/</a> 上创建一个 Firebase 帐户</li>
+<li>通过 npm 安装 Firebase：<code>npm install -g firebase-tools</code></li>
+</ol>
+<p>创建帐户并登录后，便可随时进行部署！</p>
+<ol>
+<li><p>在 <a href="https://firebase.google.com/console/?hl=zh-cn" target="_blank" rel="noopener">https://firebase.google.com/console/</a> 上创建一个新应用，这里我创建了一个叫 PWA Demo 的应用</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1ly9fSpXXXXcBapXXXXXXXXXX-1970-566.png" alt="image | center"></p>
+</li>
+</ol>
+<ol start="2">
+<li><p>如果你近期未登录 Firebase 工具，需要重新登录：<code>firebase login</code></p>
+</li>
+<li><p>初始化你的应用，并提供你完成的应用所在的目录（我们的示例 Demo 是 <code>work</code>）： <code>firebase init</code></p>
+<p><img src="https://gw.alicdn.com/tfs/TB1QByCSpXXXXXHXVXXXXXXXXXX-2448-1328.png_600x600" alt="image | center"></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>最后，将应用部署到 Firebase： <code>firebase deploy</code></p>
+<p><img src="https://gw.alicdn.com/tfs/TB1Ahh6SpXXXXbeaVXXXXXXXXXX-2420-914.png_600x600" alt="image | center"></p>
+</li>
+</ol>
+<ol start="5">
+<li>大功告成。 操作完成！我们的应用将部署到以下网域：<code>https://YOUR-FIREBASE-APP.firebaseapp.com</code></li>
+</ol>
+<p>测试，尝试将应用添加到主屏幕，然后断开网络并验证应用能够按照预期离线工作。当然，你可以选择部署到集团 CDN 上，这里就不演示了。</p>
+<p>OK，就到这吧，后面再给大家带来详细的《调试服务工作线程》和 《向网络应用添加推送通知》的分享。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/" target="_blank" rel="noopener">https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/</a>  </p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/PWA/">PWA</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/10/25/Service-Workers-介绍/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Service Workers 介绍</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/11/27/weekly-1125/">
+        <span class="next-text nav-default">weekly-1125 </span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

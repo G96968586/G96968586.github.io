@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="有关 PWA 的几个宝贵实践经验"/>
+
+
+
+
+  <meta name="keywords" content="PWA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2017/11/29/有关-PWA-的几个宝贵实践经验/"/>
+
+
+<meta name="description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。 提供降级方案Service Worker 直接在浏览器网络层工作">
+<meta name="keywords" content="PWA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关 PWA 的几个宝贵实践经验">
+<meta property="og:url" content="http://G96968586.github.io/2017/11/29/有关-PWA-的几个宝贵实践经验/index.html">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。 提供降级方案Service Worker 直接在浏览器网络层工作">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/jpeg/257f24ab-aaa8-44af-ae11-5fa9c31e6aca.jpeg">
+<meta property="og:updated_time" content="2018-05-06T15:33:26.736Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有关 PWA 的几个宝贵实践经验">
+<meta name="twitter:description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。 提供降级方案Service Worker 直接在浏览器网络层工作">
+<meta name="twitter:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/jpeg/257f24ab-aaa8-44af-ae11-5fa9c31e6aca.jpeg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 有关 PWA 的几个宝贵实践经验 - 箫鉴哥 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          有关 PWA 的几个宝贵实践经验
+        
+      </h1>
+
+      <time class="post-time">
+          Nov 29 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。</p>
+<h2 id="提供降级方案"><a href="#提供降级方案" class="headerlink" title="提供降级方案"></a>提供降级方案</h2><p>Service Worker 直接在浏览器网络层工作，脱离页面生命周期，提供资源预加载和强大的离线缓存能力，因此，如果 Service Worker 内部存在 bug，很大情况下 bug 会被放大，比如：</p>
+<ul>
+<li>由于缓存的原因，bug 也被缓存起来了，不能及时的修复</li>
+<li>如果 Service Worker 的缓存策略存在 bug，用户可能就无法更新页面了，这种情况开发者也不易察觉到</li>
+<li>Service Worker 的错误可能会导致整个页面无法工作，给业务带来灾难性的影响</li>
+</ul>
+<p>而且，国内市面上各种各样的浏览器和系统，对 Service Worker 的能力支持各不相同，功能适配和兼容性问题给我们国内开发者写出 bug-free 代码带来了很大的难度。<br>所以，万一出现重大 bug 了，怎么在最短时间内解决呢？当然是降级啦，所以提供降级方案非常有必要！那 PWA 怎么降级呢？<br><a href="http://chuansong.me/n/1676119852913" target="_blank" rel="noopener">饿了么 M 站</a> 提供了一个简单又粗暴的方法，就是降级开关。一旦发现事情不妙，开启降级就可以了。具体做法是，页面先请求开关接口，若降级，则不安装并且<strong>注销</strong>所有 Service Worker。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (支持SW) &#123;</span><br><span class="line">  fetch(开关接口)</span><br><span class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (降级) &#123;</span><br><span class="line">      <span class="comment">// 注销所有已安装的 SW</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 注册 SW</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里有几点要注意的：</p>
+<ul>
+<li>降级不是简单的不安装，而是要注销掉。原因是降级前可能已经有用户访问过网站，导致 Service Worker 被安装，不注销的话降级开关对这部分用户是不起作用的。</li>
+<li>降级开关不能被缓存，需要具备即时性。服务端和 Service Worker 都不该缓存该接口。</li>
+<li>出现问题并降级后，可能影响问题的排查，因此可以考虑加入对用户隐蔽的 debug 模式（如 url 传入特定字段），debug 模式中忽略降级接口。</li>
+</ul>
+<h2 id="接入错误监控"><a href="#接入错误监控" class="headerlink" title="接入错误监控"></a>接入错误监控</h2><p>由于 Service Worker 运行在 worker 线程里，所以抛出的错误页面是捕捉不到的，因此需要在 Service Worker 里引入错误监控方案。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'error'</span>, event =&gt; &#123;</span><br><span class="line">  <span class="comment">// 上报错误信息</span></span><br><span class="line">  <span class="comment">// 常用的属性：</span></span><br><span class="line">  <span class="comment">// event.message</span></span><br><span class="line">  <span class="comment">// event.filename</span></span><br><span class="line">  <span class="comment">// event.lineno</span></span><br><span class="line">  <span class="comment">// event.colno</span></span><br><span class="line">  <span class="comment">// event.error.stack</span></span><br><span class="line">&#125;)</span><br><span class="line">self.addEventListener(<span class="string">'unhandledrejection'</span>, event =&gt; &#123;</span><br><span class="line">  <span class="comment">// 上报错误信息</span></span><br><span class="line">  <span class="comment">// 常用的属性：</span></span><br><span class="line">  <span class="comment">// event.reason</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Service Worker 大部分 API 都是 promise-based 的，promise 里未处理的错误触发的不是 error 事件，而是 unhandledrejection 事件。</li>
+<li>这两个事件都只能在 worker 线程的 initial 生命周期里注册。（否则会失败，控制台可看到警告）</li>
+</ul>
+<h2 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h2><p>每一个产品都需要数据统计，目的是为了帮助我们更好的理解用户，为业务增长提供数据支撑。同时，其曲线抖动也可以辅助错误监控为生产环境提供监控保障。当然，数据也可以协助运营提供更加好的产品运营解决方案。</p>
+<h2 id="开发单页面-PWA-应用"><a href="#开发单页面-PWA-应用" class="headerlink" title="开发单页面 PWA 应用"></a>开发单页面 PWA 应用</h2><p>前面的准备工作做完后，就可以开始专心写代码了。单页面架构的应用，你只需要：</p>
+<ul>
+<li>用几个 Service Worker 的库，比如：<a href="https://github.com/goldhand/sw-precache-webpack-plugin" target="_blank" rel="noopener">sw-precache-webpack-plugin</a></li>
+<li>找个 manifest.json 抄一下，比如<a href="">饿了么 M 站</a>的 <a href="https://h5.ele.me/manifest.json" target="_blank" rel="noopener">manitest.json</a></li>
+<li>使用 lighthouse 跑一下页面，按照提示改进</li>
+<li>对比谷歌的 PWA <a href="https://developers.google.com/web/progressive-web-apps/checklist" target="_blank" rel="noopener">Checklist </a>，按照提示改进</li>
+<li>国内各大浏览器 Debug 测试：微信、QQ 浏览器、UC 浏览器、百度浏览器、360 浏览器、猎豹浏览器</li>
+<li>在 10 台安卓机上 Debug 以下系统自带的浏览器</li>
+</ul>
+<p>以上基本就 OK 了。</p>
+<h2 id="开发多页面-PWA-应用"><a href="#开发多页面-PWA-应用" class="headerlink" title="开发多页面 PWA 应用"></a>开发多页面 PWA 应用</h2><p>多页应用会面临更多的问题，比如多页面切换成本高，即使对所有资源都进行了缓存，消除了网络延时，但浏览器销毁页面、解析 HTML、执行 JS、渲染新页面等一系列动作的耗时仍然很高，且几乎无法避免。所以多页应用页面渲染流程的优化，尽可能提高首屏渲染速度是首先要做的事情。</p>
+<h2 id="用-App-Shell-提高首屏渲染速度"><a href="#用-App-Shell-提高首屏渲染速度" class="headerlink" title="用 App Shell 提高首屏渲染速度"></a>用 App Shell 提高首屏渲染速度</h2><p>提高首屏渲染速度的一个主流方法是使用 <a href="https://lark.alipay.com/fgt-mobile/be9mcc/epod4g/edit" target="_blank" rel="noopener">App Shell</a>。那怎样优雅地写一个 App Shell 呢？既然要求在 JS 加载之前渲染，那是不是意味着只能动手写 DOM？不是的，Vue 2 引入了服务端 Server Side Rendering，简称 SSR。它能够在 Node.js 里渲染 vue 组件并输出为 HTML 片段。因此我们可以在构建阶段调用 Vue SSR 进行 App Shell 的渲染，这也就是所谓的 prerendering。具体的做法可以参考<a href="https://www.npmjs.com/package/vue-server-renderer" target="_blank" rel="noopener"> vue-server-renderer</a> 和 <a href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank" rel="noopener">vue-hackernews</a>。<br>然而，饿了么 M 站在实践中发现 App Shell 的渲染比预计的要慢：它总是在同步的 JS 解析完成之后才渲染。不过这里有一个简单而行之有效的方法：把耗时的操作推迟到 Event Loop 的任务队列中，等待主调用栈清空后才执行。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 把初始化渲染放到 setTimeout 里</span></span><br><span class="line">  <span class="keyword">new</span> Vue()</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p>虽然只是几行代码的 hack ，但是对 App Shell 的渲染提升是极大的。<br><img src="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/jpeg/257f24ab-aaa8-44af-ae11-5fa9c31e6aca.jpeg" alt="image.jpeg | center | 600x348"><br>可以看到，加入 App Shell 并且优化后，在主流手机设备上，首屏 App Shell 的渲染时间在 500ms 以下，再加上 SW 对 HTML 的缓存，页面的切换体验可以比较贴近单页应用了。</p>
+<h2 id="一些踩坑经验"><a href="#一些踩坑经验" class="headerlink" title="一些踩坑经验"></a>一些踩坑经验</h2><p>下面是饿了么 M 站在 PWA 改造过程中遇到的坑以及相应的解决方案：</p>
+<ul>
+<li>Android WebView 中 UserAgent 不正确，cookies 丢失<blockquote>
+<p>在我们实验性地上线 PWA 后，大数据的同事向我们反馈，他们的统计数据中有有一部分「不正常的 UA」涌入，根据来源分析，这部分 UA 应该是「饿了么 APP」的自定义 UA ，而统计到的数据却为安卓系统默认的 WebView UA。<br>同一时间，我们还在服务监控中，观察到了某些接口的 401 状态异常上涨。而 401 状态意味着用户认证失败，据此我们推断是 SW 导致 cookies 丢失。<br>后来我们及时降级 PWA，并与谷歌合作排查，最终确定了 bug 的来源，且将 bug 提交给了 Chrome 团队： <a href="">698175 - User agent string not set correctly when Service Worker makes a fetch request - chromium - Monorail</a><br>在 WebView 修复之前，你可以通过避免在 SW 里代理需要 UA 和 cookies 的请求（通常是API请求）来避开这个 bug。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>X5 内核部分请求发送 q-sid 头<blockquote>
+<p>在开启 SW 后，微信和 QQ 浏览器都出现了白屏现象。我们利用调试工具观察到部分资源的请求多了一个 q-sid essay-header，这导致浏览器向 CDN 服务器发送 OPTIONS 请求并且遭到拒绝，所以导致页面无法打开。<br>我们向 X5 内核的团队反馈了这个问题，并且很快得到了技术支持：X5 内核将在新版(4311)中修复这个问题，在此之前，我们可以在服务端设置允许 q-sid 的自定义头部来避开这个问题。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>UC 浏览器中 301 跳转问题<blockquote>
+<p>同样，我们的页面在 UC 浏览器中也出现了白屏现象，但是 bug 的原因不同：我们发现 SW 抓取的资源中，带 301 跳转的资源请求总是失败的。在向 UC 团队反馈后，我们得到了 bug 的确认，这是内核对 fetch API 的实现基于早期不完善的规范导致的，UC 团队将积极推进内核版本的升级和 bug 的修复。在修复之前，可以采用临时的解决方案：服务端避免 301 跳转，或者 SW 中对存在 301 跳转情况的资源做特殊处理。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>其他细节：<blockquote>
+<p>低版本 chromium 不支持 cache.addAll，可以考虑引入带有 polyfill 的库；<br>UC 浏览器不支持 cache.add ，请用 cache.put 代替；<br>部分低版本微信浏览器中，UA 是 Chrome 30+ 但存在 navigator.serviceWorker，因此不要依赖 <a href="https://jakearchibald.github.io/isserviceworkerready/" target="_blank" rel="noopener">isserviceworkerready</a> 用版本检测代替功能检测；</p>
+</blockquote>
+</li>
+</ul>
+<p>##参考文章<br><a href="http://chuansong.me/n/1676119852913" target="_blank" rel="noopener">PWA 在饿了么的实践经验</a></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>本文会不定期更新，欢迎关注！</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/PWA/">PWA</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/11/29/PWA-添加-Web-Push-通知/">
+        <span class="next-text nav-default">PWA 添加 Web Push 通知</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

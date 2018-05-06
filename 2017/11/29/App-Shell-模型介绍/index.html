@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="App Shell 模型介绍"/>
+
+
+
+
+  <meta name="keywords" content="PWA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2017/11/29/App-Shell-模型介绍/"/>
+
+
+<meta name="description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base6">
+<meta name="keywords" content="PWA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App Shell 模型介绍">
+<meta property="og:url" content="http://G96968586.github.io/2017/11/29/App-Shell-模型介绍/index.html">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base6">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1CG2IdgMPMeJjy1XdXXasrXXa-743-550.png">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1Q5g7dgMPMeJjy1XdXXasrXXa-1796-1280.jpg">
+<meta property="og:updated_time" content="2018-05-06T15:36:31.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="App Shell 模型介绍">
+<meta name="twitter:description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base6">
+<meta name="twitter:image" content="https://gw.alicdn.com/tfs/TB1CG2IdgMPMeJjy1XdXXasrXXa-743-550.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> App Shell 模型介绍 - 箫鉴哥 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          App Shell 模型介绍
+        
+      </h1>
+
+      <time class="post-time">
+          Nov 29 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。<br>其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base64 图片，不依赖于 JS 框架，可以在加载、解析、执行 JS 之前就渲染出来，几乎消除了白屏时间，大大提高用户体验。<br>结合服务工作线程 Service Worker 的 Cache API 缓存技术，App Shell 在没有网络或弱网络的情况下能表现的非常出色。它能够将一些初始 HTML 片段快速加载到屏幕上，并从缓存获取数据渲染到页面上，整个过程不需等待，带来了类似 Native App 的流畅过渡体验。<br><img src="https://gw.alicdn.com/tfs/TB1CG2IdgMPMeJjy1XdXXasrXXa-743-550.png" alt="image | center"></p>
+<h2 id="构建自己的-App-Shell"><a href="#构建自己的-App-Shell" class="headerlink" title="构建自己的 App Shell"></a>构建自己的 App Shell</h2><p>前面说过 App Shell 是一个轻量级界面框架，它将应用核心基础架构和 UI 同数据分离出来。因此，在构建我们的 App Shell 之前，需要明确区分页面 Shell 和动态数据。<br>理想的 App Shell 具备下面的特点：</p>
+<ul>
+<li>快速加载</li>
+<li>尽可能使用较少的数据</li>
+<li>使用本地静态缓存资源</li>
+<li>将内容与页面导航分离开</li>
+<li>检索和显示特定页面的内容（HTML、JSON 等）</li>
+<li>缓存动态资源（可选）</li>
+</ul>
+<p>这里有一个使用 App Shell 模型的 PWA 例子可以作为参考，Jake Archibald 的<a href="https://wiki-offline.jakearchibald.com/wiki/Rick_and_Morty" target="_blank" rel="noopener">离线维基百科应用</a>。它能在用户重复访问时即时加载到屏幕上，同时使用 JS 动态获取数据，并在稍后离线缓存数据内容，供后面访问使用。下面是截图示例。<br><img src="https://gw.alicdn.com/tfs/TB1Q5g7dgMPMeJjy1XdXXasrXXa-1796-1280.jpg" alt="image | center"></p>
+<h3 id="App-Shell-的-HTML-示例"><a href="#App-Shell-的-HTML-示例" class="headerlink" title="App Shell 的 HTML 示例"></a>App Shell 的 HTML 示例</h3><p>这里我们让示例应用初始加载时尽可能的简单，在访问示例应用时仅显示页面布局，至于数据，有些来自index 文件(内联 DOM、样式)，有些来自外部脚本、样式表。<br>所有页面 UI 和基础架构都通过服务工作线程缓存在本地，这样，后面再次访问我们的应用时，将仅检索新数据或发生改变的数据，而不需要去加载所有的数据。<br>下面是示例代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>App Shell<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"manifest"</span> <span class="attr">href</span>=<span class="string">"/manifest.json"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>App Shell<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"styles/inline.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">header</span> <span class="attr">class</span>=<span class="string">"header"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"header__title"</span>&gt;</span>App Shell<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dialog-container"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"loader"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Show a spinner or placeholders for content --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"app.js"</span> <span class="attr">async</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  if ('serviceWorker' in navigator) &#123;</span></span><br><span class="line"><span class="undefined">    navigator.serviceWorker.register('/sw.js').then(function(registration) &#123;</span></span><br><span class="line"><span class="undefined">      // Registration was successful</span></span><br><span class="line"><span class="undefined">      console.log('ServiceWorker registration successful with scope: ', registration.scope);</span></span><br><span class="line"><span class="undefined">    &#125;).catch(function(err) &#123;</span></span><br><span class="line"><span class="undefined">      // registration failed :(</span></span><br><span class="line"><span class="undefined">      console.log('ServiceWorker registration failed: ', err);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其实就是一个普通的 HTML 页面，由于篇幅，这里把一些代码省略掉了。纵观整个页面，包括了下面三个部分：</p>
+<ul>
+<li>页面主干：由 HTML 和 CSS 构成的页面导航以及一些内容展示块</li>
+<li>用于处理导航和 UI 逻辑的外部 JavaScript 文件 app.js</li>
+<li>网络应用清单 manifest.json 和用于启用离线功能的服务工作线程加载程序 sw.js</li>
+</ul>
+<p>说到这，App Shell 也没有什么神秘的地方，简单理解就是 HTML 页面 + 逻辑处理文件 app.js + 服务工作线程 service-worker.js 。App Shell 也可以通过使用任意内容库或框架去编写。</p>
+<h3 id="缓存-App-Shell"><a href="#缓存-App-Shell" class="headerlink" title="缓存 App Shell"></a>缓存 App Shell</h3><p>缓存 App Shell 实际上是通过服务工作线程来实现的。<a href="">《Service Workers 介绍》</a> 以及<a href="">《调试 Service Workers》</a> 都介绍过，这里就不多说了。</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/PWA/">PWA</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/11/29/PWA-添加-Web-Push-通知/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">PWA 添加 Web Push 通知</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/11/29/调试-Service-Workers/">
+        <span class="next-text nav-default">调试 Service Workers</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
