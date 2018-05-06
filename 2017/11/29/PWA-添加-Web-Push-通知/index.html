@@ -35,13 +35,13 @@
 <link rel="canonical" href="http://G96968586.github.io/2017/11/29/PWA-添加-Web-Push-通知/"/>
 
 
-<meta name="description" content="本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章《PWA系列 - Web Push 技术》，看一篇抵过 n 篇 Google 的文档。OK，下面我们进入主题。同样，你需要先做一些准备工作，可以参考这篇《搭建你的第一个 PWA》文章。然后下载示例代码：download: push-notifications-master.zip 注">
+<meta name="description" content="本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章《PWA系列 - Web Push 技术》，看一篇抵过 n 篇 Google 的文档。">
 <meta name="keywords" content="PWA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PWA 添加 Web Push 通知">
 <meta property="og:url" content="http://G96968586.github.io/2017/11/29/PWA-添加-Web-Push-通知/index.html">
 <meta property="og:site_name" content="箫鉴哥">
-<meta property="og:description" content="本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章《PWA系列 - Web Push 技术》，看一篇抵过 n 篇 Google 的文档。OK，下面我们进入主题。同样，你需要先做一些准备工作，可以参考这篇《搭建你的第一个 PWA》文章。然后下载示例代码：download: push-notifications-master.zip 注">
+<meta property="og:description" content="本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章《PWA系列 - Web Push 技术》，看一篇抵过 n 篇 Google 的文档。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/e32187ca-e5c1-4071-b1d1-024b0c17621a.png">
 <meta property="og:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/40be4c5b212b8e6e.png">
@@ -58,10 +58,10 @@
 <meta property="og:image" content="https://gw.alicdn.com/tfs/TB1NWOTeMMPMeJjy1XcXXXpppXa-2880-1658.png">
 <meta property="og:image" content="https://gw.alicdn.com/tfs/TB1LnGTeMMPMeJjy1XcXXXpppXa-2880-1498.png">
 <meta property="og:image" content="https://gw.alicdn.com/tfs/TB1bLmBeMMPMeJjy1XdXXasrXXa-1878-294.png">
-<meta property="og:updated_time" content="2018-05-06T15:35:22.313Z">
+<meta property="og:updated_time" content="2018-05-06T15:42:49.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PWA 添加 Web Push 通知">
-<meta name="twitter:description" content="本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章《PWA系列 - Web Push 技术》，看一篇抵过 n 篇 Google 的文档。OK，下面我们进入主题。同样，你需要先做一些准备工作，可以参考这篇《搭建你的第一个 PWA》文章。然后下载示例代码：download: push-notifications-master.zip 注">
+<meta name="twitter:description" content="本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章《PWA系列 - Web Push 技术》，看一篇抵过 n 篇 Google 的文档。">
 <meta name="twitter:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/e32187ca-e5c1-4071-b1d1-024b0c17621a.png">
 
 
@@ -146,7 +146,7 @@
 
     
             <div class="post-content">
-            <p>本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章<a href="">《PWA系列 - Web Push 技术》</a>，看一篇抵过 n 篇 Google 的文档。<br>OK，下面我们进入主题。同样，你需要先做一些准备工作，可以参考这篇<a href="">《搭建你的第一个 PWA》</a>文章。然后下载示例代码：<br><a href="">download: push-notifications-master.zip</a></p>
+            <p>本文主要介绍如何往 PWA 中添加推送通知功能，如果你有兴趣想了解更多关于 Web Push 技术，可以阅读这篇文章<a href="">《PWA系列 - Web Push 技术》</a>，看一篇抵过 n 篇 Google 的文档。<br><a id="more"></a><br>OK，下面我们进入主题。同样，你需要先做一些准备工作，可以参考这篇<a href="">《搭建你的第一个 PWA》</a>文章。然后下载示例代码：<br><a href="">download: push-notifications-master.zip</a></p>
 <h2 id="注册-Service-Worker"><a href="#注册-Service-Worker" class="headerlink" title="注册 Service Worker"></a>注册 Service Worker</h2><p>解压示例代码，在 app 目录下有一个 sw.js 的文件，打开你会发现里面除了一些注释和一行 <code>use strict;</code>外什么都没有，后面我们会不断往里面添加代码的，因为这个文件是我们的服务工作线程。<br>现在，打开 scripts/main.js，这是示例程序的入口，在文件的末尾添加下面代码，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator &amp;&amp; <span class="string">'PushManager'</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Service Worker and Push is supported'</span>);</span><br><span class="line"></span><br><span class="line">  navigator.serviceWorker.register(<span class="string">'sw.js'</span>)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">swReg</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Service Worker is registered'</span>, swReg);</span><br><span class="line"></span><br><span class="line">    swRegistration = swReg;</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'Service Worker Error'</span>, error);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.warn(<span class="string">'Push messaging is not supported'</span>);</span><br><span class="line">  pushButton.textContent = <span class="string">'Push Not Supported'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这是一段注册服务工作线程的代码，但你会发现这段代码跟前面文章所介绍的注册服务工作线程有些不太一样，是的，我们这里同时检查了浏览器是否支持推送消息： ‘PushManager’ in window。<br>打开 Web Server for Chrome，选择访问目录为 app，<br><img src="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/e32187ca-e5c1-4071-b1d1-024b0c17621a.png" alt="屏幕快照 2017-09-17 下午10.23.33.png | center | 644x680"></p>
 <p>在浏览器打开网址 <strong>127.0.0.1:8887 </strong>访问我们的示例应用。如果你前面阅读过 <a href="https://lark.alipay.com/fgt-mobile/be9mcc/dt2egy" target="_blank" rel="noopener">《调试 Service Workers》</a>，并在自己的电脑上做过调试，你也许会访问到这个页面，<br><img src="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/40be4c5b212b8e6e.png" alt="image | center"></p>

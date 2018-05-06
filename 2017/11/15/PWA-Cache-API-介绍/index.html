@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="箫鉴哥">
 <meta property="og:description" content="本文重点介绍 Cache 相关技术，不对 Cache 的背景做过多的介绍。希望通过该文能够让读者对 Cache 技术有更进一步的了解。CacheStorage 同 App Cache、IndexedDB、LocalStorage 等一样，也是一种数据存储机制，但它能够提供精细的存储控制能力，常与 Fetch API 结合，让页端具备了完全操控请求，响应，缓存的能力，这正是页端一直非常缺乏的能力。在">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-06T15:32:21.252Z">
+<meta property="og:updated_time" content="2018-05-06T15:42:19.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PWA Cache API 介绍">
 <meta name="twitter:description" content="本文重点介绍 Cache 相关技术，不对 Cache 的背景做过多的介绍。希望通过该文能够让读者对 Cache 技术有更进一步的了解。CacheStorage 同 App Cache、IndexedDB、LocalStorage 等一样，也是一种数据存储机制，但它能够提供精细的存储控制能力，常与 Fetch API 结合，让页端具备了完全操控请求，响应，缓存的能力，这正是页端一直非常缺乏的能力。在">
@@ -130,7 +130,7 @@
 
     
             <div class="post-content">
-            <p>本文重点介绍 Cache 相关技术，不对 Cache 的背景做过多的介绍。希望通过该文能够让读者对 Cache 技术有更进一步的了解。<br>CacheStorage 同 App Cache、IndexedDB、LocalStorage 等一样，也是一种数据存储机制，但它能够提供精细的存储控制能力，常与 Fetch API 结合，让页端具备了完全操控请求，响应，缓存的能力，这正是页端一直非常缺乏的能力。在 PWA 中结合 Service Workers ，能够给应用带来更好的离线体验。</p>
+            <p>本文重点介绍 Cache 相关技术，不对 Cache 的背景做过多的介绍。希望通过该文能够让读者对 Cache 技术有更进一步的了解。<br>CacheStorage 同 App Cache、IndexedDB、LocalStorage 等一样，也是一种数据存储机制，但它能够提供精细的存储控制能力，常与 Fetch API 结合，让页端具备了完全操控请求，响应，缓存的能力，这正是页端一直非常缺乏的能力。在 PWA 中结合 Service Workers ，能够给应用带来更好的离线体验。<br><a id="more"></a></p>
 <h2 id="API-介绍"><a href="#API-介绍" class="headerlink" title="API 介绍"></a>API 介绍</h2><p>CacheStorage 管理一系列 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache" target="_blank" rel="noopener">Cache</a> 对象，它提供了多个 JS 方法用于操作 Cache 对象。Cache 跟 Worker 一样，也是暴露在 window 作用域下。下面我们开始介绍 CacheStorage、Cache 的 API 使用。</p>
 <h3 id="CacheStorage"><a href="#CacheStorage" class="headerlink" title="CacheStorage"></a>CacheStorage</h3><ul>
 <li><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open" target="_blank" rel="noopener">CacheStorage.open()</a> 用于获取一个 Cache 对象实例，结果通过一个 Promise 返回。  </p>

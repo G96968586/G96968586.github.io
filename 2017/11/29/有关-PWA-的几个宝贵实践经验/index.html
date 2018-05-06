@@ -35,19 +35,19 @@
 <link rel="canonical" href="http://G96968586.github.io/2017/11/29/有关-PWA-的几个宝贵实践经验/"/>
 
 
-<meta name="description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。 提供降级方案Service Worker 直接在浏览器网络层工作">
+<meta name="description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。">
 <meta name="keywords" content="PWA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有关 PWA 的几个宝贵实践经验">
 <meta property="og:url" content="http://G96968586.github.io/2017/11/29/有关-PWA-的几个宝贵实践经验/index.html">
 <meta property="og:site_name" content="箫鉴哥">
-<meta property="og:description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。 提供降级方案Service Worker 直接在浏览器网络层工作">
+<meta property="og:description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/jpeg/257f24ab-aaa8-44af-ae11-5fa9c31e6aca.jpeg">
-<meta property="og:updated_time" content="2018-05-06T15:33:26.736Z">
+<meta property="og:updated_time" content="2018-05-06T15:43:11.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="有关 PWA 的几个宝贵实践经验">
-<meta name="twitter:description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。 提供降级方案Service Worker 直接在浏览器网络层工作">
+<meta name="twitter:description" content="日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。">
 <meta name="twitter:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/jpeg/257f24ab-aaa8-44af-ae11-5fa9c31e6aca.jpeg">
 
 
@@ -132,7 +132,7 @@
 
     
             <div class="post-content">
-            <p>日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。</p>
+            <p>日常的技术调研、新技术的尝鲜，我们更多的关注点是在技术本身上。但是，如果涉及到技术的具体落地，关联到线上生产环境，我们要考虑的因素就多了。这里以 PWA 为例，如果我们的产品使用了 PWA 技术，在将其部署到生产环境之前，我们需要做什么准备呢？需要提前考虑到哪些因素呢？下面是总结饿了么 M 站的一些宝贵实践经验，这里拿来跟大家分享。<br><a id="more"></a></p>
 <h2 id="提供降级方案"><a href="#提供降级方案" class="headerlink" title="提供降级方案"></a>提供降级方案</h2><p>Service Worker 直接在浏览器网络层工作，脱离页面生命周期，提供资源预加载和强大的离线缓存能力，因此，如果 Service Worker 内部存在 bug，很大情况下 bug 会被放大，比如：</p>
 <ul>
 <li>由于缓存的原因，bug 也被缓存起来了，不能及时的修复</li>

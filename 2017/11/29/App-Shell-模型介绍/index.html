@@ -35,20 +35,20 @@
 <link rel="canonical" href="http://G96968586.github.io/2017/11/29/App-Shell-模型介绍/"/>
 
 
-<meta name="description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base6">
+<meta name="description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。">
 <meta name="keywords" content="PWA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="App Shell 模型介绍">
 <meta property="og:url" content="http://G96968586.github.io/2017/11/29/App-Shell-模型介绍/index.html">
 <meta property="og:site_name" content="箫鉴哥">
-<meta property="og:description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base6">
+<meta property="og:description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://gw.alicdn.com/tfs/TB1CG2IdgMPMeJjy1XdXXasrXXa-743-550.png">
 <meta property="og:image" content="https://gw.alicdn.com/tfs/TB1Q5g7dgMPMeJjy1XdXXasrXXa-1796-1280.jpg">
-<meta property="og:updated_time" content="2018-05-06T15:36:31.313Z">
+<meta property="og:updated_time" content="2018-05-06T15:42:14.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="App Shell 模型介绍">
-<meta name="twitter:description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base6">
+<meta name="twitter:description" content="App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。">
 <meta name="twitter:image" content="https://gw.alicdn.com/tfs/TB1CG2IdgMPMeJjy1XdXXasrXXa-743-550.png">
 
 
@@ -133,7 +133,7 @@
 
     
             <div class="post-content">
-            <p>App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。<br>其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base64 图片，不依赖于 JS 框架，可以在加载、解析、执行 JS 之前就渲染出来，几乎消除了白屏时间，大大提高用户体验。<br>结合服务工作线程 Service Worker 的 Cache API 缓存技术，App Shell 在没有网络或弱网络的情况下能表现的非常出色。它能够将一些初始 HTML 片段快速加载到屏幕上，并从缓存获取数据渲染到页面上，整个过程不需等待，带来了类似 Native App 的流畅过渡体验。<br><img src="https://gw.alicdn.com/tfs/TB1CG2IdgMPMeJjy1XdXXasrXXa-743-550.png" alt="image | center"></p>
+            <p>App Shell 是构建 PWA 的一种常用的技术方法，同时，App Shell 也是提高页面首次渲染速度的主流方法之一。通过 App Shell 我们的应用（Web App）能够做到像 Native App 一样可靠、即时地加载到用户设备屏幕上，极大的提高了用户体验。<br><a id="more"></a><br>其实 App Shell 就是一个能够被缓存的、轻量级的界面框架，它往往是纯 HTML 片段，只包括内联 CSS 和 base64 图片，不依赖于 JS 框架，可以在加载、解析、执行 JS 之前就渲染出来，几乎消除了白屏时间，大大提高用户体验。<br>结合服务工作线程 Service Worker 的 Cache API 缓存技术，App Shell 在没有网络或弱网络的情况下能表现的非常出色。它能够将一些初始 HTML 片段快速加载到屏幕上，并从缓存获取数据渲染到页面上，整个过程不需等待，带来了类似 Native App 的流畅过渡体验。<br><img src="https://gw.alicdn.com/tfs/TB1CG2IdgMPMeJjy1XdXXasrXXa-743-550.png" alt="image | center"></p>
 <h2 id="构建自己的-App-Shell"><a href="#构建自己的-App-Shell" class="headerlink" title="构建自己的 App Shell"></a>构建自己的 App Shell</h2><p>前面说过 App Shell 是一个轻量级界面框架，它将应用核心基础架构和 UI 同数据分离出来。因此，在构建我们的 App Shell 之前，需要明确区分页面 Shell 和动态数据。<br>理想的 App Shell 具备下面的特点：</p>
 <ul>
 <li>快速加载</li>

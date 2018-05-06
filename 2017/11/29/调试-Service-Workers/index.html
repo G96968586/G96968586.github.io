@@ -35,13 +35,13 @@
 <link rel="canonical" href="http://G96968586.github.io/2017/11/29/调试-Service-Workers/"/>
 
 
-<meta name="description" content="这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。首先，你需要做一些准备工作，可以参考这篇《搭建你的第一个 PWA》文章。为了便于调试，这里我们去 Google 实验室下载测试 Demo: debugging-service-worker。解压 Demo，打开 Web Server，点击 C">
+<meta name="description" content="这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。">
 <meta name="keywords" content="PWA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="调试 Service Workers">
 <meta property="og:url" content="http://G96968586.github.io/2017/11/29/调试-Service-Workers/index.html">
 <meta property="og:site_name" content="箫鉴哥">
-<meta property="og:description" content="这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。首先，你需要做一些准备工作，可以参考这篇《搭建你的第一个 PWA》文章。为了便于调试，这里我们去 Google 实验室下载测试 Demo: debugging-service-worker。解压 Demo，打开 Web Server，点击 C">
+<meta property="og:description" content="这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/6b911bfcf3bcf47b.png">
 <meta property="og:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/40be4c5b212b8e6e.png">
@@ -67,10 +67,10 @@
 <meta property="og:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/2f188875-8250-49fd-bd50-0b88f7b5f31a.png">
 <meta property="og:image" content="https://developers.google.com/web/fundamentals/getting-started/codelabs/debugging-service-workers/img/a8a8fa8d35b0667a.png?hl=zh-cn">
 <meta property="og:image" content="https://developers.google.com/web/fundamentals/getting-started/codelabs/debugging-service-workers/img/eacd4c5859f5f3ff.png?hl=zh-cn">
-<meta property="og:updated_time" content="2018-05-06T15:30:24.973Z">
+<meta property="og:updated_time" content="2018-05-06T15:43:19.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="调试 Service Workers">
-<meta name="twitter:description" content="这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。首先，你需要做一些准备工作，可以参考这篇《搭建你的第一个 PWA》文章。为了便于调试，这里我们去 Google 实验室下载测试 Demo: debugging-service-worker。解压 Demo，打开 Web Server，点击 C">
+<meta name="twitter:description" content="这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。">
 <meta name="twitter:image" content="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/6b911bfcf3bcf47b.png">
 
 
@@ -155,7 +155,7 @@
 
     
             <div class="post-content">
-            <p>这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。<br>首先，你需要做一些准备工作，可以参考这篇<a href="https://lark.alipay.com/fgt-mobile/be9mcc/oeeik3" target="_blank" rel="noopener">《搭建你的第一个 PWA》</a>文章。为了便于调试，这里我们去 Google 实验室下载测试 Demo: <a href="https://github.com/googlecodelabs/debugging-service-workers/archive/master.zip" target="_blank" rel="noopener">debugging-service-worker</a>。<br>解压 Demo，打开 Web Server，点击 Choose Folder 将当前文件路径定位到 Demo 目录下的 work 目录。</p>
+            <p>这里我们来一起探讨如何使用 Chrome DevTools 中新增的 Application 面板调试和检查 Service Workers（服务工作线程）。<br><a id="more"></a><br>首先，你需要做一些准备工作，可以参考这篇<a href="https://lark.alipay.com/fgt-mobile/be9mcc/oeeik3" target="_blank" rel="noopener">《搭建你的第一个 PWA》</a>文章。为了便于调试，这里我们去 Google 实验室下载测试 Demo: <a href="https://github.com/googlecodelabs/debugging-service-workers/archive/master.zip" target="_blank" rel="noopener">debugging-service-worker</a>。<br>解压 Demo，打开 Web Server，点击 Choose Folder 将当前文件路径定位到 Demo 目录下的 work 目录。</p>
 <p><img src="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/6b911bfcf3bcf47b.png" alt="img"></p>
 <p>我们然后关掉 Web Server，重新再打开，在 Chrome 地址栏输入 <a href="http://127.0.0.1:8887/" target="_blank" rel="noopener">http://127.0.0.1:8887</a> （当然，前提你没有更新 Web Server 默认的端口），你可以见到下图的页面。</p>
 <p><img src="https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/png/40be4c5b212b8e6e.png" alt="img"></p>
