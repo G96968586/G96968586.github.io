@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="Android 性能优化学习笔记"/>
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2016/07/17/Android-性能优化学习笔记/"/>
+
+
+<meta name="description" content="渲染 电量 内存 运算  UI 渲染Android 每隔 16 ms 就会发出触发 UI 渲染的 VSYNC 信号，如果每次的渲染都成功，就能保证页面达到流畅，此时所需要的画面帧数是每秒达到 60 帧，为了能够实现 60 fps，意味着程序的大多数操作都必须在16ms内完成。  下面是一个丢帧的例子：  丢帧的原因有：layout 太过复杂、UI 上有层叠太多的绘制单元、动画执行次数过多等等，这">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 性能优化学习笔记">
+<meta property="og:url" content="http://G96968586.github.io/2016/07/17/Android-性能优化学习笔记/index.html">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="渲染 电量 内存 运算  UI 渲染Android 每隔 16 ms 就会发出触发 UI 渲染的 VSYNC 信号，如果每次的渲染都成功，就能保证页面达到流畅，此时所需要的画面帧数是每秒达到 60 帧，为了能够实现 60 fps，意味着程序的大多数操作都必须在16ms内完成。  下面是一个丢帧的例子：  丢帧的原因有：layout 太过复杂、UI 上有层叠太多的绘制单元、动画执行次数过多等等，这">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://hukai.me/images/draw_per_16ms.png">
+<meta property="og:image" content="http://hukai.me/images/vsync_over_draw.png">
+<meta property="og:image" content="http://hukai.me/images/overdraw_hidden_view.png">
+<meta property="og:image" content="http://hukai.me/images/overdraw_options_view.png">
+<meta property="og:image" content="http://hukai.me/images/vsync_gpu_hardware.png">
+<meta property="og:image" content="http://hukai.me/images/vsync_gpu_hardware_not_sync.png">
+<meta property="og:image" content="http://hukai.me/images/vsync_buffer.png">
+<meta property="og:image" content="http://hukai.me/images/vsync_gpu_hardware_not_sync2.png">
+<meta property="og:image" content="http://hukai.me/images/tools_gpu_profile_rendering.png">
+<meta property="og:image" content="http://hukai.me/images/tools_gpu_profile_rendering_graphic_activity.png">
+<meta property="og:image" content="http://hukai.me/images/tools_gpu_rendering_bar.png">
+<meta property="og:image" content="http://hukai.me/images/tools_gpu_profile_three_color.png">
+<meta property="og:image" content="http://hukai.me/images/gpu_rasterization.png">
+<meta property="og:image" content="http://hukai.me/images/gpu_cpu_rasterization.png">
+<meta property="og:image" content="http://hukai.me/images/layout_three_steps.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_clip_1.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_clip_3.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_clip_2.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_clip_code_compare.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_clip_result.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_hierarchy_1.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_hierarchy_2.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_hierarchy_3.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_course_hierarchy_4.png">
+<meta property="og:image" content="http://hukai.me/images/memory_mode_generation.png">
+<meta property="og:image" content="http://hukai.me/images/android_memory_gc_mode.png">
+<meta property="og:image" content="http://hukai.me/images/gc_threshold.png">
+<meta property="og:image" content="http://hukai.me/images/gc_event_thread_stop.png">
+<meta property="og:image" content="http://hukai.me/images/gc_overtime.png">
+<meta property="og:image" content="http://hukai.me/images/memory_monitor_gc.png">
+<meta property="og:image" content="http://hukai.me/images/memory_leak_profile_method.png">
+<meta property="og:image" content="http://hukai.me/images/memory_leak_track_method.png">
+<meta property="og:image" content="http://hukai.me/images/memory_monitor_overview.png">
+<meta property="og:image" content="http://hukai.me/images/memory_monitor_free_allocation.png">
+<meta property="og:image" content="http://hukai.me/images/memory_monitor_gc_event.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_compute_traceview.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_compute_traceview_2.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_compute_batching_1.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_compute_batching_2.png">
+<meta property="og:image" content="http://hukai.me/images/android_perf_compute_caching.png">
+<meta property="og:updated_time" content="2018-05-10T12:32:19.627Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 性能优化学习笔记">
+<meta name="twitter:description" content="渲染 电量 内存 运算  UI 渲染Android 每隔 16 ms 就会发出触发 UI 渲染的 VSYNC 信号，如果每次的渲染都成功，就能保证页面达到流畅，此时所需要的画面帧数是每秒达到 60 帧，为了能够实现 60 fps，意味着程序的大多数操作都必须在16ms内完成。  下面是一个丢帧的例子：  丢帧的原因有：layout 太过复杂、UI 上有层叠太多的绘制单元、动画执行次数过多等等，这">
+<meta name="twitter:image" content="http://hukai.me/images/draw_per_16ms.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Android 性能优化学习笔记 - 箫鉴哥 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Android 性能优化学习笔记
+        
+      </h1>
+
+      <time class="post-time">
+          Jul 17 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <ul>
+<li>渲染</li>
+<li>电量</li>
+<li>内存</li>
+<li>运算</li>
+</ul>
+<h3 id="UI-渲染"><a href="#UI-渲染" class="headerlink" title="UI 渲染"></a>UI 渲染</h3><p>Android 每隔 16 ms 就会发出触发 UI 渲染的 VSYNC 信号，如果每次的渲染都成功，就能保证页面达到流畅，此时所需要的画面帧数是每秒达到 60 帧，为了能够实现 60 fps，意味着程序的大多数操作都必须在16ms内完成。</p>
+<p><img src="http://hukai.me/images/draw_per_16ms.png" alt=""></p>
+<p>下面是一个丢帧的例子：</p>
+<p><img src="http://hukai.me/images/vsync_over_draw.png" alt=""></p>
+<p>丢帧的原因有：layout 太过复杂、UI 上有层叠太多的绘制单元、动画执行次数过多等等，这些都会导致CPU 或者 GPU 负载过重。</p>
+<p>工具协助：</p>
+<ul>
+<li>HierarchyViewer -&gt; Activity 布局是否过于复杂</li>
+<li>使用手机设置里面的开发者选项，打开 Show GPU Overdraw 等选项进行观察</li>
+<li>TraceView -&gt; CPU 的执行情况</li>
+</ul>
+<h4 id="过度绘制-Overdraw"><a href="#过度绘制-Overdraw" class="headerlink" title="过度绘制(Overdraw)"></a>过度绘制(Overdraw)</h4><p>指屏幕上的某个像素在同一帧的时间内被绘制了多次。</p>
+<p><img src="http://hukai.me/images/overdraw_hidden_view.png" alt=""></p>
+<p>通过手机设置里面的开发者选项，打开 Show GPU Overdraw 的选项，可以观察 UI 上的 Overdraw 情况.</p>
+<p><img src="http://hukai.me/images/overdraw_options_view.png" alt=""></p>
+<p>目标就是尽量减少红色 Overdraw，看到更多的蓝色区域。</p>
+<h4 id="理解-VSYNC"><a href="#理解-VSYNC" class="headerlink" title="理解 VSYNC"></a>理解 VSYNC</h4><ul>
+<li>Refresh Rate：代表了屏幕在一秒内刷新屏幕的次数，这取决于硬件的固定参数，例如60Hz。</li>
+<li>Frame Rate：代表了GPU在一秒内绘制操作的帧数，例如30fps，60fps。</li>
+</ul>
+<p>GPU 负责获取图形数据进行渲染，硬件负责把渲染后的内容呈现到屏幕上，两者不停相互协作。</p>
+<p><img src="http://hukai.me/images/vsync_gpu_hardware.png" alt=""></p>
+<p>如果发生帧率与刷新频率不一致的情况，就会容易出现 <strong>Tearing</strong> 的现象，(画面上下两部分显示内容发生断裂，来自不同的两帧数据发生重叠)。</p>
+<p><img src="http://hukai.me/images/vsync_gpu_hardware_not_sync.png" alt=""></p>
+<p><img src="http://hukai.me/images/vsync_buffer.png" alt=""></p>
+<p>我们遇到更多的情况是帧率小于刷新频率,</p>
+<p><img src="http://hukai.me/images/vsync_gpu_hardware_not_sync2.png" alt=""></p>
+<p>在这种情况下，某些帧显示的画面内容就会与上一帧的画面相同。糟糕的事情是，帧率从超过 60fps 突然掉到 60fps 以下，这样就会发生 <strong>LAG</strong>，<strong>JANK</strong>，<strong>HITCHING</strong> 等卡顿掉帧的不顺滑的情况。这也是用户感受不好的原因所在。</p>
+<h4 id="Profile-GPU-Rendering"><a href="#Profile-GPU-Rendering" class="headerlink" title="Profile GPU Rendering"></a>Profile GPU Rendering</h4><p><img src="http://hukai.me/images/tools_gpu_profile_rendering.png" alt=""></p>
+<p>可以在手机画面上看到丰富的 GPU 绘制图形信息，分别关于 StatusBar，NavBar，激活的程序 Activity区域的 GPU Rending 信息。</p>
+<p>随着界面的刷新，界面上会滚动显示垂直的柱状图来表示每帧画面所需要渲染的时间，柱状图越高表示花费的渲染时间越长。</p>
+<p><img src="http://hukai.me/images/tools_gpu_profile_rendering_graphic_activity.png" alt=""></p>
+<p><img src="http://hukai.me/images/tools_gpu_rendering_bar.png" alt=""></p>
+<p>中间有一根绿色的横线，代表 16ms，我们需要确保每一帧花费的总时间都低于这条横线，这样才能够避免出现卡顿的问题。</p>
+<p><img src="http://hukai.me/images/tools_gpu_profile_three_color.png" alt=""></p>
+<p>每一条柱状线包括三部分：</p>
+<ul>
+<li>蓝色，代表测量绘制 Display List 的时间</li>
+<li>红色，代表 OpenGL 渲染 Display List 所需要的时间</li>
+<li>黄色，则代表了 CPU 等待 GPU 处理的时间</li>
+</ul>
+<h4 id="为什么是-60-fps"><a href="#为什么是-60-fps" class="headerlink" title="为什么是 60 fps"></a>为什么是 60 fps</h4><p>我们通常都会提到 60fps 与 16ms，可是知道为何会是以程序是否达到 60fps 来作为 App 性能的衡量标准吗？这是因为人眼与大脑之间的协作无法感知超过 60fps 的画面更新。</p>
+<p>12fps 大概类似手动快速翻动书籍的帧率，这明显是可以感知到不够顺滑的。24fps 使得人眼感知的是连续线性的运动，这其实是归功于运动模糊的效果。24fps 是电影胶圈通常使用的帧率，因为这个帧率已经足够支撑大部分电影画面需要表达的内容，同时能够最大的减少费用支出。但是低于 30fps 是无法顺畅表现绚丽的画面内容的，此时就需要用到 60fps 来达到想要的效果，当然超过 60fps 是没有必要的。</p>
+<p>开发app的性能目标就是保持 60fps，这意味着每一帧你只有 16ms=1000/60 的时间来处理所有的任务。</p>
+<h4 id="Resterization栅格化"><a href="#Resterization栅格化" class="headerlink" title="Resterization栅格化"></a><strong>Resterization栅格化</strong></h4><p><img src="http://hukai.me/images/gpu_rasterization.png" alt=""></p>
+<p>是负责绘制 Button，Shape，Path，String，Bitmap 等组件最基础的操作。它把那些组件拆分到不同的像素上进行显示。这是一个很费时的操作，GPU 的引入就是为了加快栅格化的操作。</p>
+<p><img src="http://hukai.me/images/gpu_cpu_rasterization.png" alt=""></p>
+<p>CPU (计算 UI 组件) -&gt; [Polygons，Texture纹理] -&gt; GPU (Resterization) -&gt; 栅格化渲染 -&gt; 屏幕</p>
+<p>然而每次从 CPU 转移到 GPU 是一件很麻烦的事情，所幸的是 OpenGL ES 可以把那些需要渲染的纹理Hold 在 GPU Memory 里面，在下次需要渲染的时候直接进行操作。所以如果你更新了 GPU 所 hold 住的纹理内容，那么之前保存的状态就丢失了。</p>
+<p>通常来说，Android 需要把 XML 布局文件转换成 GPU 能够识别并绘制的对象。这个操作是在 <strong>DisplayList</strong>的帮助下完成的。DisplayList 持有所有将要交给 GPU 绘制到屏幕上的数据信息。</p>
+<p>需要注意的是：任何时候View中的绘制内容发生变化时，都会重新执行创建 DisplayList，渲染DisplayList，更新到屏幕上等一系列操作。这个流程的表现性能取决于你的 View 的复杂程度，View 的状态变化以及渲染管道的执行性能。举个例子，假设某个 Button 的大小需要增大到目前的两倍，在增大Button 大小之前，需要通过父 View 重新计算并摆放其他子 View 的位置。修改 View 的大小会触发整个HierarcyView 的重新计算大小的操作。如果是修改 View 的位置则会触发 HierarchView 重新计算其他View 的位置。如果布局很复杂，这就会很容易导致严重的性能问题。我们需要尽量减少 Overdraw。</p>
+<p><img src="http://hukai.me/images/layout_three_steps.png" alt=""></p>
+<h4 id="Apply-clipRect-and-quickReject-Quiz-amp-Solution"><a href="#Apply-clipRect-and-quickReject-Quiz-amp-Solution" class="headerlink" title="Apply clipRect and quickReject - Quiz &amp; Solution"></a>Apply clipRect and quickReject - Quiz &amp; Solution</h4><p><img src="http://hukai.me/images/android_perf_course_clip_1.png" alt=""></p>
+<p>上面的示例图中显示了一个自定义的 View，主要效果是呈现多张重叠的卡片。这个 View 的 onDraw 方法如下图所示：</p>
+<p><img src="http://hukai.me/images/android_perf_course_clip_3.png" alt=""></p>
+<p><img src="http://hukai.me/images/android_perf_course_clip_2.png" alt=""></p>
+<p>是什么原因导致过度绘制的呢？</p>
+<p>下面的代码显示了如何通过 clipRect 来解决自定义 View 的过度绘制，提高自定义 View 的绘制性能：</p>
+<p><img src="http://hukai.me/images/android_perf_course_clip_code_compare.png" alt=""></p>
+<p>优化之后的效果图：</p>
+<p><img src="http://hukai.me/images/android_perf_course_clip_result.png" alt=""></p>
+<h3 id="Nested-Hierarchies-and-Performance"><a href="#Nested-Hierarchies-and-Performance" class="headerlink" title="Nested Hierarchies and Performance"></a>Nested Hierarchies and Performance</h3><p>提升布局性能的关键点是尽量保持布局层级的扁平化，避免出现重复的嵌套布局。例如下面的例子，有2行显示相同内容的视图，分别用两种不同的写法来实现，他们有着不同的层级。</p>
+<p><img src="http://hukai.me/images/android_perf_course_hierarchy_1.png" alt=""></p>
+<p><img src="http://hukai.me/images/android_perf_course_hierarchy_2.png" alt=""></p>
+<p>下图显示了使用2种不同的写法，在 Hierarchy Viewer 上呈现出来的性能测试差异：</p>
+<p><img src="http://hukai.me/images/android_perf_course_hierarchy_3.png" alt=""></p>
+<p>下图举例演示了如何优化 ListItem 的布局，通过 RelativeLayout 替代旧方案中的嵌套 LinearLayout 来优化布局:</p>
+<p><img src="http://hukai.me/images/android_perf_course_hierarchy_4.png" alt=""></p>
+<h4 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h4><p><strong>Generational Heap Memory</strong></p>
+<p><img src="http://hukai.me/images/memory_mode_generation.png" alt=""></p>
+<p><img src="http://hukai.me/images/android_memory_gc_mode.png" alt=""></p>
+<p><img src="http://hukai.me/images/gc_threshold.png" alt=""></p>
+<p><img src="http://hukai.me/images/gc_event_thread_stop.png" alt=""></p>
+<p>通常来说，单个的 GC 并不会占用太多时间，但是大量不停的 GC 操作则会显著占用帧间隔时间 (16ms)。如果在帧间隔时间里面做了过多的 GC 操作，那么自然其他类似计算，渲染等操作的可用时间就变得少了。</p>
+<p>导致 GC 频繁执行的原因有两个：</p>
+<ul>
+<li><strong>Memory Churn 内存抖动</strong>，内存抖动是因为大量的对象被创建又在短时间内马上被释放。</li>
+<li>瞬间产生大量的对象会严重占用 Young Generation 的内存区域，当达到阀值，剩余空间不够的时候，也会触发 GC。即使每次分配的对象占用了很少的内存，但是他们叠加在一起会增加 Heap 的压力，从而触发更多其他类型的 GC。这个操作有可能会影响到帧率，并使得用户感知到性能问题。</li>
+</ul>
+<p><img src="http://hukai.me/images/gc_overtime.png" alt=""></p>
+<p>解决上面的问题有简洁直观方法，如果你在 <strong>Memory Monitor</strong> (Memory Monitor 在 Android Studio 上的使用：<a href="https://developer.android.com/studio/profile/am-memory.html)里面查看到短时间发生了多次内存的涨跌，这意味着很有可能发生了内存抖动。" target="_blank" rel="noopener">https://developer.android.com/studio/profile/am-memory.html)里面查看到短时间发生了多次内存的涨跌，这意味着很有可能发生了内存抖动。</a></p>
+<p><img src="http://hukai.me/images/memory_monitor_gc.png" alt=""></p>
+<p>同时我们还可以通过 <strong>Allocation Tracker</strong> 来查看在短时间内，同一个栈中不断进出的相同对象。这是内存抖动的典型信号之一。</p>
+<h4 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h4><p><img src="http://hukai.me/images/memory_leak_profile_method.png" alt=""></p>
+<p>寻找内存泄漏并修复这个漏洞是件很棘手的事情，你需要对执行的代码很熟悉，清楚的知道在特定环境下是如何运行的，然后仔细排查。</p>
+<p>例如，你想知道程序中的某个 activity 退出的时候，它之前所占用的内存是否有完整的释放干净了？首先你需要在 activity 处于前台的时候使用 Heap Tool 获取一份当前状态的内存快照，然后你需要创建一个几乎不这么占用内存的空白 activity 用来给前一个 Activity 进行跳转，其次在跳转到这个空白的 activity 的时候主动调用 System.gc() 方法来确保触发一个 GC 操作。最后，如果前面这个 activity 的内存都有全部正确释放，那么在空白 activity 被启动之后的内存快照中应该不会有前面那个 activity 中的任何对象了。</p>
+<p><img src="http://hukai.me/images/memory_leak_track_method.png" alt=""></p>
+<p>如果你发现在空白 activity 的内存快照中有一些可疑的没有被释放的对象存在，那么接下去就应该使用 <strong>Alocation Track Tool</strong> 来仔细查找具体的可疑对象。我们可以从空白 activity 开始监听，启动到观察activity，然后再回到空白 activity 结束监听。这样操作以后，我们可以仔细观察那些对象，找出内存泄漏的真凶。</p>
+<h4 id="Memory-Performance"><a href="#Memory-Performance" class="headerlink" title="Memory Performance"></a>Memory Performance</h4><p>为了寻找内存的性能问题，Android Studio提供了工具来帮助开发者：</p>
+<ul>
+<li><strong>Memory Monitor：</strong>查看整个 app 所占用的内存，以及发生 GC 的时刻，短时间内发生大量的 GC 操作是一个危险的信号。</li>
+</ul>
+<p><img src="http://hukai.me/images/memory_monitor_overview.png" alt=""></p>
+<p><img src="http://hukai.me/images/memory_monitor_free_allocation.png" alt=""></p>
+<p><img src="http://hukai.me/images/memory_monitor_gc_event.png" alt=""></p>
+<ul>
+<li><strong>Allocation Tracker：</strong>使用此工具来追踪内存的分配，前面有提到过。</li>
+<li><strong>Heap Tool：</strong>查看当前内存快照，便于对比分析哪些对象有可能是泄漏了的，请参考前面的Case。</li>
+</ul>
+<h4 id="Battery-Performance"><a href="#Battery-Performance" class="headerlink" title="Battery Performance"></a>Battery Performance</h4><p>Purdue University 研究了最受欢迎的一些应用的电量消耗，平均只有 30% 左右的电量是被程序最核心的方法例如绘制图片，摆放布局等等所使用掉的，剩下的 70% 左右的电量是被上报数据，检查位置信息，定时检索后台广告信息所使用掉的。</p>
+<p>有下面一些措施能够显著减少电量的消耗：</p>
+<ul>
+<li>我们应该尽量减少唤醒屏幕的次数与持续的时间，使用 WakeLock 来处理唤醒的问题，能够正确执行唤醒操作并根据设定及时关闭操作进入睡眠状态。</li>
+<li>某些非必须马上执行的操作，例如上传歌曲，图片处理等，可以等到设备处于充电状态或者电量充足的时候才进行。</li>
+<li>触发网络请求的操作，每次都会保持无线信号持续一段时间，我们可以把零散的网络请求打包进行一次操作，避免过多的无线信号引起的电量消耗。关于网络请求引起无线信号的电量消耗，还可以参考这里 <a href="http://hukai.me/android-training-course-in-chinese/connectivity/efficient-downloads/efficient-network-access.html" target="_blank" rel="noopener">优化下载以高效地访问网络</a></li>
+<li>可以使用JobScheduler API来对一些任务进行定时处理，例如我们可以把那些任务重的操作等到手机处于充电状态，或者是连接到WiFi的时候来处理。 关于JobScheduler的更多知识可以参考 <a href="http://hukai.me/android-training-course-in-chinese/background-jobs/scheduling/index.html" target="_blank" rel="noopener">管理设备的唤醒状态</a></li>
+</ul>
+<p>从 Android 5.0 开始发布了 <a href="https://github.com/google/battery-historian" target="_blank" rel="noopener">Battery History Tool</a>，它可以查看程序被唤醒的频率，由谁唤醒的，持续了多长的时间，这些信息都可以获取到。</p>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><p>Android 中的 Java 代码会经过编译优化再执行，代码的不同写法会影响到 Java 编译器的优化效率。</p>
+<p>通常来说有两类运行效率差的情况：<strong>第1种</strong>是相对执行时间长的方法，我们可以很轻松的找到这些方法并做一定的优化。<strong>第2种</strong>是执行时间短，但是执行频次很高的方法，因为执行次数多，累积效应下就会对性能产生很大的影响。</p>
+<h3 id="Traceview-Walkthrough"><a href="#Traceview-Walkthrough" class="headerlink" title="Traceview Walkthrough"></a>Traceview Walkthrough</h3><p>通过 Android Studio 打开里面的 Android Device Monitor，切换到 DDMS 窗口，点击左边栏上面想要跟踪的进程，再点击上面的 Start Method Tracing 的按钮，如下图所示：</p>
+<p><img src="http://hukai.me/images/android_perf_compute_traceview.png" alt=""></p>
+<p>启动跟踪之后，再操控 app，做一些你想要跟踪的事件，例如滑动 listview，点击某些视图进入另外一个页面等等。操作完之后，回到 Android Device Monitor，再次点击 Method Tracing 的按钮停止跟踪。此时工具会为刚才的操作生成 TraceView 的详细视图。</p>
+<p><img src="http://hukai.me/images/android_perf_compute_traceview_2.png" alt=""></p>
+<h3 id="Batching-and-Caching"><a href="#Batching-and-Caching" class="headerlink" title="Batching and Caching"></a>Batching and Caching</h3><p>提升运算性能的两个技术：</p>
+<p><strong>Batching</strong> 是在真正执行运算操作之前对数据进行批量预处理，例如你需要有这样一个方法，它的作用是查找某个值是否存在与于一堆数据中。假设一个前提，我们会先对数据做排序，然后使用二分查找法来判断值是否存在。我们先看第一种情况，下图中存在着多次重复的排序操作。</p>
+<p><img src="http://hukai.me/images/android_perf_compute_batching_1.png" alt=""></p>
+<p>在上面的那种写法下，如果数据的量级并不大的话，应该还可以接受，可是如果数据集非常大，就会有严重的效率问题。那么我们看下改进的写法，把排序的操作打包绑定只执行一次：</p>
+<p><img src="http://hukai.me/images/android_perf_compute_batching_2.png" alt=""></p>
+<p><strong>Caching</strong> 的理念很容易理解，在很多方面都有体现，下面举一个for循环的例子：</p>
+<p><img src="http://hukai.me/images/android_perf_compute_caching.png" alt="img"></p>
+<p>上面这2种基础技巧非常实用，积极恰当的使用能够显著提升运算性能。</p>
+<h3 id="Blocking-the-UI-Thread"><a href="#Blocking-the-UI-Thread" class="headerlink" title="Blocking the UI Thread"></a>Blocking the UI Thread</h3><p>把那些可能有性能问题的代码移到非UI线程进行操作。</p>
+<h3 id="Container-Performance"><a href="#Container-Performance" class="headerlink" title="Container Performance"></a>Container Performance</h3><p>避免我们重复造轮子，Java提供了很多现成的容器，例如 Vector，ArrayList，LinkedList，HashMap 等等，在 Android 里面还有新增加的 SparseArray 等，我们需要了解这些基础容器的性能差异以及适用场景。这样才能够选择合适的容器，达到最佳的性能。</p>
+<blockquote>
+<p>代码性能优化小技巧</p>
+</blockquote>
+<p>让下面的小技巧作为平时写代码的习惯，这样能够提升代码的效率。</p>
+<p>高效的代码需要满足下面两个原则：</p>
+<ul>
+<li>不要做冗余的工作</li>
+<li>尽量避免执行过多的内存分配操作</li>
+</ul>
+<h4 id="http-hukai-me-android-training-performance-tips"><a href="#http-hukai-me-android-training-performance-tips" class="headerlink" title="http://hukai.me/android-training-performance-tips/"></a><a href="http://hukai.me/android-training-performance-tips/" target="_blank" rel="noopener">http://hukai.me/android-training-performance-tips/</a></h4><h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>关于Allocation Tracker工具的使用，不展开了，参考下面的链接：</p>
+<ul>
+<li><a href="http://developer.android.com/tools/debugging/ddms.html#alloc" target="_blank" rel="noopener">http://developer.android.com/tools/debugging/ddms.html#alloc</a></li>
+<li><a href="http://android-developers.blogspot.com/2009/02/track-memory-allocations.html" target="_blank" rel="noopener">http://android-developers.blogspot.com/2009/02/track-memory-allocations.html</a></li>
+</ul>
+<h4 id="Android-管理应用的内存"><a href="#Android-管理应用的内存" class="headerlink" title="Android 管理应用的内存"></a>Android 管理应用的内存</h4><h5 id="内存共享"><a href="#内存共享" class="headerlink" title="内存共享"></a>内存共享</h5><ul>
+<li>系统启动 －》 zygote 进程载入通用 framework 代码和资源 －》(fork) app 进程 －》 加载 app 代码(共享 RAM 的资源)</li>
+<li>大多数 static 的数据被 mmapped 到一个进程中。这不仅仅使得同样的数据能够在进程间进行共享，而且使得它能够在需要的时候被 paged out。</li>
+<li>在很多情况下，Android 通过显式的分配共享内存区域(例如 ashmem 或者 grallo c)来实现一些动态RAM 区域能够在不同进程间进行共享</li>
+</ul>
+<h5 id="分配与内存回收"><a href="#分配与内存回收" class="headerlink" title="分配与内存回收"></a>分配与内存回收</h5><ul>
+<li>每一个进程的 Dalvik heap 都有一个受限的虚拟内存范围(系统会给它一个上限)，即 heap size，它可以随着需要进行增长，但不会超过上限。</li>
+<li>逻辑上讲的 heap size 和实际物理上使用的内存数量是不等的，Android 会计算一个叫做Proportional Set Size(PSS) 的值，它记录了那些和其他进程进行共享的内存大小。（假设共享内存大小是10M，一共有20个 Process 在共享使用，根据权重，可能认为其中有 0.3M 才能真正算是你的进程所使用的）</li>
+<li>Dalvik heap 与逻辑上的 heap size 不吻合，这意味着 Android 并不会去做 heap 中的碎片整理用来关闭空闲区域。Android 仅仅会在 heap 的尾端出现不使用的空间时才会做收缩逻辑 heap size大小的动作。但是这并不是意味着被 heap 所使用的物理内存大小不能被收缩。在垃圾回收之后，Dalvik会遍历heap并找出不使用的 pages，然后使用 madvise (系统调用)把那些 pages 返回给 kernal。因此，成对的 allocations 与 deallocations 大块的数据可以使得物理内存能够被正常的回收。然而，回收碎片化的内存则会使得效率低下很多，因为那些碎片化的分配页面也许会被其他地方所共享到。</li>
+</ul>
+<h5 id="限制应用的内存"><a href="#限制应用的内存" class="headerlink" title="限制应用的内存"></a>限制应用的内存</h5><p>Android 为每一个 app 都设置了一个硬性的 heap size 限制。准确的 heap size 限制会因为不同设备的不同RAM大小而各有差异。如果你的 app 已经到了 heap 的限制大小并且再尝试分配内存的话，会引起<code>OutOfMemoryError</code>的错误。</p>
+<p>在一些情况下，你也许想要查询当前设备的 heap size 限制大小是多少，然后决定 cache 的大小。可以通过<code>getMemoryClass()</code>来查询。这个方法会返回一个整数，表明你的应用的 heap size 限制是多少Mb(megabates)。</p>
+<h4 id="你的应用该如何管理内存"><a href="#你的应用该如何管理内存" class="headerlink" title="你的应用该如何管理内存"></a>你的应用该如何管理内存</h4><ul>
+<li><p>珍惜 Service 资源(多用 IntentService)</p>
+</li>
+<li><p>当 UI 隐藏时释放内存(onTrimMemory())</p>
+<p>因为 onTrimMemory() 的回调是在 <strong>API 14</strong> 才被加进来的，对于老的版本，你可以使用 <a href="http://developer.android.com/reference/android/content/ComponentCallbacks.html#onLowMemory(" target="_blank" rel="noopener">onLowMemory</a>) 回调来进行兼容。onLowMemory 相当与<code>TRIM_MEMORY_COMPLETE</code>。</p>
+</li>
+<li><p>当内存紧张时释放部分内存</p>
+</li>
+<li><p>检查你应该使用多少的内存</p>
+</li>
+<li><p>避免 bitmaps 的浪费</p>
+</li>
+<li><p>使用优化的数据容器(例如<a href="http://developer.android.com/reference/android/util/SparseArray.html" target="_blank" rel="noopener">SparseArray</a>, <a href="http://developer.android.com/reference/android/util/SparseBooleanArray.html" target="_blank" rel="noopener">SparseBooleanArray</a>, 与 <a href="http://developer.android.com/reference/android/support/v4/util/LongSparseArray.html" target="_blank" rel="noopener">LongSparseArray</a>)</p>
+</li>
+<li><p>谨慎使用第三方 libraries</p>
+</li>
+<li><p>为序列化的数据使用 nano protobufs <a href="https://developers.google.com/protocol-buffers/docs/overview" target="_blank" rel="noopener">Protocol buffers</a></p>
+</li>
+</ul>
+<p><a href="http://hukai.me/android-training-managing_your_app_memory/" target="_blank" rel="noopener">http://hukai.me/android-training-managing_your_app_memory/</a></p>
+<h4 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h4><p><a href="https://developer.android.com/about/versions/android-5.0.html#Power" target="_blank" rel="noopener">Battery Historian </a>是Android 5.0开始引入的新API。通过下面的指令，可以得到设备上的电量消耗信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> adb shell dumpsys batterystats &gt; xxx.txt  //得到整个设备的电量消耗信息</span><br><span class="line"><span class="meta">$</span> adb shell dumpsys batterystats &gt; com.package.name &gt; xxx.txt //得到指定app相关的电量消耗信息</span><br></pre></td></tr></table></figure>
+<p>得到了原始的电量消耗数据之后，我们需要通过Google编写的一个<a href="https://github.com/google/battery-historian" target="_blank" rel="noopener">python脚本</a>把数据信息转换成可读性更好的 html 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> python historian.py xxx.txt &gt; xxx.html</span><br></pre></td></tr></table></figure>
+<h5 id="Track-Battery-Status-amp-Battery-Manager"><a href="#Track-Battery-Status-amp-Battery-Manager" class="headerlink" title="Track Battery Status &amp; Battery Manager"></a>Track Battery Status &amp; Battery Manager</h5><p>获取手机当前充电状态：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// It is very easy to subscribe to changes to the battery state, but you can get the current</span></span><br><span class="line"><span class="comment">// state by simply passing null in as your receiver.  Nifty, isn't that?</span></span><br><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(Intent.ACTION_BATTERY_CHANGED);</span><br><span class="line">Intent batteryStatus = <span class="keyword">this</span>.registerReceiver(<span class="keyword">null</span>, filter);</span><br><span class="line"><span class="keyword">int</span> chargePlug = batteryStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -<span class="number">1</span>);</span><br><span class="line"><span class="keyword">boolean</span> acCharge = (chargePlug == BatteryManager.BATTERY_PLUGGED_AC);</span><br><span class="line"><span class="keyword">if</span> (acCharge) &#123;</span><br><span class="line">    Log.v(LOG_TAG,“The phone is charging!”);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子演示了如何立即获取到手机的充电状态，得到充电状态信息之后，我们可以有针对性的对部分代码做优化。比如我们可以判断只有当前手机为AC充电状态时 才去执行一些非常耗电的操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This method checks for power by comparing the current battery state against all possible</span></span><br><span class="line"><span class="comment"> * plugged in states. In this case, a device may be considered plugged in either by USB, AC, or</span></span><br><span class="line"><span class="comment"> * wireless charge. (Wireless charge was introduced in API Level 17.)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkForPower</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// It is very easy to subscribe to changes to the battery state, but you can get the current</span></span><br><span class="line">    <span class="comment">// state by simply passing null in as your receiver.  Nifty, isn't that?</span></span><br><span class="line">    IntentFilter filter = <span class="keyword">new</span> IntentFilter(Intent.ACTION_BATTERY_CHANGED);</span><br><span class="line">    Intent batteryStatus = <span class="keyword">this</span>.registerReceiver(<span class="keyword">null</span>, filter);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// There are currently three ways a device can be plugged in. We should check them all.</span></span><br><span class="line">    <span class="keyword">int</span> chargePlug = batteryStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">boolean</span> usbCharge = (chargePlug == BatteryManager.BATTERY_PLUGGED_USB);</span><br><span class="line">    <span class="keyword">boolean</span> acCharge = (chargePlug == BatteryManager.BATTERY_PLUGGED_AC);</span><br><span class="line">    <span class="keyword">boolean</span> wirelessCharge = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN_MR1) &#123;</span><br><span class="line">        wirelessCharge = (chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (usbCharge || acCharge || wirelessCharge);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Using-Job-Scheduler"><a href="#Using-Job-Scheduler" class="headerlink" title="Using Job Scheduler"></a>Using Job Scheduler</h5><p>使用<a href="https://developer.android.com/reference/android/app/job/JobScheduler.html" target="_blank" rel="noopener">Job Scheduler</a>，应用需要做的事情就是判断哪些任务是不紧急的，可以交给 Job Scheduler 来处理，Job Scheduler 集中处理收到的任务，选择合适的时间，合适的网络，再一起进行执行。</p>
+<p>下面是使用 Job Scheduler 的一段简要示例，需要先有一个 JobService：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyJobService</span> <span class="keyword">extends</span> <span class="title">JobService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOG_TAG = <span class="string">"MyJobService"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Log.i(LOG_TAG, <span class="string">"MyJobService created"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        Log.i(LOG_TAG, <span class="string">"MyJobService destroyed"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onStartJob</span><span class="params">(JobParameters params)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// This is where you would implement all of the logic for your job. Note that this runs</span></span><br><span class="line">        <span class="comment">// on the main thread, so you will want to use a separate thread for asynchronous work</span></span><br><span class="line">        <span class="comment">// (as we demonstrate below to establish a network connection).</span></span><br><span class="line">        <span class="comment">// If you use a separate thread, return true to indicate that you need a "reschedule" to</span></span><br><span class="line">        <span class="comment">// return to the job at some point in the future to finish processing the work. Otherwise,</span></span><br><span class="line">        <span class="comment">// return false when finished.</span></span><br><span class="line">        Log.i(LOG_TAG, <span class="string">"Totally and completely working on job "</span> + params.getJobId());</span><br><span class="line">        <span class="comment">// First, check the network, and then attempt to connect.</span></span><br><span class="line">        <span class="keyword">if</span> (isNetworkConnected()) &#123;</span><br><span class="line">            <span class="keyword">new</span> SimpleDownloadTask() .execute(params);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Log.i(LOG_TAG, <span class="string">"No connection on job "</span> + params.getJobId() + <span class="string">"; sad face"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onStopJob</span><span class="params">(JobParameters params)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Called if the job must be stopped before jobFinished() has been called. This may</span></span><br><span class="line">        <span class="comment">// happen if the requirements are no longer being met, such as the user no longer</span></span><br><span class="line">        <span class="comment">// connecting to WiFi, or the device no longer being idle. Use this callback to resolve</span></span><br><span class="line">        <span class="comment">// anything that may cause your application to misbehave from the job being halted.</span></span><br><span class="line">        <span class="comment">// Return true if the job should be rescheduled based on the retry criteria specified</span></span><br><span class="line">        <span class="comment">// when the job was created or return false to drop the job. Regardless of the value</span></span><br><span class="line">        <span class="comment">// returned, your job must stop executing.</span></span><br><span class="line">        Log.i(LOG_TAG, <span class="string">"Whelp, something changed, so I'm calling it on job "</span> + params.getJobId());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Determines if the device is currently online.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNetworkConnected</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ConnectivityManager connectivityManager =</span><br><span class="line">                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);</span><br><span class="line">        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();</span><br><span class="line">        <span class="keyword">return</span> (networkInfo != <span class="keyword">null</span> &amp;&amp; networkInfo.isConnected());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  Uses AsyncTask to create a task away from the main UI thread. This task creates a</span></span><br><span class="line"><span class="comment">     *  HTTPUrlConnection, and then downloads the contents of the webpage as an InputStream.</span></span><br><span class="line"><span class="comment">     *  The InputStream is then converted to a String, which is logged by the</span></span><br><span class="line"><span class="comment">     *  onPostExecute() method.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleDownloadTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">JobParameters</span>, <span class="title">Void</span>, <span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">protected</span> JobParameters mJobParam;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> String <span class="title">doInBackground</span><span class="params">(JobParameters... params)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// cache system provided job requirements</span></span><br><span class="line">            mJobParam = params[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                InputStream is = <span class="keyword">null</span>;</span><br><span class="line">                <span class="comment">// Only display the first 50 characters of the retrieved web page content.</span></span><br><span class="line">                <span class="keyword">int</span> len = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">                URL url = <span class="keyword">new</span> URL(<span class="string">"https://www.google.com"</span>);</span><br><span class="line">                HttpURLConnection conn = (HttpURLConnection) url.openConnection();</span><br><span class="line">                conn.setReadTimeout(<span class="number">10000</span>); <span class="comment">//10sec</span></span><br><span class="line">                conn.setConnectTimeout(<span class="number">15000</span>); <span class="comment">//15sec</span></span><br><span class="line">                conn.setRequestMethod(<span class="string">"GET"</span>);</span><br><span class="line">                <span class="comment">//Starts the query</span></span><br><span class="line">                conn.connect();</span><br><span class="line">                <span class="keyword">int</span> response = conn.getResponseCode();</span><br><span class="line">                Log.d(LOG_TAG, <span class="string">"The response is: "</span> + response);</span><br><span class="line">                is = conn.getInputStream();</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Convert the input stream to a string</span></span><br><span class="line">                Reader reader = <span class="keyword">null</span>;</span><br><span class="line">                reader = <span class="keyword">new</span> InputStreamReader(is, <span class="string">"UTF-8"</span>);</span><br><span class="line">                <span class="keyword">char</span>[] buffer = <span class="keyword">new</span> <span class="keyword">char</span>[len];</span><br><span class="line">                reader.read(buffer);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> String(buffer);</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"Unable to retrieve web page."</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(String result)</span> </span>&#123;</span><br><span class="line">            jobFinished(mJobParam, <span class="keyword">false</span>);</span><br><span class="line">            Log.i(LOG_TAG, result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后模拟通过点击Button触发N个任务，交给JobService来处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FreeTheWakelockActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String LOG_TAG = <span class="string">"FreeTheWakelockActivity"</span>;</span><br><span class="line"></span><br><span class="line">    TextView mWakeLockMsg;</span><br><span class="line">    ComponentName mServiceComponent;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_wakelock);</span><br><span class="line"></span><br><span class="line">        mWakeLockMsg = (TextView) findViewById(R.id.wakelock_txt);</span><br><span class="line">        mServiceComponent = <span class="keyword">new</span> ComponentName(<span class="keyword">this</span>, MyJobService.class);</span><br><span class="line">        Intent startServiceIntent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, MyJobService.class);</span><br><span class="line">        startService(startServiceIntent);</span><br><span class="line"></span><br><span class="line">        Button theButtonThatWakelocks = (Button) findViewById(R.id.wakelock_poll);</span><br><span class="line">        theButtonThatWakelocks.setText(R.string.poll_server_button);</span><br><span class="line"></span><br><span class="line">        theButtonThatWakelocks.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                    pollServer();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * This method polls the server via the JobScheduler API. By scheduling the job with this API,</span></span><br><span class="line"><span class="comment">     * your app can be confident it will execute, but without the need for a wake lock. Rather, the</span></span><br><span class="line"><span class="comment">     * API will take your network jobs and execute them in batch to best take advantage of the</span></span><br><span class="line"><span class="comment">     * initial network connection cost.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * The JobScheduler API works through a background service. In this sample, we have</span></span><br><span class="line"><span class="comment">     * a simple service in MyJobService to get you started. The job is scheduled here in</span></span><br><span class="line"><span class="comment">     * the activity, but the job itself is executed in MyJobService in the startJob() method. For</span></span><br><span class="line"><span class="comment">     * example, to poll your server, you would create the network connection, send your GET</span></span><br><span class="line"><span class="comment">     * request, and then process the response all in MyJobService. This allows the JobScheduler API</span></span><br><span class="line"><span class="comment">     * to invoke your logic without needed to restart your activity.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * For brevity in the sample, we are scheduling the same job several times in quick succession,</span></span><br><span class="line"><span class="comment">     * but again, try to consider similar tasks occurring over time in your application that can</span></span><br><span class="line"><span class="comment">     * afford to wait and may benefit from batching.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pollServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">            JobInfo jobInfo = <span class="keyword">new</span> JobInfo.Builder(i, mServiceComponent)</span><br><span class="line">                    .setMinimumLatency(<span class="number">5000</span>) <span class="comment">// 5 seconds</span></span><br><span class="line">                    .setOverrideDeadline(<span class="number">60000</span>) <span class="comment">// 60 seconds (for brevity in the sample)</span></span><br><span class="line">                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY) <span class="comment">// WiFi or data connections</span></span><br><span class="line">                    .build();</span><br><span class="line"></span><br><span class="line">            mWakeLockMsg.append(<span class="string">"Scheduling job "</span> + i + <span class="string">"!\n"</span>);</span><br><span class="line">            scheduler.schedule(jobInfo);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Android/">Android</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/08/02/不用-AIDL-实现-IPC-的一个简便方法/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">不用 AIDL 实现 IPC 的一个简便方法</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/02/02/学习-git，从此不再枯燥无味/">
+        <span class="next-text nav-default">学习 git，从此不再枯燥无味</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
