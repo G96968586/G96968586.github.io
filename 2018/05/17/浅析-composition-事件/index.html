@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="浅析 Composition 事件"/>
+
+
+
+
+  <meta name="keywords" content="前端与交互设计," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2018/05/17/浅析-composition-事件/"/>
+
+
+<meta name="description" content="今天开会时听同事分享了用 Composition 事件解决输入法的问题，在这里跟大家分享下。 也许你还不清楚什么是 Composition 事件，别着急，在这里，我先跟大家说说我们碰到的输入法问题是什么，这是一个很常见的问题。">
+<meta name="keywords" content="前端与交互设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析 Composition 事件">
+<meta property="og:url" content="http://G96968586.github.io/2018/05/17/浅析-composition-事件/index.html">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="今天开会时听同事分享了用 Composition 事件解决输入法的问题，在这里跟大家分享下。 也许你还不清楚什么是 Composition 事件，别着急，在这里，我先跟大家说说我们碰到的输入法问题是什么，这是一个很常见的问题。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1kiwJr7CWBuNjy0FaXXXUlXXa-2878-284.png">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1ofoBr7yWBuNjy0FpXXassXXa-2876-280.png">
+<meta property="og:updated_time" content="2018-05-18T03:58:52.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅析 Composition 事件">
+<meta name="twitter:description" content="今天开会时听同事分享了用 Composition 事件解决输入法的问题，在这里跟大家分享下。 也许你还不清楚什么是 Composition 事件，别着急，在这里，我先跟大家说说我们碰到的输入法问题是什么，这是一个很常见的问题。">
+<meta name="twitter:image" content="https://gw.alicdn.com/tfs/TB1kiwJr7CWBuNjy0FaXXXUlXXa-2878-284.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 浅析 Composition 事件 - 箫鉴哥 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          浅析 Composition 事件
+        
+      </h1>
+
+      <time class="post-time">
+          May 17 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>今天开会时听同事分享了用 Composition 事件解决输入法的问题，在这里跟大家分享下。</p>
+<p>也许你还不清楚什么是 Composition 事件，别着急，在这里，我先跟大家说说我们碰到的输入法问题是什么，这是一个很常见的问题。</p>
+<a id="more"></a>
+<p>以微博为例子，我们知道，一条微博最多只能输入 140 个字，这就需要我们实时去计算输入框的字数，输入内容超过长度以后不允许输入，这是一个很常见的功能需求。但实际上，在输入法输入过程中和输入完成时的统计结果有可能是不一致的。</p>
+<p>见下面的 Demo <a href="https://codepen.io/g96968586/pen/aGQaNE" target="_blank" rel="noopener">CodePan</a>：</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1kiwJr7CWBuNjy0FaXXXUlXXa-2878-284.png" alt="img"></p>
+<p><img src="https://gw.alicdn.com/tfs/TB1ofoBr7yWBuNjy0FpXXassXXa-2876-280.png" alt="img"></p>
+<p>另一个例子，比如：输入框输入一二三四五六七八九十。现在已经输入了一二三四五六七八九。如果是实时的去判断并过滤超长内容的话，想要通过输入 shi 来输出十几乎是做不到的，它总是被截断为 sh。这时候我们就可以通过 Composition 事件来解决以上的问题。Composition 的具体介绍可以看比较权威的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent" target="_blank" rel="noopener">MDN Composition</a>。它主要是用来监听输入法的事件。</p>
+<p>composition event在keydown事件之后被触发，触发的是 compositionstart、compositionupdate 还是 compositionend 事件则取决于当时输入法编辑器的状态。你可以通过这个<a href="https://dvcs.w3.org/hg/d4e/raw-file/tip/key-event-test.html" target="_blank" rel="noopener">在线示例</a>来观察键盘的事件和顺序。</p>
+<p>Ok, 下面我们可以通过编程来直接解决上面的问题了。</p>
+<p>在 <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent" target="_blank" rel="noopener">keyboard event</a> 文档中可以找到 isComposing 事件属性。在 compositionstart 和 compositionend 之间其值为 true。但遗憾的是在目前测试的几个浏览器中，isComposing 的值始终是 undefined。所以需要另觅方法，最容易想到的就是利用 compositionstart 和 compositionend 事件来模拟出 isComposing 这个状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var isComposing = false;</span><br><span class="line">$input.on(&apos;input&apos;, function() &#123;</span><br><span class="line">    if(isComposing) return;</span><br><span class="line">    console.log(&apos;value change&apos;);</span><br><span class="line">&#125;).on(&apos;compositionstart compositionend&apos;, function(ev) &#123;</span><br><span class="line">    isComposing = ev.type === &quot;compositionstart&quot;;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上处理在不支持 composition event 的浏览器上也不会出错。</p>
+<p>另外，composition 事件有一个 data 属性表示当前的输入值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$input.on(&apos;compositionstart compositionupdate compositionend&apos;, function(ev) &#123;</span><br><span class="line">    if(ev.type === &quot;compositionstart&quot;) &#123;</span><br><span class="line">        // 此时表示进入输入法的开始编辑状态，这个时候ev.data表示输入框中选择的内容，即会被替换掉的内容。</span><br><span class="line">    &#125;else if(ev.type === &quot;compositionupdate&quot;) &#123;</span><br><span class="line">        // 此时表示在输入法开始编辑状态之后，新的键入操作。此时 ev.data 为当前输入法编辑器中的内容。</span><br><span class="line">    &#125;else if(ev.type === &quot;compositionend&quot;) &#123;</span><br><span class="line">        // 此时表示退出了输入法编辑状态。ev.data 值为即将输出的实际内容。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>注意!!! 在移动端（ios7、android4.3）对于输入法几乎都不响应 keyup 事件。而开启计时器来做判断的话，在 IOS6 以下会有些莫名的问题。所以移动端慎用。</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/前端与交互设计/">前端与交互设计</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/04/04/浅谈智能语音交互/">
+        <span class="next-text nav-default">浅谈智能语音交互</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
