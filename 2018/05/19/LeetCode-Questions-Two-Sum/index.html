@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="LeetCode Questions: Two Sum"/>
+
+
+
+
+  <meta name="keywords" content="LeetCode," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2018/05/19/LeetCode-Questions-Two-Sum/"/>
+
+
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Questions: Two Sum">
+<meta property="og:url" content="http://G96968586.github.io/2018/05/19/LeetCode-Questions-Two-Sum/index.html">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://gw.alipayobjects.com/zos/skylark/53af2bf7-990e-4ae7-9e4e-d63ff79cba28/2018/png/4feccaef-8798-47a9-977a-c383315bf53e.png">
+<meta property="og:image" content="https://gw.alipayobjects.com/zos/skylark/488e5f55-0272-4a56-bf46-6b6d6bed9327/2018/png/40c9eae9-4d97-4276-a13b-64744fd20025.png">
+<meta property="og:image" content="https://gw.alipayobjects.com/zos/skylark/7156a3f7-7caa-4a90-905c-2fc8c4a6e59b/2018/png/1d87cfb2-3c31-46ac-bfb0-74fba0d20a93.png">
+<meta property="og:updated_time" content="2018-05-19T05:43:38.938Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Questions: Two Sum">
+<meta name="twitter:image" content="https://gw.alipayobjects.com/zos/skylark/53af2bf7-990e-4ae7-9e4e-d63ff79cba28/2018/png/4feccaef-8798-47a9-977a-c383315bf53e.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> LeetCode Questions: Two Sum - 箫鉴哥 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode Questions: Two Sum
+        
+      </h1>
+
+      <time class="post-time">
+          May 19 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><img src="https://gw.alipayobjects.com/zos/skylark/53af2bf7-990e-4ae7-9e4e-d63ff79cba28/2018/png/4feccaef-8798-47a9-977a-c383315bf53e.png" alt="img"></p>
+<a id="more"></a>
+<p>My answer: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @param &#123;number&#125; target</span><br><span class="line"> * @return &#123;number[]&#125;</span><br><span class="line"> */</span><br><span class="line">var twoSum = function(nums, target) &#123;</span><br><span class="line">    // my answer</span><br><span class="line">    var result = [];</span><br><span class="line">    var length = nums.length;</span><br><span class="line">    if (length &gt; 0) &#123;</span><br><span class="line">        for (var i = 0; i &lt; length; i++) &#123;</span><br><span class="line">            var tmp = target - nums[i];</span><br><span class="line">            var tmpIndex = nums.lastIndexOf(tmp);</span><br><span class="line">            if (tmpIndex &gt; 0) &#123;</span><br><span class="line">                result = [i, tmpIndex];</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://gw.alipayobjects.com/zos/skylark/488e5f55-0272-4a56-bf46-6b6d6bed9327/2018/png/40c9eae9-4d97-4276-a13b-64744fd20025.png" alt="img"></p>
+<p>You can see, my runtime is 207ms, see another best answer:</p>
+<p><img src="https://gw.alipayobjects.com/zos/skylark/7156a3f7-7caa-4a90-905c-2fc8c4a6e59b/2018/png/1d87cfb2-3c31-46ac-bfb0-74fba0d20a93.png" alt="img"></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/LeetCode/">LeetCode</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/05/17/浅析-composition-事件/">
+        <span class="next-text nav-default">浅析 Composition 事件</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

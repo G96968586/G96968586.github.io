@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://G96968586.github.io/"/>
-  <updated>2018-05-18T04:53:45.810Z</updated>
+  <updated>2018-05-19T05:43:38.938Z</updated>
   <id>http://G96968586.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode Questions: Two Sum</title>
+    <link href="http://G96968586.github.io/2018/05/19/LeetCode-Questions-Two-Sum/"/>
+    <id>http://G96968586.github.io/2018/05/19/LeetCode-Questions-Two-Sum/</id>
+    <published>2018-05-19T05:41:35.000Z</published>
+    <updated>2018-05-19T05:43:38.938Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://gw.alipayobjects.com/zos/skylark/53af2bf7-990e-4ae7-9e4e-d63ff79cba28/2018/png/4feccaef-8798-47a9-977a-c383315bf53e.png" alt="img"></p><a id="more"></a><p>My answer: </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @param &#123;number&#125; target</span><br><span class="line"> * @return &#123;number[]&#125;</span><br><span class="line"> */</span><br><span class="line">var twoSum = function(nums, target) &#123;</span><br><span class="line">    // my answer</span><br><span class="line">    var result = [];</span><br><span class="line">    var length = nums.length;</span><br><span class="line">    if (length &gt; 0) &#123;</span><br><span class="line">        for (var i = 0; i &lt; length; i++) &#123;</span><br><span class="line">            var tmp = target - nums[i];</span><br><span class="line">            var tmpIndex = nums.lastIndexOf(tmp);</span><br><span class="line">            if (tmpIndex &gt; 0) &#123;</span><br><span class="line">                result = [i, tmpIndex];</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="https://gw.alipayobjects.com/zos/skylark/488e5f55-0272-4a56-bf46-6b6d6bed9327/2018/png/40c9eae9-4d97-4276-a13b-64744fd20025.png" alt="img"></p><p>You can see, my runtime is 207ms, see another best answer:</p><p><img src="https://gw.alipayobjects.com/zos/skylark/7156a3f7-7caa-4a90-905c-2fc8c4a6e59b/2018/png/1d87cfb2-3c31-46ac-bfb0-74fba0d20a93.png" alt="img"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://gw.alipayobjects.com/zos/skylark/53af2bf7-990e-4ae7-9e4e-d63ff79cba28/2018/png/4feccaef-8798-47a9-977a-c383315bf53e.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://G96968586.github.io/categories/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://G96968586.github.io/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>浅析 Composition 事件</title>
@@ -469,32 +491,6 @@
       <category term="转载" scheme="http://G96968586.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
     
       <category term="热修复" scheme="http://G96968586.github.io/tags/%E7%83%AD%E4%BF%AE%E5%A4%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>快速排序优化分析</title>
-    <link href="http://G96968586.github.io/2016/09/23/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/"/>
-    <id>http://G96968586.github.io/2016/09/23/快速排序优化分析/</id>
-    <published>2016-09-23T12:19:32.000Z</published>
-    <updated>2018-05-02T12:38:09.978Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>转自我在 CSDN 的一篇博文，<a href="http://blog.csdn.net/g96968586/article/details/24271639" target="_blank" rel="noopener">原文链接</a>在这里，谢谢大家支持！</p></blockquote><p>上一篇的《浅谈快速排序》 <a href="http://blog.csdn.net/g96968586/article/details/24185967" target="_blank" rel="noopener">http://blog.csdn.net/g96968586/article/details/24185967</a>  </p><p>中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会发生什么情况呢？<br><a id="more"></a></p><p>前一篇的Partition函数代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span> <span class="params">( SqList *L,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">       <span class="keyword">int</span> pivotkey;  </span><br><span class="line">       pivotkey = L-&gt;r[low];   <span class="comment">/* 用子表的第一个记录作枢轴记录 */</span>  </span><br><span class="line">       <span class="keyword">while</span>(low &lt; high)   <span class="comment">/* 从表的两端交替向中间扫描 */</span>  </span><br><span class="line">       &#123;  </span><br><span class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[high] &gt;= pivotkey)    high - - ;  </span><br><span class="line">            swap(L,low,high);    <span class="comment">/* 将比枢轴记录小的记录交换到低端 */</span>  </span><br><span class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; L-&gt;r[low] &lt;= pivotkey )   low ++;  </span><br><span class="line">            swap(L,low,high);  <span class="comment">/* 将比枢轴记录大的记录交换到高端 */</span>  </span><br><span class="line">        &#125;  </span><br><span class="line">          <span class="keyword">return</span> low;   <span class="comment">/*  返回枢轴所在位置 */</span>  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>如果我们对数组{9,1,5,8,3,7,4,6,2}进行排序，由代码第四行“pivotkey = L-&gt;r[low]; ”知道，我们应该选取9作为第一个枢轴pivotkey，此时经过一轮“pivot=Partition(L,1,9)”，它只是更换了9和2的位置，并把9返回给pivot。整个数组并没有实质性的变化。如图示，</p><p><img src="http://img.blog.csdn.net/20140421211948156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p><p>换句话说，第四行代码“pivotkey = L-&gt;r[low]; ”变成了一个潜在的瓶颈。排序速度的快慢取决于L-&gt;r[l1]的关键字处在整个序列的位置，L-&gt;r[1]太大或太小都回影响性能。在我们现实中，带排序的序列极有可能是基本有序的，如果我们总是固定地选择第一个关键字作为首个枢轴，就变成了极为不合理的做法。<br>这里的改进方法我们采用三数取中法。即取三个关键字先进行排序，将中间数作为枢轴，一般是取整个待排序的左端、右端和中间三个数，也可以随机选取。这样至少这个中间数一定不会是最小或者是最大的数，从概率来说，取三个数均为最小或最大的可能性微乎其微，因此中间数位于较为中间的值的可能性就大大提高了。<br>我们现在在Partition函数的第三行和第四行中间加入这么一段代码，</p><p><img src="http://img.blog.csdn.net/20140421211805765?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p><p>这样子，如果我们对数组{9,1,5,8,3,7,4,6,2}，取左9、中间3、右2来比较，最终使得L-&gt;r[low] = 3,一定要比9和2来的更合理。</p><p>下面来优化一些不必要的交换。<br>大家发现了没，上一篇中，对于50这个关键字，其位置变化是1-&gt;9-&gt;3-&gt;6-&gt;5，可其实它的最终目标就是5，当中的一些交换是不需要的。因此，我们再次对Partition函数进行优化。</p><p><img src="http://img.blog.csdn.net/20140421212022000?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p><p>优化之后少了多次交换数据的操作，在性能上又得到了部分的提高。</p><p>看程序分析，</p><p><img src="http://img.blog.csdn.net/20140421212232265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p><p><img src="http://img.blog.csdn.net/20140421212330640?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZzk2OTY4NTg2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;转自我在 CSDN 的一篇博文，&lt;a href=&quot;http://blog.csdn.net/g96968586/article/details/24271639&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;原文链接&lt;/a&gt;在这里，谢谢大家支持！&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;上一篇的《浅谈快速排序》 &lt;a href=&quot;http://blog.csdn.net/g96968586/article/details/24185967&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://blog.csdn.net/g96968586/article/details/24185967&lt;/a&gt;  &lt;/p&gt;
-&lt;p&gt;中我们分析了快速排序的算法，我们也举了一个例子来模拟快速排序，然而大家发现了没有，上次是对数组{50，10，90，30，70，40，80，60，20}进行排序，如果这一次我换成下面这个例子会发生什么情况呢？&lt;br&gt;
-    
-    </summary>
-    
-      <category term="数据结构" scheme="http://G96968586.github.io/categories/DataStructure/"/>
-    
-    
-      <category term="转载" scheme="http://G96968586.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
     
   </entry>
   
