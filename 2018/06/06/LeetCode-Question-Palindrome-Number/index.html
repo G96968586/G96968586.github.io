@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="LeetCode Question: Palindrome Number"/>
+
+
+
+
+  <meta name="keywords" content="LeetCode," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="箫鉴哥">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://G96968586.github.io/2018/06/06/LeetCode-Question-Palindrome-Number/"/>
+
+
+<meta name="description" content="Palindrome Number Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward. Example 1: 12Input: 121Output: true Example 2: 123Input: -121Outp">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Question: Palindrome Number">
+<meta property="og:url" content="http://G96968586.github.io/2018/06/06/LeetCode-Question-Palindrome-Number/index.html">
+<meta property="og:site_name" content="箫鉴哥">
+<meta property="og:description" content="Palindrome Number Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward. Example 1: 12Input: 121Output: true Example 2: 123Input: -121Outp">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://gw.alicdn.com/tfs/TB1M_ulwntYBeNjy1XdXXXXyVXa-2384-1172.png">
+<meta property="og:updated_time" content="2018-06-06T15:24:39.425Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Question: Palindrome Number">
+<meta name="twitter:description" content="Palindrome Number Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward. Example 1: 12Input: 121Output: true Example 2: 123Input: -121Outp">
+<meta name="twitter:image" content="https://gw.alicdn.com/tfs/TB1M_ulwntYBeNjy1XdXXXXyVXa-2384-1172.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> LeetCode Question: Palindrome Number - 箫鉴哥 </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">箫鉴哥</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode Question: Palindrome Number
+        
+      </h1>
+
+      <time class="post-time">
+          Jun 06 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Palindrome Number</p>
+<p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+<p>Example 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 121</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+<p>Example 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: -121</span><br><span class="line">Output: false</span><br><span class="line">Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.</span><br></pre></td></tr></table></figure>
+<p>Example 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 10</span><br><span class="line">Output: false</span><br><span class="line">Explanation: Reads 01 from right to left. Therefore it is not a palindrome.</span><br></pre></td></tr></table></figure>
+<p>Follow up:<br>Coud you solve it without converting the integer to a string?</p>
+<p>This is an easy question.</p>
+<p>Here is my answer:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number&#125; x</span><br><span class="line"> * @return &#123;boolean&#125;</span><br><span class="line"> */</span><br><span class="line">var isPalindrome = function(x) &#123;</span><br><span class="line">    if (x &lt; 0) return false;</span><br><span class="line">    let t = 0;</span><br><span class="line">    let x1 = x;</span><br><span class="line">    while(x &gt; 0) &#123;</span><br><span class="line">        t = t * 10 + x % 10;</span><br><span class="line">        x = Math.floor(x / 10);</span><br><span class="line">    &#125;</span><br><span class="line">    return t === x1;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>My runtime :</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1M_ulwntYBeNjy1XdXXXXyVXa-2384-1172.png" alt=""></p>
+<p>You can see, my runtime is 352 ms, see another best answer(244ms):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number&#125; x</span><br><span class="line"> * @return &#123;boolean&#125;</span><br><span class="line"> */</span><br><span class="line">var isPalindrome = function(x) &#123;</span><br><span class="line">   if(x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0)) return false;</span><br><span class="line">    let reverseNumber = 0;</span><br><span class="line">    while(x &gt; reverseNumber)&#123; // pay attention to this code line, it&apos;s awesome!!!</span><br><span class="line">        reverseNumber = reverseNumber * 10 + x % 10;</span><br><span class="line">        x /= 10;</span><br><span class="line">        x = Math.floor(x);</span><br><span class="line">    &#125;</span><br><span class="line">    return x == reverseNumber || x == Math.floor(reverseNumber / 10);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/LeetCode/">LeetCode</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/06/06/LeetCode-Questions-Longest-Substring-Without-Repeating-Characters/">
+        <span class="next-text nav-default">LeetCode Questions: Longest Substring Without Repeating Characters</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2016 -
+    
+    2018
+    <span class="footer-author">箫鉴哥.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

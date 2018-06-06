@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://G96968586.github.io/"/>
-  <updated>2018-06-05T16:48:34.301Z</updated>
+  <updated>2018-06-06T15:24:39.425Z</updated>
   <id>http://G96968586.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode Question: Palindrome Number</title>
+    <link href="http://G96968586.github.io/2018/06/06/LeetCode-Question-Palindrome-Number/"/>
+    <id>http://G96968586.github.io/2018/06/06/LeetCode-Question-Palindrome-Number/</id>
+    <published>2018-06-06T15:03:08.000Z</published>
+    <updated>2018-06-06T15:24:39.425Z</updated>
+    
+    <content type="html"><![CDATA[<p>Palindrome Number</p><p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p><p>Example 1:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 121</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure><p>Example 2:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: -121</span><br><span class="line">Output: false</span><br><span class="line">Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.</span><br></pre></td></tr></table></figure><p>Example 3:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 10</span><br><span class="line">Output: false</span><br><span class="line">Explanation: Reads 01 from right to left. Therefore it is not a palindrome.</span><br></pre></td></tr></table></figure><p>Follow up:<br>Coud you solve it without converting the integer to a string?</p><p>This is an easy question.</p><p>Here is my answer:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number&#125; x</span><br><span class="line"> * @return &#123;boolean&#125;</span><br><span class="line"> */</span><br><span class="line">var isPalindrome = function(x) &#123;</span><br><span class="line">    if (x &lt; 0) return false;</span><br><span class="line">    let t = 0;</span><br><span class="line">    let x1 = x;</span><br><span class="line">    while(x &gt; 0) &#123;</span><br><span class="line">        t = t * 10 + x % 10;</span><br><span class="line">        x = Math.floor(x / 10);</span><br><span class="line">    &#125;</span><br><span class="line">    return t === x1;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>My runtime :</p><p><img src="https://gw.alicdn.com/tfs/TB1M_ulwntYBeNjy1XdXXXXyVXa-2384-1172.png" alt=""></p><p>You can see, my runtime is 352 ms, see another best answer(244ms):</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number&#125; x</span><br><span class="line"> * @return &#123;boolean&#125;</span><br><span class="line"> */</span><br><span class="line">var isPalindrome = function(x) &#123;</span><br><span class="line">   if(x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0)) return false;</span><br><span class="line">    let reverseNumber = 0;</span><br><span class="line">    while(x &gt; reverseNumber)&#123; // pay attention to this code line, it&apos;s awesome!!!</span><br><span class="line">        reverseNumber = reverseNumber * 10 + x % 10;</span><br><span class="line">        x /= 10;</span><br><span class="line">        x = Math.floor(x);</span><br><span class="line">    &#125;</span><br><span class="line">    return x == reverseNumber || x == Math.floor(reverseNumber / 10);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Palindrome Number&lt;/p&gt;
+&lt;p&gt;Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forw
+      
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://G96968586.github.io/categories/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://G96968586.github.io/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode Questions: Longest Substring Without Repeating Characters</title>
@@ -457,31 +483,6 @@
       &lt;p&gt;1、本地 git 切换到远程分支&lt;/p&gt;
 &lt;p&gt;首先，通过 git branch -va 查看本地 ＋ 远程的分支列表,比如：&lt;/p&gt;
 &lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;* master              0840594 merge master and 1.0.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;remotes/origin/1.0.0  743012a &#39;update&#39;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;remotes/origin/2.0.0  2787838 udpate&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;remotes/origin/HEAD   -&amp;gt; origin/master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;remotes/origin/master 0840594 merge master and 1.0.0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="WeeklyTask" scheme="http://G96968586.github.io/categories/WeeklyTask/"/>
-    
-    
-      <category term="每周总结" scheme="http://G96968586.github.io/tags/%E6%AF%8F%E5%91%A8%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>weekly 1008</title>
-    <link href="http://G96968586.github.io/2016/10/08/weekly-1008/"/>
-    <id>http://G96968586.github.io/2016/10/08/weekly-1008/</id>
-    <published>2016-10-08T15:20:16.000Z</published>
-    <updated>2018-05-02T09:59:54.535Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>最近在做 React 开发时，遇到了这样一个问题，<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoApp</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">    getInitialState()&#123;</span><br><span class="line">         <span class="comment">// some thing</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><a id="more"></a><p>getInitialState 不会调用，浏览器输出了下面的信息，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Warning: getInitialState was defined on TodoApp, a plain JavaScript class. This is only supported for classes created using React.createClass. Did you mean to define a state property instead?</span><br></pre></td></tr></table></figure></p><p>上网查了一下，原来 React 在 ES6 的实现中去掉了 getInitialState 这个 hook 函数，规定 state 在 constructor 中实现，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class App extends Component &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;&#125;;</span><br><span class="line">&#125;    </span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>Babel的Blog上还有一种实现方法，即直接使用赋值语句：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Class App extends React.Component &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">state = &#123;&#125;    </span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;最近在做 React 开发时，遇到了这样一个问题，&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;TodoApp&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Component&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    getInitialState()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &lt;span class=&quot;comment&quot;&gt;// some thing&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
